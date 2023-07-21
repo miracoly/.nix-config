@@ -18,32 +18,44 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # git & GitHub
+  # git
   programs.git = {
     enable = true;
     userName = "miracoly";
     userEmail = "68049792+miracoly@users.noreply.github.com";
+    ignores = [
+      "*~"
+      "*.swp"
+    ];
     extraConfig = {
       init.defaultBranch = "main";
+      credential.helper = "cache";
     };
-  };
-  programs.gh = {
-    enable = true;
-    enableGitCredentialHelper = true;
   };
 
   # kitty
   programs.kitty = {
     enable = true;
     font.name = "JetBrainsMonoNLNerdFont";
-    font.size = 12;
+    font.size = 24;
     theme = "Earthsong";
   };
 
-  # i3 config
-  # xsession.windowManager.i3.config = {
-  #   
-  # }
+  # i3
+  xsession.windowManager.i3 = {
+    enable = true;
+    config = {
+      fonts = {
+        names = [ "JetBrainsMonoNLNerdFont" ];
+        size = 10.0;
+      };
+      terminal = "kitty";
+      gaps.inner = 15;
+      floating.border = 0;
+      window.border = 0;
+      window.hideEdgeBorders = "both";
+    };
+  };
 
   home.packages = with pkgs; [
     bitwarden

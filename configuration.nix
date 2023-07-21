@@ -67,14 +67,14 @@
     xkbVariant = "";
     dpi = 200;
 
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-        i3status
-        i3lock
-      ];
-    };
+    # windowManager.i3 = {
+    #   enable = true;
+    #   extraPackages = with pkgs; [
+    #     dmenu
+    #     i3status
+    #     i3lock
+    #   ];
+    # };
     
     # desktopManager = {
     #   xterm.enable = false;
@@ -125,6 +125,7 @@
     arandr
     firefox
     git
+    nixos-option
     pavucontrol
     vim
     xorg.xrandr
