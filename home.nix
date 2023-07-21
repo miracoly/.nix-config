@@ -27,10 +27,18 @@
       init.defaultBranch = "main";
     };
   };
-  
-  programs.gh.enable = true;
-  programs.gh.enableGitCredentialHelper = true;
-  
+  programs.gh = {
+    enable = true;
+    enableGitCredentialHelper = true;
+  };
+
+  # kitty
+  programs.kitty = {
+    enable = true;
+    font.name = "JetBrainsMonoNLNerdFont";
+    font.size = 12;
+    theme = "Earthsong";
+  };
 
   # i3 config
   # xsession.windowManager.i3.config = {
@@ -42,7 +50,7 @@
     bitwarden-cli
     flameshot
     google-chrome
-    kitty
     neovim
+    nerdfonts
   ];
 }
