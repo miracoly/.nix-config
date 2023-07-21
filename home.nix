@@ -29,7 +29,7 @@
     ];
     extraConfig = {
       init.defaultBranch = "main";
-      credential.helper = "cache";
+      credential.helper = "store";
     };
   };
 
@@ -49,6 +49,14 @@
         names = [ "JetBrainsMonoNLNerdFont" ];
         size = 10.0;
       };
+      bars = [
+        {
+          statusCommand = "i3status";
+          colors = {
+            background = "#282420";
+          };
+        }
+      ];
       terminal = "kitty";
       gaps.inner = 15;
       floating.border = 0;
@@ -56,6 +64,9 @@
       window.hideEdgeBorders = "both";
     };
   };
+
+  # i3status
+  programs.i3status.enable = true;
 
   home.packages = with pkgs; [
     bitwarden
