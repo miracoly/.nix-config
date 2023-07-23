@@ -21,6 +21,7 @@
     google-chrome
     neovim
     nerdfonts
+    peek
   ];
 
   # Let Home Manager install and manage itself.
@@ -63,12 +64,38 @@
   # picom
   services.picom = {
     enable = true;
+    backend = "glx";
+    vSync = true;
 
     activeOpacity = 0.95;
-    inactiveOpacity = 0.90;
+    inactiveOpacity = 0.9;
+    menuOpacity = 0.9;
+    opacityRules = [
+      "100:name *= 'YouTube'"
+      "100:name *= 'Prime Video'"
+      "100:name *= 'Netflix'"
+      "100:name *= 'Vimeo'"
+      "100:name *= 'Coursera'"
+      "100:name *= 'Huddle'"
+    ];
     
     fade = true;
     fadeSteps = [ 0.03 0.03 ];
+
+    settings = {
+      detect-client-opacity = true;
+      detect-rounded-corners = true;
+      detect-transient = true;
+      focus-exclude = [
+        "class_g = 'Cairo-clock'"
+        "class_g = 'Peek'"
+      ];
+      inactive-opacity-override = false;
+      log-level = "warn";
+      mark-wmwin-focused = true;
+      mark-ovredir-focused = true;
+      use-damage = true;
+    };
 
     shadow = true;
     shadowExclude = [
@@ -79,6 +106,15 @@
       "_GTK_FRAME_EXTENTS@:c"
     ];
     shadowOffsets = [ (-7) (-7) ];
+    shadowOpacity = 0.6;
+
+    wintypes = {
+      tooltip = { fade = true; shadow = true; opacity = 0.75; focus = true; full-shadow = false; };
+      dock = { shadow = false; clip-shadow-above = true; };
+      dnd = { shadow = false; };
+      popup_menu = { opacity = 0.8; };
+      dropdown_menu = { opacity = 0.8; };
+    };
   }; 
 
   # i3
@@ -107,10 +143,11 @@
       gaps.inner = 10;
       startup = [
         { command = "blueman-applet"; notification = false; }
+        { command = "copyq"; notification = false; }
         # TODO - image does not exist in setup
         { command = "feh --bg-tile ~/Pictures/wallpaper/8k/sun-mountains-7680.jpg &"; notification = false; }
         { command = "flameshot"; notification = false; }
-        { command = "picom -b"; notification = false; }
+        { command = "picom -b"; always = true; notification = false; }
         { command = "setxkbmap -layout us,de -variant 'basic,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
       ];
       terminal = "kitty";
