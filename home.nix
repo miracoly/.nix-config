@@ -3,7 +3,6 @@
   # paths it should manage.
   home.username = "mira";
   home.homeDirectory = "/home/mira";
-  programs.zsh.enable = true;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -15,8 +14,19 @@
   # changes in each release.
   home.stateVersion = "23.05";
 
+  home.packages = with pkgs; [
+    bitwarden
+    bitwarden-cli
+    gimp
+    google-chrome
+    neovim
+    nerdfonts
+  ];
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.feh.enable = true;
+  programs.firefox.enable = true;
 
   # git
   programs.git = {
@@ -33,6 +43,9 @@
     };
   };
 
+  # i3status
+  programs.i3status.enable = true;
+
   # kitty
   programs.kitty = {
     enable = true;
@@ -41,39 +54,73 @@
     theme = "Earthsong";
   };
 
+  # zsh
+  programs.zsh.enable = true;
+
+  services.copyq.enable = true;
+  services.flameshot.enable = true;
+
+  # picom
+  services.picom = {
+    enable = true;
+
+    activeOpacity = 0.95;
+    inactiveOpacity = 0.90;
+    
+    fade = true;
+    fadeSteps = [ 0.03 0.03 ];
+
+    shadow = true;
+    shadowExclude = [
+      "name = 'Notification'"
+      "class_g = 'Conky'"
+      "class_g ?= 'Notify-osd'"
+      "class_g = 'Cairo-clock'"
+      "_GTK_FRAME_EXTENTS@:c"
+    ];
+    shadowOffsets = [ (-7) (-7) ];
+  }; 
+
   # i3
   xsession.windowManager.i3 = {
     enable = true;
     config = {
-      fonts = {
-        names = [ "JetBrainsMonoNLNerdFont" ];
-        size = 10.0;
-      };
       bars = [
         {
           statusCommand = "i3status";
           colors = {
             background = "#282420";
+            statusline = "#e5c6a8";
           };
+          extraConfig = ''
+            separator_symbol " | "
+            i3bar_command i3bar --transparency
+          '';
         }
       ];
-      terminal = "kitty";
-      gaps.inner = 15;
+      colors.background = "#282420";
       floating.border = 0;
-      window.border = 0;
-      window.hideEdgeBorders = "both";
+      fonts = {
+        names = [ "JetBrainsMonoNLNerdFont" ];
+        size = 10.0;
+      };
+      gaps.inner = 10;
+      startup = [
+        { command = "blueman-applet"; notification = false; }
+        # TODO - image does not exist in setup
+        { command = "feh --bg-tile ~/Pictures/wallpaper/8k/sun-mountains-7680.jpg &"; notification = false; }
+        { command = "flameshot"; notification = false; }
+        { command = "picom -b"; notification = false; }
+        { command = "setxkbmap -layout us,de -variant 'basic,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
+      ];
+      terminal = "kitty";
+      window = {
+        border = 0;
+        hideEdgeBorders = "both";
+        titlebar = false;
+      };
     };
   };
 
-  # i3status
-  programs.i3status.enable = true;
 
-  home.packages = with pkgs; [
-    bitwarden
-    bitwarden-cli
-    flameshot
-    google-chrome
-    neovim
-    nerdfonts
-  ];
 }
