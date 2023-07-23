@@ -22,6 +22,9 @@
     neovim
     nerdfonts
     peek
+    rofi-bluetooth
+    rofi-power-menu
+    rofimoji
   ];
 
   # Let Home Manager install and manage itself.
@@ -53,6 +56,17 @@
     font.name = "JetBrainsMonoNLNerdFont";
     font.size = 24;
     theme = "Earthsong";
+  };
+
+  # rofi
+  programs.rofi = {
+    enable = true;
+    font = "JetBrainsMonoNLNerdFont 24";
+    plugins = with pkgs; [
+      rofi-calc
+      rofi-power-menu
+      rofimoji
+    ];
   };
 
   # zsh
@@ -168,9 +182,17 @@
         "${mod}+Shift+${right}" = "move right";
 
         # split
-        "${mod}+b" = "split v";
         "${mod}+v" = "split h";
+        "${mod}+Shift+v" = "split v";
+
+        # Applications
+        "${mod}+c" = "exec rofi -show calc -modi calc -no-show-match -no-sort";
+        "${mod}+Shift+b" = "exec --no-startup-id rofi-bluetooth";
+        "${mod}+Shift+m" = "exec rofi -show emoji -modi 'emoji:rofimoji --action=copy'";
+        "${mod}+Shift+mod1+p" = "exec rofi -show p -modi p:'rofi-power-menu'";
       };
+
+      menu = "rofi -show run";
 
       modes = with keybindings; lib.mkOptionDefault {
         resize = {
