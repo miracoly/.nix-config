@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "mira";
@@ -141,6 +141,52 @@
         size = 10.0;
       };
       gaps.inner = 10;
+
+      keybindings =
+        let
+          mod = config.xsession.windowManager.i3.config.modifier;
+          up = "k";
+          down = "j";
+          left = "h";
+          right = "l";
+        in lib.mkOptionDefault {
+          "floating_modifier" = mod;
+          "tiling_drag modifier" = "titlebar";
+
+          # change focus
+          "${mod}+${up}" = "focus up";
+          "${mod}+${down}" = "focus down";
+          "${mod}+${left}" = "focus left";
+          "${mod}+${right}" = "focus right";
+
+          # move focused window
+          "${mod}+Shift+${up}" = "move up";
+          "${mod}+Shift+${down}" = "move down";
+          "${mod}+Shift+${left}" = "move left";
+          "${mod}+Shift+${right}" = "move right";
+
+          # split
+          "${mod}+b" = "split v";
+          "${mod}+v" = "split h";
+        };
+
+      modes =
+      let
+        up = "k";
+        down = "j";
+        left = "h";
+        right = "l";
+      in lib.mkOptionDefault {
+        resize = {
+          "${up}" = "resize shrink height 100 px or 10 ppt";
+          "${down}" = "resize grow height 100 px or 10 ppt";
+          "${left}" = "resize shrink width 100 px or 10 ppt";
+          "${right}" = "resize grow width 100 px or 10 ppt";         
+        }; 
+      };
+
+      modifier = "Mod4";
+
       startup = [
         { command = "blueman-applet"; notification = false; }
         { command = "copyq"; notification = false; }
