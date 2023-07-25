@@ -22,6 +22,7 @@
     neovim
     nerdfonts
     peek
+    pulseaudio
     rofi-bluetooth
     rofi-power-menu
     rofimoji
@@ -185,14 +186,27 @@
         "${mod}+v" = "split h";
         "${mod}+Shift+v" = "split v";
 
+        # tiling / floating
+        "${mod}+Shift+t" = "floating toggle";
+        "${mod}+t" = "focus mode_toggle";
+
         # Applications
+        "${mod}+Shift+d" = "exec rofi -show run -modi run";
         "${mod}+c" = "exec rofi -show calc -modi calc -no-show-match -no-sort";
         "${mod}+Shift+b" = "exec --no-startup-id rofi-bluetooth";
         "${mod}+Shift+m" = "exec rofi -show emoji -modi 'emoji:rofimoji --action=copy'";
         "${mod}+Shift+mod1+p" = "exec rofi -show p -modi p:'rofi-power-menu'";
+        "Print" = "exec flameshot gui";
+
+        # Volume
+        "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status";
+        "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status";
+        "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status";
+        "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status";
+
       };
 
-      menu = "rofi -show run";
+      menu = "rofi -show drun";
 
       modes = with keybindings; lib.mkOptionDefault {
         resize = {
