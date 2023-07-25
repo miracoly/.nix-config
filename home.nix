@@ -1,8 +1,11 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: 
+  let
+    HOME = "/home/mira";
+  in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "mira";
-  home.homeDirectory = "/home/mira";
+  home.homeDirectory = "${HOME}";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -27,6 +30,13 @@
     rofi-power-menu
     rofimoji
   ];
+
+  home.sessionVariables = {
+    QT_AUTO_SCREEN_SCALE_FACTOR = 1;
+    QT_SCALE_FACTOR = 2;
+    GDK_SCALE = 2;
+    GDK_DPI_SCALE = 0.5;
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -73,7 +83,13 @@
   # zsh
   programs.zsh.enable = true;
 
+  # copyQ
   services.copyq.enable = true;
+  home.file.copyq.source = "${HOME}/.nix-config/config/copyq/copyq.conf";
+  home.file.copyq.target = ".config/copyq/copyq.conf";
+  home.file.copyq-commands.source = "${HOME}/.nix-config/config/copyq/copyq-commands.ini";
+  home.file.copyq-commands.target = ".config/copyq/copyq-commands.ini";
+
   services.flameshot.enable = true;
 
   # picom
