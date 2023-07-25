@@ -22,12 +22,14 @@
     bitwarden-cli
     gimp
     google-chrome
+    jq
     neovim
     nerdfonts
     peek
     pulseaudio
     rofi-bluetooth
     rofi-power-menu
+    rofi-systemd
     rofimoji
   ];
 
@@ -36,6 +38,7 @@
     QT_SCALE_FACTOR = 2;
     GDK_SCALE = 2;
     GDK_DPI_SCALE = 0.5;
+    ROFI_SYSTEMD_TERM = "kitty";
   };
 
   # Let Home Manager install and manage itself.
@@ -51,6 +54,7 @@
     ignores = [
       "*~"
       "*.swp"
+      "*.out"
     ];
     extraConfig = {
       init.defaultBranch = "main";
@@ -59,14 +63,25 @@
   };
 
   # i3status
-  programs.i3status.enable = true;
+  programs.i3status = {
+    enable = true;
+    general = {
+      output_format = "i3bar";
+      colors = true;
+      color_good = "#82DAB4";
+      color_degraded = "#FFD598";
+      color_bad = "#FFA987";
+      interval = 5;
+    };
+  };
 
   # kitty
   programs.kitty = {
     enable = true;
     font.name = "JetBrainsMonoNLNerdFont";
     font.size = 24;
-    theme = "Earthsong";
+    #theme = "toychest";
+    settings = import ./home/kitty/theme.nix;
   };
 
   # rofi
@@ -148,6 +163,23 @@
     };
   }; 
 
+  # redshift
+  services.redshift = {
+    enable = true;
+    provider = "geoclue2";
+    settings.redshift = {
+      adjustment-method = "randr";
+      brightness-day = 1;
+      brightness-night = 0.7;
+      gamma = 1;
+    };
+    temperature = {
+      day = 5500;
+      night = 5000;
+    };
+    tray = true;
+  };
+
   # i3
   xsession.windowManager.i3 = {
     enable = true;
@@ -165,8 +197,9 @@
         {
           statusCommand = "i3status";
           colors = {
-            background = "#282420";
-            statusline = "#e5c6a8";
+            background = "#455559aa";
+            statusline = "#FFF5F4";
+            separator = "#FFF5F4";
           };
           extraConfig = ''
             separator_symbol " | "
@@ -211,6 +244,7 @@
         "${mod}+c" = "exec rofi -show calc -modi calc -no-show-match -no-sort";
         "${mod}+Shift+b" = "exec --no-startup-id rofi-bluetooth";
         "${mod}+Shift+m" = "exec rofi -show emoji -modi 'emoji:rofimoji --action=copy'";
+        "${mod}+Shift+s" = "exec --no-startup-id rofi-systemd";
         "${mod}+Shift+mod1+p" = "exec rofi -show p -modi p:'rofi-power-menu'";
         "Print" = "exec flameshot gui";
 
@@ -240,7 +274,7 @@
         { command = "blueman-applet"; notification = false; }
         { command = "copyq"; notification = false; }
         # TODO - image does not exist in setup
-        { command = "feh --bg-tile ~/Pictures/wallpaper/8k/sun-mountains-7680.jpg &"; notification = false; }
+        { command = "feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &"; always = true; notification = false; }
         { command = "flameshot"; notification = false; }
         { command = "picom -b"; always = true; notification = false; }
         { command = "setxkbmap -layout us,de -variant 'basic,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
@@ -253,6 +287,4 @@
       };
     };
   };
-
-
 }
