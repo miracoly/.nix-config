@@ -67,7 +67,7 @@
     enable = true;
     layout = "us";
     xkbVariant = "";
-    dpi = 200;
+    dpi = 192;
 
     windowManager.i3 = {
       enable = true;

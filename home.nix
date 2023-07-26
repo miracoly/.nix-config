@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }: 
   let
-    HOME = "/home/mira";
+    homedir = "/home/mira";
   in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "mira";
-  home.homeDirectory = "${HOME}";
+  home.homeDirectory = "${homedir}";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -29,6 +29,7 @@
     peek
     pulseaudio
     rofi-bluetooth
+    rofi-file-browser
     rofi-power-menu
     rofi-systemd
     rofimoji
@@ -45,6 +46,29 @@
   # autorandr
   programs.autorandr = {
     enable = true;
+    hooks = {
+      postswitch = {
+        "notify-i3" = "${pkgs.i3}/bin/i3-msg restart";
+        "change-dpi" = ''
+          case "$AUTORANDR_CURRENT_PROFILE" in
+            default)
+              DPI=192
+              ;;
+            homeoffice)
+              DPI=192
+              ;;
+            mobile)
+              DPI=192
+              ;;
+            *)
+              echo "Unknown profile: $AUTORANDR_CURRENT_PROFILE"
+              exit 1
+          esac
+
+          echo "Xft.dpi: $DPI" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
+        '';
+      };
+    };
     profiles = {
       mobile = {
         fingerprint = {
@@ -63,7 +87,8 @@
         hooks = {
           postswitch = ''
             #!/usr/bin/env bash
-            notify-send "profile mobile loaded"
+            ${pkgs.libnotify}/bin/notify-send "autorandr" "profile mobile loaded" 
+            ${pkgs.feh}/bin/feh --bg-center ~/Pictures/wallpaper/8k/surreal-6645614.jpg &
           '';
         };
       };
@@ -95,7 +120,8 @@
         hooks = {
           postswitch = ''
             #!/usr/bin/env bash
-            notify-send "profile homeoffice loaded"
+            ${pkgs.libnotify}/bin/notify-send "autorandr" "profile homeoffice loaded" 
+            ${pkgs.feh}/bin/feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &
           '';
         };
       };
@@ -218,7 +244,7 @@
   programs.kitty = {
     enable = true;
     font.name = "JetBrainsMonoNLNerdFont";
-    font.size = 24;
+    font.size = 12;
     #theme = "toychest";
     settings = import ./home/kitty/theme.nix;
   };
@@ -232,6 +258,7 @@
       rofi-power-menu
       rofimoji
     ];
+    # theme =
   };
 
   # zsh
@@ -239,9 +266,9 @@
 
   # copyQ
   services.copyq.enable = true;
-  home.file.copyq.source = "${HOME}/.nix-config/config/copyq/copyq.conf";
+  home.file.copyq.source = "${homedir}/.nix-config/config/copyq/copyq.conf";
   home.file.copyq.target = ".config/copyq/copyq.conf";
-  home.file.copyq-commands.source = "${HOME}/.nix-config/config/copyq/copyq-commands.ini";
+  home.file.copyq-commands.source = "${homedir}/.nix-config/config/copyq/copyq-commands.ini";
   home.file.copyq-commands.target = ".config/copyq/copyq-commands.ini";
 
   services.flameshot.enable = true;
@@ -383,6 +410,7 @@
         "${mod}+c" = "exec rofi -show calc -modi calc -no-show-match -no-sort";
         "${mod}+Shift+b" = "exec --no-startup-id rofi-bluetooth";
         "${mod}+Shift+m" = "exec rofi -show emoji -modi 'emoji:rofimoji --action=copy'";
+        "${mod}+Shift+f" = "exec rofi -show filebrowser -modi filebrowser";
         "${mod}+Shift+s" = "exec --no-startup-id rofi-systemd";
         "${mod}+Shift+mod1+p" = "exec rofi -show p -modi p:'rofi-power-menu'";
         "Print" = "exec flameshot gui";
