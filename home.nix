@@ -23,6 +23,7 @@
     gimp
     google-chrome
     jq
+    kate
     libnotify
     neovim
     nerdfonts
@@ -37,38 +38,12 @@
 
   home.sessionVariables = {
     QT_AUTO_SCREEN_SCALE_FACTOR = 1;
-    QT_SCALE_FACTOR = 2;
-    GDK_SCALE = 2;
-    GDK_DPI_SCALE = 0.5;
     ROFI_SYSTEMD_TERM = "kitty";
   };
 
   # autorandr
   programs.autorandr = {
     enable = true;
-    hooks = {
-      postswitch = {
-        "notify-i3" = "${pkgs.i3}/bin/i3-msg restart";
-        "change-dpi" = ''
-          case "$AUTORANDR_CURRENT_PROFILE" in
-            default)
-              DPI=192
-              ;;
-            homeoffice)
-              DPI=192
-              ;;
-            mobile)
-              DPI=192
-              ;;
-            *)
-              echo "Unknown profile: $AUTORANDR_CURRENT_PROFILE"
-              exit 1
-          esac
-
-          echo "Xft.dpi: $DPI" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
-        '';
-      };
-    };
     profiles = {
       mobile = {
         fingerprint = {
@@ -87,8 +62,10 @@
         hooks = {
           postswitch = ''
             #!/usr/bin/env bash
-            ${pkgs.libnotify}/bin/notify-send "autorandr" "profile mobile loaded" 
+            ${pkgs.i3}/bin/i3-msg restart
+            echo "Xft.dpi: 192" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
             ${pkgs.feh}/bin/feh --bg-center ~/Pictures/wallpaper/8k/surreal-6645614.jpg &
+            ${pkgs.libnotify}/bin/notify-send "autorandr" "profile mobile loaded" 
           '';
         };
       };
@@ -119,9 +96,10 @@
         };
         hooks = {
           postswitch = ''
-            #!/usr/bin/env bash
-            ${pkgs.libnotify}/bin/notify-send "autorandr" "profile homeoffice loaded" 
+            ${pkgs.i3}/bin/i3-msg restart
+            echo "Xft.dpi: 192" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
             ${pkgs.feh}/bin/feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &
+            ${pkgs.libnotify}/bin/notify-send "autorandr" "profile homeoffice loaded" 
           '';
         };
       };
@@ -230,7 +208,6 @@
           device = "pulse";
         };
       };
-      
       "tztime local" = {
         position = 9;
         settings = {
@@ -245,7 +222,6 @@
     enable = true;
     font.name = "JetBrainsMonoNLNerdFont";
     font.size = 12;
-    #theme = "toychest";
     settings = import ./home/kitty/theme.nix;
   };
 
@@ -258,11 +234,43 @@
       rofi-power-menu
       rofimoji
     ];
-    # theme =
   };
 
   # zsh
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    history.extended = true;
+    initExtra = ''
+      bindkey "$key[Up]" up-line-or-search
+    '';
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "vi-mode"
+        "azure"
+        "stack"
+      ];
+    };
+    plugins = with pkgs; [
+      {
+        file = ".p10k.zsh";
+        name = "powerlevel10k";
+        src = lib.cleanSource config/p10k/p10k.zsh;
+      }
+    ];
+    zplug = {
+      enable = true;
+      plugins = [
+        { name = "zsh-users/zsh-autosuggestions"; } 
+        { name = "marlonrichert/zsh-autocomplete"; } 
+        { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } 
+      ];
+    };
+  };
+  home.file.p10k.source = "${homedir}/.nix-config/config/p10k/p10k.zsh";
+  home.file.p10k.target = ".p10k.zsh";
 
   # copyQ
   services.copyq.enable = true;
@@ -441,7 +449,7 @@
         { command = "blueman-applet"; notification = false; }
         { command = "copyq"; notification = false; }
         # TODO - image does not exist in setup
-        { command = "feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &"; always = true; notification = false; }
+        { command = "feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &"; notification = false; }
         { command = "flameshot"; notification = false; }
         { command = "picom -b"; always = true; notification = false; }
         { command = "setxkbmap -layout us,de -variant 'basic,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
