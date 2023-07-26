@@ -240,10 +240,8 @@
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
+    enableCompletion = true;
     history.extended = true;
-    initExtra = ''
-      bindkey "$key[Up]" up-line-or-search
-    '';
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -253,18 +251,9 @@
         "stack"
       ];
     };
-    plugins = with pkgs; [
-      {
-        file = ".p10k.zsh";
-        name = "powerlevel10k";
-        src = lib.cleanSource config/p10k/p10k.zsh;
-      }
-    ];
     zplug = {
       enable = true;
       plugins = [
-        { name = "zsh-users/zsh-autosuggestions"; } 
-        { name = "marlonrichert/zsh-autocomplete"; } 
         { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } 
       ];
     };
