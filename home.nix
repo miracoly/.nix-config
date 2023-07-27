@@ -20,8 +20,12 @@
   home.packages = with pkgs; [
     bitwarden
     bitwarden-cli
+    brightnessctl
     gimp
     google-chrome
+    jetbrains.clion
+    jetbrains.idea-ultimate
+    jetbrains.pycharm-professional
     jq
     kate
     libnotify
