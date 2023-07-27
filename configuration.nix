@@ -62,6 +62,16 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+  # Thumbnails
+  services.tumbler.enable = true;
+
   # Configure keymap in X11
   services.xserver = {
     enable = true;

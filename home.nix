@@ -275,6 +275,8 @@
     ];
   };
 
+  programs.zathura.enable = true;
+
   # zsh
   programs.zsh = {
     enable = true;
