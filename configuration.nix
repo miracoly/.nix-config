@@ -101,6 +101,14 @@
     #jack.enable = true;
   };
 
+  # Smartcard
+  services.pcscd.enable = true;
+
+  # Printing
+  services.printing.enable = true;
+  services.avahi.enable = true;
+  services.avahi.nssmdns = true;
+
   environment.shells = with pkgs; [ zsh ];
   environment.pathsToLink = [ "/share/zsh" ];
 
