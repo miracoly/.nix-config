@@ -40,6 +40,7 @@
     rofi-power-menu
     rofi-systemd
     rofimoji
+    yubikey-manager
   ];
 
   home.sessionVariables = {
@@ -55,6 +56,8 @@
   home.file.whatsapp.target = ".local/share/applications/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop";
   home.file.youtube-music.source = "${homedir}/.nix-config/config/applications/chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default.desktop";
   home.file.youtube-music.target = ".local/share/applications/chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default.desktop";
+  home.file.yubikey-rofi.source = "${homedir}/.nix-config/config/applications/yubikey-rofi.desktop";
+  home.file.yubikey-rofi.target = ".local/share/applications/yubikey-rofi.desktop";
 
   # Other .dotfiles
   home.file.ideavim.source = "${homedir}/.nix-config/config/ideavim/.ideavimrc";
