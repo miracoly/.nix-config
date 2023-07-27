@@ -39,9 +39,22 @@
   ];
 
   home.sessionVariables = {
+    FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT = 1;
+    DOTNET_CLI_TELEMETRY_OPTOUT = 1;
     QT_AUTO_SCREEN_SCALE_FACTOR = 1;
     ROFI_SYSTEMD_TERM = "kitty";
   };
+
+  # TODO: Validate if this works
+  # Applications
+  home.file.whatsapp.source = "${homedir}/.nix-config/config/applications/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop";
+  home.file.whatsapp.target = ".local/share/applications/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop";
+  home.file.youtube-music.source = "${homedir}/.nix-config/config/applications/chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default.desktop";
+  home.file.youtube-music.target = ".local/share/applications/chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default.desktop";
+
+  # Other .dotfiles
+  home.file.ideavim.source = "${homedir}/.nix-config/config/ideavim/.ideavimrc";
+  home.file.ideavim.target = ".ideavimrc";
 
   # autorandr
   programs.autorandr = {
@@ -261,7 +274,20 @@
     enableAutosuggestions = true;
     enableCompletion = true;
     initExtra = ''
-      source ".p10k.zsh";
+      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+      decode_base64_url() {
+        local len=$((''${#1} % 4))
+        local result="$1"
+        if [ $len -eq 2 ]; then result="$1"'=='
+        elif [ $len -eq 3 ]; then result="$1"'='
+        fi
+        echo "$result" | tr '_-' '/+' | base64 -d
+      }
+
+      decode_jwt() {
+        decode_base64_url "$(echo -n "$2" | cut -d "." -f "$1")" | jq .
+      }
     '';
     history.extended = true;
     oh-my-zsh = {
@@ -272,6 +298,21 @@
         "azure"
         "stack"
       ];
+    };
+    shellAliases = {
+      ls = "ls --color=auto";
+      la = "ls -a";
+      ll = "ls -la";
+      l = "ls";
+      grep = "grep --color=auto";
+      egrep = "egrep --color=auto";
+      fgrep = "fgrep --color=auto";
+      handover = "git add -A && git commit -m 'handover' && git push";
+      kw = "echo $(date | cut -d' ' -f1,2,3,6) && echo 'Aktuelle Kalenderwoche: $(date +'%W' | sed
+      's/^0*//')'";
+      ssh = "kitty +kitten ssh";
+      jwth = "decode_jwt 1";
+      jwtp = "decode_jwt 2";
     };
     zplug = {
       enable = true;

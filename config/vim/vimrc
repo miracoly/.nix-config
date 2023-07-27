@@ -48,7 +48,6 @@ set confirm                            " display confirmation message when
 set nomodeline                         " use vimrc instead of file's mode lines
 set nrformats-=octal                   " interprete octal as decimal when
                                        " incrementing numbers
-set shell=/usr/bin/zsh                 " default shell used to execute commands
 set number relativenumber              " set line numbers
 set cursorline                         " set line where cursor is
 set exrc                               " look for .vimrc in current dir

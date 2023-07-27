@@ -1,0 +1,167 @@
+"             _           _
+"   _ __ ___ (_)_ __ __ _( )___
+"  | '_ ` _ \| | '__/ _` |// __|
+"  | | | | | | | | | (_| | \__ \
+"  |_| |_| |_|_|_|  \__,_| |___/
+"   _     _                  _
+"  (_) __| | ___  __ ___   _(_)_ __ ___
+"  | |/ _` |/ _ \/ _` \ \ / / | '_ ` _ \
+"  | | (_| |  __/ (_| |\ V /| | | | | | |
+"  |_|\__,_|\___|\__,_| \_/ |_|_| |_| |_|
+
+" ------------------------------------------------------------------------------
+"   GENERAL SETTINGS
+" ------------------------------------------------------------------------------
+
+sethandler a:ide
+sethandler <C-v> n:vim i:ide
+sethandler <C-u> n:vim
+sethandler <C-d> n:vim
+sethandler <S-[> n:vim v:vim
+sethandler <S-]> n:vim v:vim
+set incsearch                          " find next match while typing
+set hlsearch                           " highlight searches
+set ignorecase                         " ignore case sensitivity unless capital
+set smartcase                          "   is typed
+set encoding=utf-8
+set number
+set scrolloff=3
+set sidescrolloff=5
+
+" ------------------------------------------------------------------------------
+"   VIM KEYMAPS
+" ------------------------------------------------------------------------------
+
+nnoremap <SPACE> <Nop>
+let mapleader = " "
+
+nmap <leader>w :w! <CR>
+nmap <leader>r :reg <CR>
+nmap <leader>nh :noh <CR>
+
+
+" ------------------------------------------------------------------------------
+"  INTELLIJ KEYMAPS
+" ------------------------------------------------------------------------------
+
+"  GENERATE
+
+" nmap <leader>g <Action>(Generate)
+" nmap <leader>gg <Action>(GenerateGetter)
+" nmap <leader>gs <Action>(GenerateSetter)
+" nmap <leader>gc <Action>(GenerateConstructor)
+" nmap <leader>gt <Action>(GenerateTestMethod)
+" nmap <leader>go <Action>(OverrideMethods)
+"
+" "  CODE
+"
+" nmap <C-S-j> <Action>(MoveStatementDown)
+" nmap <C-S-k> <Action>(MoveStatementUp)
+"
+" "  -----------------------------------------------
+" "  NAVIGATE
+" "  -----------------------------------------------
+"
+" nmap <leader>ns <Action>(EditSource)
+" nmap <leader>nu <Action>(ShowUsages)
+" nmap <leader>nd <Action>(GotoDeclaration)
+" nmap <leader>ni <Action>(GotoImplementation)
+" nmap <leader>nt <Action>(GotoTest)
+" nmap <leader>ny <Action>(GotoTypeDeclaration)
+" nmap <leader>nr <Action>(GotoRelated)
+" nmap <leader>nm <Action>(GotoSuperMethod)
+" nmap <leader>nv <Action>(SelectIn)
+"
+" nmap <C-b> <Action>(Back)
+" nmap <C-n> <Action>(Forward)
+" nmap <C-S-b> <Action>(JumpToLastChange)
+" nmap <C-e> <Action>(GotoNextError)
+" nmap <C-S-e> <Action>(GotoPreviousError)
+" nmap <C-m> <Action>(MethodDown)
+" nmap <C-S-m> <Action>(MethodUp)
+" nmap <C-[> <Action>(EditorCodeBlockStart)
+" nmap <C-]> <Action>(EditorCodeBlockEnd)
+"
+" "  FIND
+" nmap <leader>f <Action>(SearchEverywhere)
+" nmap <leader>fc <Action>(GotoClass)
+" nmap <leader>ff <Action>(GotoFile)
+" nmap <leader>fs <Action>(GotoSymbol)
+" nmap <leader>fi <Action>(FindInPath)
+" nmap <leader>fu <Action>(FindUsages)
+" nmap <leader>fr <Action>(Replace)
+"
+" "  -----------------------------------------------
+" "  REFACTOR
+" "  -----------------------------------------------
+"
+" nmap <leader>r <Action>(RefactoringMenu)
+" nmap <leader>rr <Action>(RenameElement)
+" nmap <leader>rc <Action>(CopyElement)
+" nmap <leader>rm <Action>(Move)
+" nmap <leader>rs <Action>(ChangeSignature)
+" nmap <leader>em <Action>(ExtractMethod)
+" vmap <leader>em <Action>(ExtractMethod)
+" nmap <leader>ev <Action>(IntroduceVariable)
+" vmap <leader>ev <Action>(IntroduceVariable)
+" nmap <leader>ef <Action>(IntroduceField)
+" vmap <leader>ef <Action>(IntroduceField)
+" nmap <leader>ec <Action>(IntroduceConstant)
+" vmap <leader>ec <Action>(IntroduceConstant)
+" nmap <leader>ep <Action>(IntroduceParameter)
+" vmap <leader>ep <Action>(IntroduceParameter)
+" nmap <leader><i> <Action>(Inline)
+"
+" "  -----------------------------------------------
+" "  FILE
+" "  -----------------------------------------------
+" nmap <leader>cc <Action>(NewClass)
+" nmap <leader>cf <Action>(NewFile)
+"
+" "  GENERAL
+" imap <S-Enter> <Action>(EditorChooseLookupItemCompleteStatement)
+" nmap <leader>l <Action>(ParameterInfo)
+" nmap <leader>p <Action>(ReformatCode)<Action>(AutoIndentLines)
+" nmap <leader>h <Action>(ShowIntentionActions)
+" nmap <leader>j <Action>(QuickJavaDoc)
+" nmap <leader>k <Action>(QuickImplementations)
+" nmap <leader>q <Action>(QuickActions)
+" imap <S-SPACE> <Action>(SmartTypeCompletion)
+"
+" "  RUN ------------------------------------------
+" nmap <F10> <Action>(Run)
+" nmap <F9> <Action>(RunClass)
+" nmap <F11> <Action>(Debug)
+" nmap <F12> <Action>(Stop)
+"
+" "  DEBUGGING ------------------------------------
+" nmap <leader>db <Action>(ToggleLineBreakpoint)
+"
+" " EDITOR ----------------------------------------
+" nmap <S-Enter> <Action>(EditorCompleteStatement)
+" imap <S-Enter> <Action>(EditorCompleteStatement)
+" nmap <S-j> <Action>(PreviousTab)
+" vmap <S-j> <Action>(PreviousTab)
+" nmap <S-k> <Action>(NextTab)
+" vmap <S-k> <Action>(NextTab)
+" nmap <S-x> <Action>(CloseEditor)
+" vmap <S-x> <Action>(CloseEditor)
+" nmap <C-l> <Action>(SplitVertically)
+" nmap <C-h> <Action>(Unsplit)
+" nmap <S-l> <Action>(NextSplitter)
+" vmap <S-l> <Action>(NextSplitter)
+" nmap <S-h> <Action>(PrevSplitter)
+" vmap <S-h> <Action>(PrevSplitter)
+"
+" " WINDOWS ---------------------------------------
+" nmap <leader>wt <Action>(ActivateTerminalToolWindow)
+" nmap <leader>wc <Action>(ActivateChangesToolWindow)
+" nmap <leader>wp <Action>(ActivateProjectToolWindow)
+" nmap <C-p> <Action>(ProjectViewPopupMenu)
+"
+" " OTHERS ----------------------------------------
+" nmap <leader>tp <Action>(TogglePresentationMode)
+"
+" " TOOLS -------------------------------------------
+" nmap <leader>git <Action>(Git.Menu)
+" nmap <leader>mr <Action>(Maven.ReimportProject)
