@@ -27,6 +27,8 @@
     libnotify
     neovim
     nerdfonts
+    nodejs_18
+    nodePackages.yarn
     peek
     pulseaudio
     rofi-bluetooth
@@ -63,7 +65,7 @@
           postswitch = ''
             #!/usr/bin/env bash
             ${pkgs.i3}/bin/i3-msg restart
-            echo "Xft.dpi: 192" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
+            echo "Xft.dpi: 160" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
             ${pkgs.feh}/bin/feh --bg-center ~/Pictures/wallpaper/8k/surreal-6645614.jpg &
             ${pkgs.libnotify}/bin/notify-send "autorandr" "profile mobile loaded" 
           '';
@@ -96,8 +98,9 @@
         };
         hooks = {
           postswitch = ''
+            #!/usr/bin/env bash
             ${pkgs.i3}/bin/i3-msg restart
-            echo "Xft.dpi: 192" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
+            echo "Xft.dpi: 160" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
             ${pkgs.feh}/bin/feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &
             ${pkgs.libnotify}/bin/notify-send "autorandr" "profile homeoffice loaded" 
           '';
@@ -105,7 +108,7 @@
       };
     };
   };
-  services.autorandr.enable = true;
+  services.autorandr.enable = false;
 
   services.dunst.enable = true;
 
@@ -236,11 +239,30 @@
     ];
   };
 
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
+    extraConfig = builtins.readFile ./config/vim/vimrc;
+    plugins = with pkgs.vimPlugins; [
+      coc-nvim
+      haskell-vim
+      jsonc-vim
+      lightline-vim
+      markdown-preview-nvim
+      vim-colorschemes
+      vim-plug
+      vim-polyglot
+    ];
+  };
+
   # zsh
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
+    initExtra = ''
+      source ".p10k.zsh";
+    '';
     history.extended = true;
     oh-my-zsh = {
       enable = true;
@@ -318,11 +340,11 @@
     shadowOpacity = 0.6;
 
     wintypes = {
-      tooltip = { fade = true; shadow = true; opacity = 0.75; focus = true; full-shadow = false; };
+      tooltip = { fade = true; shadow = true; opacity = 0.6; focus = true; full-shadow = false; };
       dock = { shadow = false; clip-shadow-above = true; };
       dnd = { shadow = false; };
-      popup_menu = { opacity = 0.8; };
-      dropdown_menu = { opacity = 0.8; };
+      popup_menu = { opacity = 0.6; };
+      dropdown_menu = { opacity = 0.6; };
     };
   }; 
 
@@ -358,7 +380,6 @@
     in {
       bars = [
         {
-          statusCommand = "i3status";
           colors = {
             background = "#455559aa";
             statusline = "#FFF5F4";
@@ -368,6 +389,11 @@
             separator_symbol " | "
             i3bar_command i3bar --transparency
           '';
+          fonts = {
+            names = [ "JetBrainsMonoNLNerdFont" ];
+            size = 10.0;
+          };
+          statusCommand = "i3status";
         }
       ];
       colors.background = "#282420";
@@ -442,6 +468,7 @@
         { command = "flameshot"; notification = false; }
         { command = "picom -b"; always = true; notification = false; }
         { command = "setxkbmap -layout us,de -variant 'basic,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
+        { command = "echo 'Xft.dpi: 160' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
       ];
       terminal = "kitty";
       window = {
