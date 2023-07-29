@@ -23,6 +23,7 @@
     brightnessctl
     gimp
     google-chrome
+    haskellPackages.zlib
     jetbrains.clion
     jetbrains.idea-ultimate
     jetbrains.pycharm-professional
@@ -33,6 +34,7 @@
     nerdfonts
     nodejs_18
     nodePackages.yarn
+    pa_applet
     peek
     pulseaudio
     rofi-bluetooth
@@ -40,7 +42,11 @@
     rofi-power-menu
     rofi-systemd
     rofimoji
+    slack
     yubikey-manager
+    zlib
+    stack
+    zoom-us
   ];
 
   home.sessionVariables = {
@@ -285,6 +291,8 @@
     initExtra = ''
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+      export PATH=$HOME/.local/bin:$PATH
+
       decode_base64_url() {
         local len=$((''${#1} % 4))
         local result="$1"
@@ -341,6 +349,8 @@
   home.file.copyq-commands.target = ".config/copyq/copyq-commands.ini";
 
   services.flameshot.enable = true;
+
+  services.network-manager-applet.enable = true;
 
   # picom
   services.picom = {
@@ -414,6 +424,8 @@
     };
     tray = true;
   };
+
+  services.screen-locker.lockCmd = "\${pkgs.i3lock}/bin/i3lock -n -c 000000";
 
   # i3
   xsession.windowManager.i3 = {
@@ -516,6 +528,7 @@
         # TODO - image does not exist in setup
         { command = "feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &"; notification = false; }
         { command = "flameshot"; notification = false; }
+        { command = "pa-applet"; notification = false; }
         { command = "picom -b"; always = true; notification = false; }
         { command = "setxkbmap -layout us,de -variant 'basic,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
         { command = "echo 'Xft.dpi: 160' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
