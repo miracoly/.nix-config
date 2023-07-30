@@ -72,12 +72,17 @@
   # Thumbnails
   services.tumbler.enable = true;
 
-  # Configure keymap in X11
+  # X11
   services.xserver = {
     enable = true;
     layout = "us";
     xkbVariant = "";
     dpi = 192;
+
+    xautolock = {
+      enable = true;
+      locker = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+    };
 
     windowManager.i3 = {
       enable = true;

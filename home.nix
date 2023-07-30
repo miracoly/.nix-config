@@ -18,12 +18,18 @@
   home.stateVersion = "23.05";
 
   home.packages = with pkgs; [
+    audacity
     bitwarden
     bitwarden-cli
     brightnessctl
     gimp
     google-chrome
+    haskellPackages.hlint
+    haskellPackages.hoogle
+    haskellPackages.ormolu
+    haskellPackages.stylish-haskell
     haskellPackages.zlib
+    i3lock-fancy
     jetbrains.clion
     jetbrains.idea-ultimate
     jetbrains.pycharm-professional
@@ -52,7 +58,7 @@
   home.sessionVariables = {
     FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT = 1;
     DOTNET_CLI_TELEMETRY_OPTOUT = 1;
-    QT_AUTO_SCREEN_SCALE_FACTOR = 1;
+    QT_AUTO_SCREEN_SCALE_FACTOR = 2;
     ROFI_SYSTEMD_TERM = "kitty";
   };
 
@@ -140,6 +146,8 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.htop.enable = true;
   programs.feh.enable = true;
   programs.firefox.enable = true;
 
@@ -400,11 +408,11 @@
     shadowOpacity = 0.6;
 
     wintypes = {
-      tooltip = { fade = true; shadow = true; opacity = 0.6; focus = true; full-shadow = false; };
+      tooltip = { fade = true; shadow = true; opacity = 0.9; focus = true; full-shadow = false; };
       dock = { shadow = false; clip-shadow-above = true; };
       dnd = { shadow = false; };
-      popup_menu = { opacity = 0.6; };
-      dropdown_menu = { opacity = 0.6; };
+      popup_menu = { opacity = 0.9; };
+      dropdown_menu = { opacity = 0.9; };
     };
   }; 
 
@@ -425,7 +433,11 @@
     tray = true;
   };
 
-  services.screen-locker.lockCmd = "\${pkgs.i3lock}/bin/i3lock -n -c 000000";
+  services.screen-locker = {
+    enable = true;
+    lockCmd = "/usr/bin/env i3lock";
+    xautolock.enable = true;
+  };
 
   # i3
   xsession.windowManager.i3 = {
@@ -498,6 +510,7 @@
         "${mod}+Shift+f" = "exec rofi -show filebrowser -modi filebrowser";
         "${mod}+Shift+s" = "exec --no-startup-id rofi-systemd";
         "${mod}+Shift+mod1+p" = "exec rofi -show p -modi p:'rofi-power-menu'";
+        "${mod}+Shift+mod1+l" = "exec --no-startup-id i3lock-fancy";
         "Print" = "exec flameshot gui";
 
         # Volume
