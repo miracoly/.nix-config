@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }: 
   let
     homedir = "/home/mira";
+    secrets = import ./.secrets.nix;
   in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -52,6 +53,7 @@
     yubikey-manager
     zlib
     stack
+    steam-run
     zoom-us
   ];
 
@@ -62,7 +64,58 @@
     ROFI_SYSTEMD_TERM = "kitty";
   };
 
+  accounts.email.accounts = with secrets.email; {
+    miracoly = with miracoly; {
+      address = address;
+      folders = {
+        drafts = "Drafts";
+        inbox = "Inbox";
+        sent = "Sent";
+        trash = "Trash";
+      };
+      imap = {
+        host = "posteo.de";
+        port = 993;
+        tls.enable = true;
+      };
+      primary = true;
+      realName = realName;
+      signature = {};
+      smtp = {
+        host = "posteo.de";
+        port = 587;
+        tls.enable = true;
+      };
+      thunderbird.enable = true;
+      userName = address;
+    };
+    kb = with kb; {
+      address = address;
+      folders = {
+        drafts = "Drafts";
+        inbox = "Inbox";
+        sent = "Sent";
+        trash = "Trash";
+      };
+      imap = {
+        host = "imap.gmail.com";
+        port = 993;
+        tls.enable = true;
+      };
+      realName = realName;
+      signature = {};
+      smtp = {
+        host = "smtp.gmail.com";
+        port = 587;
+        tls.enable = true;
+      };
+      thunderbird.enable = true;
+      userName = address;
+    };
+  };
+
   # TODO: Validate if this works
+  # I believe there is an own property for defining desktop files
   # Applications
   home.file.whatsapp.source = "${homedir}/.nix-config/config/applications/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop";
   home.file.whatsapp.target = ".local/share/applications/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop";
@@ -144,12 +197,15 @@
 
   services.dunst.enable = true;
 
+  programs.feh.enable = true;
+  programs.firefox.enable = true;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   programs.htop.enable = true;
-  programs.feh.enable = true;
-  programs.firefox.enable = true;
+
+  programs.java.enable = true;
 
   # git
   programs.git = {
@@ -271,6 +327,14 @@
       rofi-power-menu
       rofimoji
     ];
+  };
+
+  programs.thunderbird = {
+    enable = true;
+
+    profiles.miracoly = with secrets.email.miracoly; {
+      isDefault = true;
+    };
   };
 
   programs.vim = {
@@ -537,9 +601,9 @@
 
       startup = [
         { command = "blueman-applet"; notification = false; }
-        { command = "copyq"; notification = false; }
+        { command = "copyq"; always = true; notification = false; }
         # TODO - image does not exist in setup
-        { command = "feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &"; notification = false; }
+        { command = "feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &"; always = true; notification = false; }
         { command = "flameshot"; notification = false; }
         { command = "pa-applet"; notification = false; }
         { command = "picom -b"; always = true; notification = false; }
