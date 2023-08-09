@@ -37,24 +37,45 @@
     jq
     kate
     libnotify
+    maven
     neovim
     nerdfonts
     nodejs_18
+    nodePackages.npm-check-updates
     nodePackages.yarn
     pa_applet
+    pciutils
     peek
     pulseaudio
+    python311
     rofi-bluetooth
     rofi-file-browser
     rofi-power-menu
     rofi-systemd
     rofimoji
     slack
-    yubikey-manager
-    zlib
     stack
     steam-run
+    unzip
+    yubikey-manager
+    zip
+    zlib
     zoom-us
+    # needed for cypress
+    # gtk2
+    gtk3
+    nss
+    xorg.libXScrnSaver
+    xorg.libXdamage
+    xorg.libX11
+    xorg.libxcb
+    xorg.libXcomposite
+    xorg.libXi
+    xorg.libXext
+    xorg.libXfixes
+    xorg.libXcursor
+    xorg.libXrender
+    xorg.libXrandr
   ];
 
   home.sessionVariables = {
@@ -150,7 +171,7 @@
           postswitch = ''
             #!/usr/bin/env bash
             ${pkgs.i3}/bin/i3-msg restart
-            echo "Xft.dpi: 160" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
+            echo "Xft.dpi: 152" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
             ${pkgs.feh}/bin/feh --bg-center ~/Pictures/wallpaper/8k/surreal-6645614.jpg &
             ${pkgs.libnotify}/bin/notify-send "autorandr" "profile mobile loaded" 
           '';
@@ -185,7 +206,7 @@
           postswitch = ''
             #!/usr/bin/env bash
             ${pkgs.i3}/bin/i3-msg restart
-            echo "Xft.dpi: 160" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
+            echo "Xft.dpi: 152" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
             ${pkgs.feh}/bin/feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &
             ${pkgs.libnotify}/bin/notify-send "autorandr" "profile homeoffice loaded" 
           '';
@@ -206,6 +227,7 @@
   programs.htop.enable = true;
 
   programs.java.enable = true;
+  programs.java.package = pkgs.jdk17;
 
   # git
   programs.git = {
@@ -608,7 +630,7 @@
         { command = "pa-applet"; notification = false; }
         { command = "picom -b"; always = true; notification = false; }
         { command = "setxkbmap -layout us,de -variant 'basic,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
-        { command = "echo 'Xft.dpi: 160' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
+        { command = "echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
       ];
       terminal = "kitty";
       window = {
