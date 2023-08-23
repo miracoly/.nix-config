@@ -24,7 +24,7 @@ set hlsearch                           " highlight searches
 set ignorecase                         " ignore case sensitivity unless capital
 set smartcase                          "   is typed
 set encoding=utf-8
-set number
+set number relativenumber
 set scrolloff=3
 set sidescrolloff=5
 

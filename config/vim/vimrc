@@ -36,7 +36,7 @@ set nobackup                           " disable backup files
 set nowritebackup                      "
 
 set tabstop=2                          " indentation options
-set softtabstop=4                      "
+set softtabstop=2                      "
 set shiftwidth=4                       "
 set autoindent                         "
 set wm=2                               "

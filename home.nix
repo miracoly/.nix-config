@@ -23,12 +23,15 @@
     bitwarden
     bitwarden-cli
     brightnessctl
+    cabal2nix
+    ghc
     gimp
     google-chrome
     haskellPackages.hlint
     haskellPackages.hoogle
     haskellPackages.ormolu
     haskellPackages.stylish-haskell
+    haskellPackages.yesod-bin
     haskellPackages.zlib
     i3lock-fancy
     jetbrains.clion
@@ -43,6 +46,7 @@
     nodejs_18
     nodePackages.npm-check-updates
     nodePackages.yarn
+    rpi-imager
     pa_applet
     pciutils
     peek
