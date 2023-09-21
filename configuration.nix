@@ -133,7 +133,7 @@
   users.users.mira = {
     isNormalUser = true;
     description = "miracoly";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "input" ];
     shell = pkgs.zsh;
   };
 

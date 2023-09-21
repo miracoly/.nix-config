@@ -267,6 +267,15 @@ let &path.="src/include,/usr/include/AL,"
 set includeexpr=substitute(v:fname,'\\.','/','g')
 
 " ------------------------------------------------------------------------------
+"   ASM C65
+" ------------------------------------------------------------------------------
+filetype plugin indent on
+augroup filetypedetect
+  au BufNewFile,BufRead *.dasm,*.asm,*.inc set ft=asm_ca65
+  au Filetype asm_ca65 syntax=asm_ca65
+augroup END
+
+" ------------------------------------------------------------------------------
 "   KEYMAP SETTINGS
 " ------------------------------------------------------------------------------
                                        " set leader to Space

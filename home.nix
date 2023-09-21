@@ -19,13 +19,17 @@
   home.stateVersion = "23.05";
 
   home.packages = with pkgs; [
+    _1password-gui
     audacity
+    asciidoctor
     bitwarden
     bitwarden-cli
     brightnessctl
     cabal2nix
+    dasm
     ghc
     gimp
+    gnumake
     google-chrome
     haskellPackages.hlint
     haskellPackages.hoogle
@@ -50,6 +54,8 @@
     pa_applet
     pciutils
     peek
+    pipenv
+    postman
     pulseaudio
     python311
     rofi-bluetooth
@@ -60,6 +66,8 @@
     slack
     stack
     steam-run
+    stella
+    texlive.combined.scheme-full
     unzip
     yubikey-manager
     zip
@@ -153,6 +161,16 @@
   home.file.ideavim.source = "${homedir}/.nix-config/config/ideavim/.ideavimrc";
   home.file.ideavim.target = ".ideavimrc";
 
+  # Latex Dnd Templage
+  home.file.dnd-latex-template.source = pkgs.fetchFromGitHub  {
+    owner = "rpgtex";
+    repo = "DND-5e-LaTeX-Template";
+    rev = "v0.8.0";
+    sha256 =
+      "sha256-jSYC0iduKGoUaYI1jrH0cakC45AMug9UodERqsvwVxw=";
+  };
+  home.file.dnd-latex-template.target = "texmf/tex/latex/dnd";
+
   # autorandr
   programs.autorandr = {
     enable = true;
@@ -175,7 +193,7 @@
           postswitch = ''
             #!/usr/bin/env bash
             ${pkgs.i3}/bin/i3-msg restart
-            echo "Xft.dpi: 152" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
+            echo "Xft.dpi: 192" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
             ${pkgs.feh}/bin/feh --bg-center ~/Pictures/wallpaper/8k/surreal-6645614.jpg &
             ${pkgs.libnotify}/bin/notify-send "autorandr" "profile mobile loaded" 
           '';
@@ -363,7 +381,19 @@
     };
   };
 
-  programs.vim = {
+  programs.vim = 
+  let
+    asm-ca65 = pkgs.vimUtils.buildVimPlugin {
+      name = "vim-asm_ca65";
+      src = pkgs.fetchFromGitHub {
+        owner = "maxbane";
+        repo = "vim-asm_ca65";
+        rev = "59f2f5ea1adb2fa321b62c3f0817545abb836b09";
+        sha256 =
+        "sha256-cR6oCUidEXvUVCCXv7l65Ycvxgqrn1ysnl+xkMQAyG0=";
+      };
+    };
+  in {
     enable = true;
     defaultEditor = true;
     extraConfig = builtins.readFile ./config/vim/vimrc;
@@ -376,6 +406,8 @@
       vim-colorschemes
       vim-plug
       vim-polyglot
+      asm-ca65
+      vim-nix
     ];
   };
 
@@ -634,7 +666,7 @@
         { command = "pa-applet"; notification = false; }
         { command = "picom -b"; always = true; notification = false; }
         { command = "setxkbmap -layout us,de -variant 'basic,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
-        { command = "echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
+        { command = "echo 'Xft.dpi: 250' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
       ];
       terminal = "kitty";
       window = {
