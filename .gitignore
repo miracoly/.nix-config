@@ -3,3 +3,4 @@ result
 nohup.out
 .idea
 *secret*
+host-specific.nix

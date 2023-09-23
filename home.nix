@@ -161,8 +161,18 @@
   home.file.ideavim.source = "${homedir}/.nix-config/config/ideavim/.ideavimrc";
   home.file.ideavim.target = ".ideavimrc";
 
+  home.activation = {
+    wallpaper = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      if [ ! -d "${homedir}/Pictures/wallpaper" ]; then
+        ${pkgs.git}/bin/git clone https://miracoly@github.com/miracoly/wallpaper.git ${homedir}/Pictures/wallpaper
+      else
+        ${pkgs.git}/bin/git -C ${homedir}/Pictures/wallpaper pull
+      fi
+    '';
+  };
+
   # Latex Dnd Templage
-  home.file.dnd-latex-template.source = pkgs.fetchFromGitHub  {
+  home.file.dnd-latex-template.source = pkgs.fetchFromGitHub {
     owner = "rpgtex";
     repo = "DND-5e-LaTeX-Template";
     rev = "v0.8.0";
@@ -193,7 +203,7 @@
           postswitch = ''
             #!/usr/bin/env bash
             ${pkgs.i3}/bin/i3-msg restart
-            echo "Xft.dpi: 192" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
+            echo "Xft.dpi: 250" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
             ${pkgs.feh}/bin/feh --bg-center ~/Pictures/wallpaper/8k/surreal-6645614.jpg &
             ${pkgs.libnotify}/bin/notify-send "autorandr" "profile mobile loaded" 
           '';
@@ -633,6 +643,8 @@
         "${mod}+Shift+s" = "exec --no-startup-id rofi-systemd";
         "${mod}+Shift+mod1+p" = "exec rofi -show p -modi p:'rofi-power-menu'";
         "${mod}+Shift+mod1+l" = "exec --no-startup-id i3lock-fancy";
+        "${mod}+Shift+mod1+h" = "exec echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge";
+        "${mod}+Shift+mod1+m" = "exec echo 'Xft.dpi: 250' | ${pkgs.xorg.xrdb}/bin/xrdb -merge";
         "Print" = "exec flameshot gui";
 
         # Volume
@@ -666,7 +678,7 @@
         { command = "pa-applet"; notification = false; }
         { command = "picom -b"; always = true; notification = false; }
         { command = "setxkbmap -layout us,de -variant 'basic,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
-        { command = "echo 'Xft.dpi: 250' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
+        # { command = "echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
       ];
       terminal = "kitty";
       window = {

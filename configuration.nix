@@ -8,33 +8,12 @@
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
+      ./host-specific.nix
       <home-manager/nixos>
     ];
 
-  # Host specific
-  services.xserver.videoDrivers = [ "modesetting" ];
-  services.xserver.libinput.enable = true;
-
-  hardware.opengl.extraPackages = with pkgs; [ intel-media-driver ];
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
-
   services.geoclue2.enable = true;
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Setup keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
-  };
-
-  # Enable swap on luks
-  boot.initrd.luks.devices."luks-eda0301b-844e-4dae-98c0-1bb2bd8fc293".device = "/dev/disk/by-uuid/eda0301b-844e-4dae-98c0-1bb2bd8fc293";
-  boot.initrd.luks.devices."luks-eda0301b-844e-4dae-98c0-1bb2bd8fc293".keyFile = "/crypto_keyfile.bin";
-
-  networking.hostName = "miras-xps-93xx"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
