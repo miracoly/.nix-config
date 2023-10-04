@@ -50,7 +50,6 @@
     nodejs_18
     nodePackages.npm-check-updates
     nodePackages.yarn
-    rpi-imager
     pa_applet
     pciutils
     peek
@@ -147,13 +146,7 @@
     };
   };
 
-  # TODO: Validate if this works
-  # I believe there is an own property for defining desktop files
   # Applications
-  home.file.whatsapp.source = "${homedir}/.nix-config/config/applications/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop";
-  home.file.whatsapp.target = ".local/share/applications/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop";
-  home.file.youtube-music.source = "${homedir}/.nix-config/config/applications/chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default.desktop";
-  home.file.youtube-music.target = ".local/share/applications/chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default.desktop";
   home.file.yubikey-rofi.source = "${homedir}/.nix-config/config/applications/yubikey-rofi.desktop";
   home.file.yubikey-rofi.target = ".local/share/applications/yubikey-rofi.desktop";
 
@@ -653,6 +646,9 @@
         "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status";
         "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status";
 
+        # Brightness
+        "XF86MonBrightnessDown" = "exec --no-startup-id brightnessctl --min-val=1 -q set 5%-";
+        "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl -q set 5%+";
       };
 
       menu = "rofi -show drun";
