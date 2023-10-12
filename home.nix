@@ -27,6 +27,7 @@
     brightnessctl
     cabal2nix
     dasm
+    dbeaver
     ghc
     gimp
     gnumake
@@ -45,6 +46,7 @@
     kate
     libnotify
     maven
+    mysql80
     neovim
     nerdfonts
     nodejs_18
