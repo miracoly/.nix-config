@@ -28,6 +28,7 @@
     cabal2nix
     dasm
     dbeaver
+    discord
     ghc
     gimp
     gnumake
@@ -675,7 +676,7 @@
         { command = "flameshot"; notification = false; }
         { command = "pa-applet"; notification = false; }
         { command = "picom -b"; always = true; notification = false; }
-        { command = "setxkbmap -layout us,de -variant 'basic,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
+        { command = "setxkbmap -layout 'de,de' -variant 'us,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
         # { command = "echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
       ];
       terminal = "kitty";
