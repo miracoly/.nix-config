@@ -26,6 +26,7 @@
     bitwarden-cli
     brightnessctl
     cabal2nix
+    calibre
     dasm
     dbeaver
     discord
@@ -44,9 +45,12 @@
     jetbrains.idea-ultimate
     jetbrains.pycharm-professional
     jq
+    k9s
     kate
+    kubectl
     libnotify
     maven
+    minikube
     mysql80
     neovim
     nerdfonts
@@ -60,11 +64,14 @@
     postman
     pulseaudio
     python311
+    racket
     rofi-bluetooth
     rofi-file-browser
     rofi-power-menu
     rofi-systemd
     rofimoji
+    sbt
+    scala
     slack
     stack
     steam-run
@@ -640,7 +647,7 @@
         "${mod}+Shift+mod1+p" = "exec rofi -show p -modi p:'rofi-power-menu'";
         "${mod}+Shift+mod1+l" = "exec --no-startup-id i3lock-fancy";
         "${mod}+Shift+mod1+h" = "exec echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge";
-        "${mod}+Shift+mod1+m" = "exec echo 'Xft.dpi: 250' | ${pkgs.xorg.xrdb}/bin/xrdb -merge";
+        "${mod}+Shift+mod1+m" = "exec echo 'Xft.dpi: 200' | ${pkgs.xorg.xrdb}/bin/xrdb -merge";
         "Print" = "exec flameshot gui";
 
         # Volume
