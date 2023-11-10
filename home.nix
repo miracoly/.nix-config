@@ -47,6 +47,7 @@
     jq
     k9s
     kate
+    keepassxc
     kubectl
     libnotify
     maven
