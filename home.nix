@@ -18,6 +18,10 @@
   # changes in each release.
   home.stateVersion = "23.05";
 
+  home.sessionPath = [
+    "${homedir}/.local/share/coursier/bin"
+  ];
+
   home.packages = with pkgs; [
     _1password-gui
     audacity
@@ -25,13 +29,17 @@
     bitwarden
     bitwarden-cli
     brightnessctl
+    busybox
     cabal2nix
     calibre
     dasm
     dbeaver
     discord
+    dotty
+    gauge
     ghc
     gimp
+    gitlint
     gnumake
     google-chrome
     haskellPackages.hlint
@@ -72,7 +80,6 @@
     rofi-systemd
     rofimoji
     sbt
-    scala
     slack
     stack
     steam-run
@@ -512,6 +519,7 @@
       "100:name *= 'Vimeo'"
       "100:name *= 'Coursera'"
       "100:name *= 'Huddle'"
+      "100:name *= 'edX'"
     ];
     
     fade = true;
@@ -530,6 +538,16 @@
       mark-wmwin-focused = true;
       mark-ovredir-focused = true;
       use-damage = true;
+      blur = {
+        method = "dual_kawase";
+        size = 8;
+        strenght = 1;
+        background = true;
+        kern = "3x3box";
+        background-exclude = [
+          "class_g = 'Peek'"
+        ];
+      };
     };
 
     shadow = true;
