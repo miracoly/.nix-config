@@ -22,21 +22,27 @@
     "${homedir}/.local/share/coursier/bin"
   ];
 
-  home.packages = with pkgs; [
+  home.packages =
+  let
+    dependency-check = pkgs.callPackage ./derivations/dependency-check.nix {};
+  in with pkgs; [
     _1password-gui
     audacity
     asciidoctor
     bitwarden
     bitwarden-cli
     brightnessctl
-    busybox
     cabal2nix
     calibre
     dasm
     dbeaver
+    dependency-check
     discord
     dotty
+    exercism
     gauge
+    gcc
+    gdb
     ghc
     gimp
     gitlint
@@ -49,6 +55,7 @@
     haskellPackages.yesod-bin
     haskellPackages.zlib
     i3lock-fancy
+    insomnia
     jetbrains.clion
     jetbrains.idea-ultimate
     jetbrains.pycharm-professional
@@ -70,7 +77,6 @@
     pciutils
     peek
     pipenv
-    postman
     pulseaudio
     python311
     racket
@@ -302,18 +308,22 @@
     modules = {
       ipv6 = {
         position = 0;
+        settings = {
+          format_up = "IPv6";
+          format_down = "no IPv6";
+        };
       };
       "wireless _first_" = {
         position = 1;
         settings = {
-          format_up = "W: (%quality at %essid) %ip";
+          format_up = "W: (%quality at %essid)";
           format_down = "W: down";
         };
       };
       "ethernet _first_" = {
         position = 2;
         settings = {
-          format_up = "E: %ip (%speed)";
+          format_up = "E: (%speed)";
           format_down = "E: down";
         };
       };
