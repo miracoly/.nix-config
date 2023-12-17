@@ -22,10 +22,7 @@
     "${homedir}/.local/share/coursier/bin"
   ];
 
-  home.packages =
-  let
-    dependency-check = pkgs.callPackage ./derivations/dependency-check.nix {};
-  in with pkgs; [
+  home.packages = with pkgs; [
     _1password-gui
     audacity
     asciidoctor
@@ -36,7 +33,6 @@
     calibre
     dasm
     dbeaver
-    dependency-check
     discord
     dotty
     exercism
