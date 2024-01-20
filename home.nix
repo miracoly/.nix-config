@@ -72,6 +72,7 @@
     pa_applet
     pciutils
     peek
+    pinta
     pipenv
     pulseaudio
     python311
@@ -526,6 +527,7 @@
       "100:name *= 'Coursera'"
       "100:name *= 'Huddle'"
       "100:name *= 'edX'"
+      "100:name *= 'Pikuma'"
     ];
     
     fade = true;
