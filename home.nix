@@ -31,11 +31,13 @@
     brightnessctl
     cabal2nix
     calibre
+    cc65
     dasm
     dbeaver
     discord
     dotty
     exercism
+    fceux
     gauge
     gcc
     gdb
@@ -69,6 +71,7 @@
     nodejs_18
     nodePackages.npm-check-updates
     nodePackages.yarn
+    p7zip
     pa_applet
     pciutils
     peek
