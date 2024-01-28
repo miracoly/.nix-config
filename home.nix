@@ -22,7 +22,10 @@
     "${homedir}/.local/share/coursier/bin"
   ];
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs;
+  let
+    ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix { };
+  in [
     _1password-gui
     audacious
     audacity
@@ -30,6 +33,7 @@
     bitwarden
     bitwarden-cli
     brightnessctl
+    ca65-symbls-to-nl
     cabal2nix
     calibre
     cc65
