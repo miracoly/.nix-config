@@ -27,6 +27,7 @@
     ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix { };
   in [
     _1password-gui
+    appimage-run
     audacious
     audacity
     asciidoctor
@@ -78,6 +79,7 @@
     nodePackages.yarn
     p7zip
     pa_applet
+    pandoc
     pciutils
     peek
     pinta
@@ -93,6 +95,7 @@
     sbt
     slack
     stack
+    steam
     steam-run
     stella
     texlive.combined.scheme-full
