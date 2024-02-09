@@ -284,7 +284,7 @@
   programs.htop.enable = true;
 
   programs.java.enable = true;
-  programs.java.package = pkgs.jdk17;
+  programs.java.package = pkgs.jdk21;
 
   # git
   programs.git = {
