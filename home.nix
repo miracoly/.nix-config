@@ -74,7 +74,7 @@
     mysql80
     neovim
     nerdfonts
-    nodejs_18
+    nodejs_20
     nodePackages.npm-check-updates
     nodePackages.yarn
     p7zip
@@ -539,6 +539,7 @@
       "100:name *= 'Huddle'"
       "100:name *= 'edX'"
       "100:name *= 'Pikuma'"
+      "100:name *= 'Schneider Akademie'"
     ];
     
     fade = true;
