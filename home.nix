@@ -52,13 +52,15 @@
     gitlint
     gnumake
     google-chrome
+    haskellPackages.cabal-install
     haskellPackages.hlint
     haskellPackages.hoogle
     haskellPackages.ormolu
+    haskellPackages.stack
     haskellPackages.stylish-haskell
     haskellPackages.yesod-bin
-    haskellPackages.zlib
     i3lock-fancy
+    inkscape
     insomnia
     jetbrains.clion
     jetbrains.idea-ultimate
@@ -74,6 +76,7 @@
     mysql80
     neovim
     nerdfonts
+    nix-index
     nodejs_20
     nodePackages.npm-check-updates
     nodePackages.yarn
@@ -94,7 +97,6 @@
     rofimoji
     sbt
     slack
-    stack
     steam
     steam-run
     stella
