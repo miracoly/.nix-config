@@ -74,7 +74,6 @@
     maven
     minikube
     mysql80
-    neovim
     nerdfonts
     nix-index
     nodejs_20
@@ -401,6 +400,11 @@
     font.name = "JetBrainsMonoNLNerdFont";
     font.size = 12;
     settings = import ./home/kitty/theme.nix;
+  };
+
+  programs.neovim = {
+    enable = true;
+    extraLuaConfig = lib.fileContents ./init.lua;
   };
 
   # rofi
