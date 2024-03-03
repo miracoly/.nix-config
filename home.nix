@@ -3,6 +3,9 @@
     homedir = "/home/mira";
     secrets = import ./.secrets.nix;
   in {
+
+  imports = [ ./modules ];
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "mira";
@@ -400,11 +403,6 @@
     font.name = "JetBrainsMonoNLNerdFont";
     font.size = 12;
     settings = import ./home/kitty/theme.nix;
-  };
-
-  programs.neovim = {
-    enable = true;
-    extraLuaConfig = lib.fileContents ./init.lua;
   };
 
   # rofi
