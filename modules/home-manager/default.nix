@@ -1,4 +1,8 @@
 { lib, config, pkgs, ... }:
 {
-  imports = [ ./nvim ];
+  imports = [
+    ./kitty
+    ./nvim
+    ./rofi
+  ];
 }

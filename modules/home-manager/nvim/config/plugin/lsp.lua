@@ -1,3 +1,8 @@
+-- [[ --------------------------------------------------------------------------
+-- LSP
+-- ]] --------------------------------------------------------------------------
+
+-- Lua
 local on_attach = function(_, bufnr)
   local bufmap = function(keys, func)
     vim.keymap.set('n', keys, func, { buffer = bufnr })
@@ -23,18 +28,40 @@ local on_attach = function(_, bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+require('neodev').setup({
+  override = function(root_dir, library)
+    if root_dir:find("/etc/nixos", 1, true) == 1 or
+      root_dir:find("/home/mira/.nix-config", 1, true) == 1 then
+      library.enabled = true
+      library.plugins = true
+    end
+  end,
+})
 
 require('lspconfig').lua_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  Lua = {
-    workspace = {
-      checkThirdParty = false
-    },
-    telemetry = {
-      enable = false
+  settings = {
+    Lua = {
+      workspace = {
+        checkThirdParty = false
+      },
+      telemetry = {
+        enable = false
+      }
     }
   }
 }
 
-require 'lspconfig'.rnix.setup {}
+-- Nix
+require('lspconfig').rnix.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+-- Haskell
+require('lspconfig')['hls'].setup {
+  filetypes = { 'haskell', 'lhaskell', 'cabal' },
+}

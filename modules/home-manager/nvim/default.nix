@@ -1,56 +1,99 @@
 { lib, config, pkgs, ... }:
 {
-  programs.neovim = 
-  let
-    toLua = str: "lua << EOF\n${str}\nEOF\n";
-    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-  in {
-    enable = true;
-    defaultEditor = true;
+  programs.neovim =
+    let
+      toLua = str: "lua << EOF\n${str}\nEOF\n";
+      toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+    in
+    {
+      enable = true;
+      defaultEditor = true;
 
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
 
-    extraLuaConfig = ''
-      ${builtins.readFile ./config/init.lua}
-    '';
+      extraLuaConfig = ''
+        ${builtins.readFile ./config/init.lua}
+        ${builtins.readFile ./config/keymaps.lua}
+      '';
 
-    plugins = with pkgs.vimPlugins; [
-      {
-        plugin = comment-nvim;
-        config = toLua ''require("Comment").setup()'';
-      }
-      {
-        plugin = monokai-pro-nvim;
-        config = toLua ''
-          require("monokai-pro").setup({
-            filter = "machine"
-          })
-          vim.cmd("colorscheme monokai-pro")
-        '';
-      }
-      {
-        plugin = lualine-nvim;
-        config = toLua ''
-          require('lualine').setup({
-            options = {
-              theme = 'monokai-pro'
-            }
-          })
-        '';
-      }
-      {
-        plugin = nvim-lspconfig;
-        config = toLuaFile ./config/plugin/lsp.lua;
-      }
-      nvim-web-devicons
-    ];
+      plugins = with pkgs.vimPlugins; [
+        cmp_luasnip
+        cmp-nvim-lsp
 
-    extraPackages = with pkgs; [
-      lua-language-server
-      rnix-lsp
-      xclip
-    ];
-  };
+        {
+          plugin = comment-nvim;
+          config = toLua ''require("Comment").setup()'';
+        }
+
+        friendly-snippets
+
+        {
+          plugin = haskell-tools-nvim;
+          config = toLuaFile ./config/plugin/haskell-tools.lua;
+        }
+
+        {
+          plugin = lualine-nvim;
+          config = toLua ''
+            require('lualine').setup({
+              options = {
+                theme = 'monokai-pro'
+              }
+            })
+          '';
+        }
+
+        luasnip
+
+        {
+          plugin = monokai-pro-nvim;
+          config = toLua ''
+            require("monokai-pro").setup({
+              filter = "machine"
+            })
+            vim.cmd("colorscheme monokai-pro")
+          '';
+        }
+
+        neo-tree-nvim
+
+        neodev-nvim
+        nui-nvim
+
+        {
+          plugin = nvim-cmp;
+          config = toLuaFile ./config/plugin/cmp.lua;
+        }
+
+        {
+          plugin = nvim-lspconfig;
+          config = toLuaFile ./config/plugin/lsp.lua;
+        }
+
+        nvim-web-devicons
+        plenary-nvim
+
+        {
+          plugin = telescope-nvim;
+          config = toLuaFile ./config/plugin/telescope.lua;
+        }
+
+        {
+          plugin = nvim-treesitter.withAllGrammars;
+          config = toLuaFile ./config/plugin/treesitter.lua;
+        }
+      ];
+
+      extraPackages = with pkgs; [
+        fd
+        haskellPackages.haskell-language-server
+        lua-language-server
+        ripgrep
+        rnix-lsp
+        tree-sitter
+        xclip
+      ];
+    };
 }

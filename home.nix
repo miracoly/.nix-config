@@ -1,8 +1,9 @@
-{ config, lib, pkgs, ... }: 
-  let
-    homedir = "/home/mira";
-    secrets = import ./.secrets.nix;
-  in {
+{ config, lib, pkgs, ... }:
+let
+  homedir = "/home/mira";
+  secrets = import ./.secrets.nix;
+in
+{
 
   imports = [ ./modules ];
 
@@ -26,104 +27,106 @@
   ];
 
   home.packages = with pkgs;
-  let
-    ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix { };
-  in [
-    _1password-gui
-    appimage-run
-    audacious
-    audacity
-    asciidoctor
-    bitwarden
-    bitwarden-cli
-    brightnessctl
-    ca65-symbls-to-nl
-    cabal2nix
-    calibre
-    cc65
-    dasm
-    dbeaver
-    discord
-    dotty
-    exercism
-    fceux
-    gauge
-    gcc
-    gdb
-    ghc
-    gimp
-    gitlint
-    gnumake
-    google-chrome
-    haskellPackages.cabal-install
-    haskellPackages.hlint
-    haskellPackages.hoogle
-    haskellPackages.ormolu
-    haskellPackages.stack
-    haskellPackages.stylish-haskell
-    haskellPackages.yesod-bin
-    i3lock-fancy
-    inkscape
-    insomnia
-    jetbrains.clion
-    jetbrains.idea-ultimate
-    jetbrains.pycharm-professional
-    jq
-    k9s
-    kate
-    keepassxc
-    kubectl
-    libnotify
-    maven
-    minikube
-    mysql80
-    nerdfonts
-    nix-index
-    nodejs_20
-    nodePackages.npm-check-updates
-    nodePackages.yarn
-    p7zip
-    pa_applet
-    pandoc
-    pciutils
-    peek
-    pinta
-    pipenv
-    pulseaudio
-    python311
-    racket
-    rofi-bluetooth
-    rofi-file-browser
-    rofi-power-menu
-    rofi-systemd
-    rofimoji
-    sbt
-    slack
-    steam
-    steam-run
-    stella
-    texlive.combined.scheme-full
-    unzip
-    yubikey-manager
-    zip
-    zlib
-    zoom-us
-    # needed for cypress
-    # gtk2
-    gtk3
-    nss
-    xorg.libXScrnSaver
-    xorg.libXdamage
-    xorg.libX11
-    xorg.libxcb
-    xorg.libXcomposite
-    xorg.libXi
-    xorg.libXext
-    xorg.libXfixes
-    xorg.libXcursor
-    xorg.libXrender
-    xorg.libXrandr
-  ];
+    let
+      ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix { };
+    in
+    [
+      _1password-gui
+      appimage-run
+      audacious
+      audacity
+      asciidoctor
+      bitwarden
+      bitwarden-cli
+      brightnessctl
+      ca65-symbls-to-nl
+      cabal2nix
+      calibre
+      cc65
+      dasm
+      dbeaver
+      discord
+      dotty
+      exercism
+      fceux
+      gauge
+      gcc
+      gdb
+      ghc
+      gimp
+      gitlint
+      gnumake
+      google-chrome
+      haskellPackages.cabal-install
+      haskellPackages.hlint
+      haskellPackages.hoogle
+      haskellPackages.ormolu
+      haskellPackages.stack
+      haskellPackages.stylish-haskell
+      haskellPackages.yesod-bin
+      i3lock-fancy
+      inkscape
+      insomnia
+      jetbrains.clion
+      jetbrains.idea-ultimate
+      jetbrains.pycharm-professional
+      jq
+      k9s
+      kate
+      keepassxc
+      kubectl
+      libnotify
+      maven
+      minikube
+      mysql80
+      nerdfonts
+      nix-index
+      nodejs_20
+      nodePackages.npm-check-updates
+      nodePackages.yarn
+      nomacs
+      p7zip
+      pa_applet
+      pandoc
+      pciutils
+      peek
+      pinta
+      pipenv
+      pulseaudio
+      python311
+      racket
+      rofi-bluetooth
+      rofi-file-browser
+      rofi-power-menu
+      rofi-systemd
+      rofimoji
+      sbt
+      slack
+      steam
+      steam-run
+      stella
+      texlive.combined.scheme-full
+      unzip
+      yubikey-manager
+      zip
+      zlib
+      zoom-us
+      # needed for cypress
+      # gtk2
+      gtk3
+      nss
+      xorg.libXScrnSaver
+      xorg.libXdamage
+      xorg.libX11
+      xorg.libxcb
+      xorg.libXcomposite
+      xorg.libXi
+      xorg.libXext
+      xorg.libXfixes
+      xorg.libXcursor
+      xorg.libXrender
+      xorg.libXrandr
+    ];
 
   home.sessionVariables = {
     FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT = 1;
@@ -148,7 +151,7 @@
       };
       primary = true;
       realName = realName;
-      signature = {};
+      signature = { };
       smtp = {
         host = "posteo.de";
         port = 587;
@@ -171,7 +174,7 @@
         tls.enable = true;
       };
       realName = realName;
-      signature = {};
+      signature = { };
       smtp = {
         host = "smtp.gmail.com";
         port = 587;
@@ -191,7 +194,7 @@
   home.file.ideavim.target = ".ideavimrc";
 
   home.activation = {
-    wallpaper = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    wallpaper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       if [ ! -d "${homedir}/Pictures/wallpaper" ]; then
         ${pkgs.git}/bin/git clone https://miracoly@github.com/miracoly/wallpaper.git ${homedir}/Pictures/wallpaper
       else
@@ -219,14 +222,14 @@
           eDP-1 = "00ffffffffffff004d10ad14000000002a1c0104a51d11780ede50a3544c99260f5054000000010101010101010101010101010101014dd000a0f0703e803020350026a510000018a4a600a0f0703e803020350026a510000018000000fe00305239394b804c513133334431000000000002410328011200000b010a20200041";
         };
         config = {
-         eDP-1 = { 
-           enable = true;
-           crtc = 0;
-           mode = "3840x2160";
-           position = "0x0";
-           primary = true;
-           rate = "60.00";
-         };
+          eDP-1 = {
+            enable = true;
+            crtc = 0;
+            mode = "3840x2160";
+            position = "0x0";
+            primary = true;
+            rate = "60.00";
+          };
         };
         hooks = {
           postswitch = ''
@@ -245,8 +248,8 @@
           DP-2 = "00ffffffffffff0009d1547945540000301f0104b54628783bdd75ae4f44ad270b5054a56b80818081c08100a9c0b300d1c0010101014dd000a0f0703e8030203500c48f2100001a000000ff0058424d30303739353031390a20000000fd00283c87873c010a202020202020000000fc0042656e5120455733323830550a0124020334f15161605f5e5d101f222120051404131203012309070783010000e200cf67030c0020003878e305c301e606050162623204740030f2705a80b0588a00c48f2100001e565e00a0a0a029502f203500c48f2100001a00000000000000000000000000000000000000000000000000000000000000000000000000000062";
         };
         config = {
-          eDP-1.enable = false; 
-          DP-2 = { 
+          eDP-1.enable = false;
+          DP-2 = {
             enable = true;
             crtc = 0;
             mode = "3840x2160";
@@ -254,7 +257,7 @@
             primary = true;
             rate = "60.00";
           };
-          DP-1 = { 
+          DP-1 = {
             enable = true;
             crtc = 0;
             mode = "3840x2160";
@@ -344,7 +347,7 @@
         settings = {
           format = "BAT %status %percentage %remaining";
           status_chr = "chg";
-          status_bat =  "dis";
+          status_bat = "dis";
           status_full = "full";
           integer_battery_capacity = true;
         };
@@ -363,7 +366,7 @@
           format = "T: %degrees °C";
           max_threshold = 42;
           format_above_threshold = "HOT T: %degrees°C";
-        }; 
+        };
       };
       cpu_usage = {
         position = 6;
@@ -397,25 +400,6 @@
     };
   };
 
-  # kitty
-  programs.kitty = {
-    enable = true;
-    font.name = "JetBrainsMonoNLNerdFont";
-    font.size = 12;
-    settings = import ./home/kitty/theme.nix;
-  };
-
-  # rofi
-  programs.rofi = {
-    enable = true;
-    font = "JetBrainsMonoNLNerdFont 24";
-    plugins = with pkgs; [
-      rofi-calc
-      rofi-power-menu
-      rofimoji
-    ];
-  };
-
   programs.thunderbird = {
     enable = true;
 
@@ -424,34 +408,35 @@
     };
   };
 
-  programs.vim = 
-  let
-    asm-ca65 = pkgs.vimUtils.buildVimPlugin {
-      name = "vim-asm_ca65";
-      src = pkgs.fetchFromGitHub {
-        owner = "maxbane";
-        repo = "vim-asm_ca65";
-        rev = "59f2f5ea1adb2fa321b62c3f0817545abb836b09";
-        sha256 =
-        "sha256-cR6oCUidEXvUVCCXv7l65Ycvxgqrn1ysnl+xkMQAyG0=";
+  programs.vim =
+    let
+      asm-ca65 = pkgs.vimUtils.buildVimPlugin {
+        name = "vim-asm_ca65";
+        src = pkgs.fetchFromGitHub {
+          owner = "maxbane";
+          repo = "vim-asm_ca65";
+          rev = "59f2f5ea1adb2fa321b62c3f0817545abb836b09";
+          sha256 =
+            "sha256-cR6oCUidEXvUVCCXv7l65Ycvxgqrn1ysnl+xkMQAyG0=";
+        };
       };
+    in
+    {
+      enable = false;
+      extraConfig = builtins.readFile ./config/vim/vimrc;
+      plugins = with pkgs.vimPlugins; [
+        coc-nvim
+        haskell-vim
+        jsonc-vim
+        lightline-vim
+        markdown-preview-nvim
+        vim-colorschemes
+        vim-plug
+        vim-polyglot
+        asm-ca65
+        vim-nix
+      ];
     };
-  in {
-    enable = false;
-    extraConfig = builtins.readFile ./config/vim/vimrc;
-    plugins = with pkgs.vimPlugins; [
-      coc-nvim
-      haskell-vim
-      jsonc-vim
-      lightline-vim
-      markdown-preview-nvim
-      vim-colorschemes
-      vim-plug
-      vim-polyglot
-      asm-ca65
-      vim-nix
-    ];
-  };
 
   programs.zathura.enable = true;
 
@@ -506,7 +491,7 @@
     zplug = {
       enable = true;
       plugins = [
-        { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } 
+        { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; }
       ];
     };
   };
@@ -544,7 +529,7 @@
       "100:name *= 'Pikuma'"
       "100:name *= 'Schneider Akademie'"
     ];
-    
+
     fade = true;
     fadeSteps = [ 0.03 0.03 ];
 
@@ -591,7 +576,7 @@
       popup_menu = { opacity = 0.9; };
       dropdown_menu = { opacity = 0.9; };
     };
-  }; 
+  };
 
   # redshift
   services.redshift = {
@@ -617,130 +602,131 @@
   };
 
   systemd.user.targets.tray = {
-		Unit = {
-			Description = "Home Manager System Tray";
-			Requires = [ "graphical-session-pre.target" ];
-		};
-	};
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
+    };
+  };
 
   # i3
   xsession.windowManager.i3 = {
     enable = true;
     config =
-    let
-      keybindings = {
-        mod = config.xsession.windowManager.i3.config.modifier;
-        up = "k";
-        down = "j";
-        left = "h";
-        right = "l";
-      };
-    in {
-      bars = [
-        {
-          colors = {
-            background = "#455559aa";
-            statusline = "#FFF5F4";
-            separator = "#8F736F";
+      let
+        keybindings = {
+          mod = config.xsession.windowManager.i3.config.modifier;
+          up = "k";
+          down = "j";
+          left = "h";
+          right = "l";
+        };
+      in
+      {
+        bars = [
+          {
+            colors = {
+              background = "#455559aa";
+              statusline = "#FFF5F4";
+              separator = "#8F736F";
+            };
+            extraConfig = ''
+              separator_symbol " | "
+              i3bar_command i3bar --transparency
+            '';
+            fonts = {
+              names = [ "JetBrainsMonoNLNerdFont" ];
+              size = 10.0;
+            };
+            statusCommand = "i3status";
+          }
+        ];
+        colors.background = "#282420";
+        floating.border = 0;
+        fonts = {
+          names = [ "JetBrainsMonoNLNerdFont" ];
+          size = 10.0;
+        };
+        gaps.inner = 10;
+
+        keybindings = with keybindings; lib.mkOptionDefault {
+          "floating_modifier" = mod;
+          "tiling_drag modifier" = "titlebar";
+
+          # change focus
+          "${mod}+${up}" = "focus up";
+          "${mod}+${down}" = "focus down";
+          "${mod}+${left}" = "focus left";
+          "${mod}+${right}" = "focus right";
+
+          # move focused window
+          "${mod}+Shift+${up}" = "move up";
+          "${mod}+Shift+${down}" = "move down";
+          "${mod}+Shift+${left}" = "move left";
+          "${mod}+Shift+${right}" = "move right";
+
+          # split
+          "${mod}+v" = "split h";
+          "${mod}+Shift+v" = "split v";
+
+          # tiling / floating
+          "${mod}+Shift+t" = "floating toggle";
+          "${mod}+t" = "focus mode_toggle";
+
+          # Applications
+          "${mod}+Shift+d" = "exec rofi -show run -modi run";
+          "${mod}+c" = "exec rofi -show calc -modi calc -no-show-match -no-sort";
+          "${mod}+Shift+b" = "exec --no-startup-id rofi-bluetooth";
+          "${mod}+Shift+m" = "exec rofi -show emoji -modi 'emoji:rofimoji --action=copy'";
+          "${mod}+Shift+f" = "exec rofi -show filebrowser -modi filebrowser";
+          "${mod}+Shift+s" = "exec --no-startup-id rofi-systemd";
+          "${mod}+Shift+mod1+p" = "exec rofi -show p -modi p:'rofi-power-menu'";
+          "${mod}+Shift+mod1+l" = "exec --no-startup-id i3lock-fancy";
+          "${mod}+Shift+mod1+h" = "exec echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge";
+          "${mod}+Shift+mod1+m" = "exec echo 'Xft.dpi: 200' | ${pkgs.xorg.xrdb}/bin/xrdb -merge";
+          "Print" = "exec flameshot gui";
+
+          # Volume
+          "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status";
+          "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status";
+          "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status";
+          "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status";
+
+          # Brightness
+          "XF86MonBrightnessDown" = "exec --no-startup-id brightnessctl --min-val=1 -q set 5%-";
+          "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl -q set 5%+";
+        };
+
+        menu = "rofi -show drun";
+
+        modes = with keybindings; lib.mkOptionDefault {
+          resize = {
+            "${up}" = "resize shrink height 100 px or 10 ppt";
+            "${down}" = "resize grow height 100 px or 10 ppt";
+            "${left}" = "resize shrink width 100 px or 10 ppt";
+            "${right}" = "resize grow width 100 px or 10 ppt";
+            "${mod}+r" = "mode default";
           };
-          extraConfig = ''
-            separator_symbol " | "
-            i3bar_command i3bar --transparency
-          '';
-          fonts = {
-            names = [ "JetBrainsMonoNLNerdFont" ];
-            size = 10.0;
-          };
-          statusCommand = "i3status";
-        }
-      ];
-      colors.background = "#282420";
-      floating.border = 0;
-      fonts = {
-        names = [ "JetBrainsMonoNLNerdFont" ];
-        size = 10.0;
+        };
+
+        modifier = "Mod4";
+
+        startup = [
+          { command = "blueman-applet"; notification = false; }
+          { command = "copyq"; always = true; notification = false; }
+          # TODO - image does not exist in setup
+          { command = "feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &"; always = true; notification = false; }
+          { command = "flameshot"; notification = false; }
+          { command = "pa-applet"; notification = false; }
+          { command = "picom -b"; always = true; notification = false; }
+          { command = "setxkbmap -layout 'de,de' -variant 'us,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
+          # { command = "echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
+        ];
+        terminal = "kitty";
+        window = {
+          border = 0;
+          hideEdgeBorders = "both";
+          titlebar = false;
+        };
       };
-      gaps.inner = 10;
-
-      keybindings = with keybindings; lib.mkOptionDefault {
-        "floating_modifier" = mod;
-        "tiling_drag modifier" = "titlebar";
-
-        # change focus
-        "${mod}+${up}" = "focus up";
-        "${mod}+${down}" = "focus down";
-        "${mod}+${left}" = "focus left";
-        "${mod}+${right}" = "focus right";
-
-        # move focused window
-        "${mod}+Shift+${up}" = "move up";
-        "${mod}+Shift+${down}" = "move down";
-        "${mod}+Shift+${left}" = "move left";
-        "${mod}+Shift+${right}" = "move right";
-
-        # split
-        "${mod}+v" = "split h";
-        "${mod}+Shift+v" = "split v";
-
-        # tiling / floating
-        "${mod}+Shift+t" = "floating toggle";
-        "${mod}+t" = "focus mode_toggle";
-
-        # Applications
-        "${mod}+Shift+d" = "exec rofi -show run -modi run";
-        "${mod}+c" = "exec rofi -show calc -modi calc -no-show-match -no-sort";
-        "${mod}+Shift+b" = "exec --no-startup-id rofi-bluetooth";
-        "${mod}+Shift+m" = "exec rofi -show emoji -modi 'emoji:rofimoji --action=copy'";
-        "${mod}+Shift+f" = "exec rofi -show filebrowser -modi filebrowser";
-        "${mod}+Shift+s" = "exec --no-startup-id rofi-systemd";
-        "${mod}+Shift+mod1+p" = "exec rofi -show p -modi p:'rofi-power-menu'";
-        "${mod}+Shift+mod1+l" = "exec --no-startup-id i3lock-fancy";
-        "${mod}+Shift+mod1+h" = "exec echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge";
-        "${mod}+Shift+mod1+m" = "exec echo 'Xft.dpi: 200' | ${pkgs.xorg.xrdb}/bin/xrdb -merge";
-        "Print" = "exec flameshot gui";
-
-        # Volume
-        "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status";
-        "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status";
-        "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status";
-        "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status";
-
-        # Brightness
-        "XF86MonBrightnessDown" = "exec --no-startup-id brightnessctl --min-val=1 -q set 5%-";
-        "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl -q set 5%+";
-      };
-
-      menu = "rofi -show drun";
-
-      modes = with keybindings; lib.mkOptionDefault {
-        resize = {
-          "${up}" = "resize shrink height 100 px or 10 ppt";
-          "${down}" = "resize grow height 100 px or 10 ppt";
-          "${left}" = "resize shrink width 100 px or 10 ppt";
-          "${right}" = "resize grow width 100 px or 10 ppt";
-          "${mod}+r" = "mode default";
-        }; 
-      };
-
-      modifier = "Mod4";
-
-      startup = [
-        { command = "blueman-applet"; notification = false; }
-        { command = "copyq"; always = true; notification = false; }
-        # TODO - image does not exist in setup
-        { command = "feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &"; always = true; notification = false; }
-        { command = "flameshot"; notification = false; }
-        { command = "pa-applet"; notification = false; }
-        { command = "picom -b"; always = true; notification = false; }
-        { command = "setxkbmap -layout 'de,de' -variant 'us,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
-        # { command = "echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
-      ];
-      terminal = "kitty";
-      window = {
-        border = 0;
-        hideEdgeBorders = "both";
-        titlebar = false;
-      };
-    };
   };
 }
