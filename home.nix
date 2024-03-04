@@ -437,8 +437,7 @@
       };
     };
   in {
-    enable = true;
-    defaultEditor = true;
+    enable = false;
     extraConfig = builtins.readFile ./config/vim/vimrc;
     plugins = with pkgs.vimPlugins; [
       coc-nvim
