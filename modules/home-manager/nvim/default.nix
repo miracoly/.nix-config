@@ -80,6 +80,8 @@
           config = toLuaFile ./config/plugin/telescope.lua;
         }
 
+        telescope-ui-select-nvim
+
         {
           plugin = nvim-treesitter.withAllGrammars;
           config = toLuaFile ./config/plugin/treesitter.lua;
@@ -90,6 +92,7 @@
         fd
         haskellPackages.haskell-language-server
         lua-language-server
+        nodePackages.typescript-language-server
         ripgrep
         rnix-lsp
         tree-sitter

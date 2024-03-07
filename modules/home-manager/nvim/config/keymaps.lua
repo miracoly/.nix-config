@@ -5,18 +5,17 @@ local silent = { silent = true }
 local remap = { remap = true }
 
 -- General
-vim.keymap.set("n", "<C-A-l>", ":Format <CR>", {})
 vim.keymap.set("n", "<C-s>", ":w! <CR>", {})
 vim.keymap.set("n", "<leader>w", ":w! <CR>", {})
 
 -- Window & Tabs
-vim.keymap.set("n", "<A-S-Left>", ":tabprevious <CR>", silent)
-vim.keymap.set("n", "<A-S-Right>", ":tabnext <CR>", silent)
+vim.keymap.set("n", "<A-Left>", ":tabprevious <CR>", silent)
+vim.keymap.set("n", "<A-Right>", ":tabnext <CR>", silent)
 
-vim.keymap.set("n", "<A-Up>", ":wincmd k <CR>", silent)
-vim.keymap.set("n", "<A-Down>", ":wincmd j <CR>", silent)
-vim.keymap.set("n", "<A-Left>", ":wincmd h <CR>", silent)
-vim.keymap.set("n", "<A-Right>", ":wincmd l <CR>", silent)
+vim.keymap.set("n", "<A-S-Up>", ":wincmd k <CR>", silent)
+vim.keymap.set("n", "<A-S-Down>", ":wincmd j <CR>", silent)
+vim.keymap.set("n", "<A-S-Left>", ":wincmd h <CR>", silent)
+vim.keymap.set("n", "<A-S-Right>", ":wincmd l <CR>", silent)
 
 vim.keymap.set("n", "<F28>", ":q <CR>", silent) -- Ctrl + F4
 

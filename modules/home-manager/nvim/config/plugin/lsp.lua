@@ -2,47 +2,24 @@
 -- LSP
 -- ]] --------------------------------------------------------------------------
 
--- Lua
-local on_attach = function(_, bufnr)
-  local bufmap = function(keys, func)
-    vim.keymap.set('n', keys, func, { buffer = bufnr })
-  end
-
-  bufmap('<leader>r', vim.lsp.buf.rename)
-  bufmap('<leader>a', vim.lsp.buf.code_action)
-
-  bufmap('gd', vim.lsp.buf.definition)
-  bufmap('gD', vim.lsp.buf.declaration)
-  bufmap('gI', vim.lsp.buf.implementation)
-  bufmap('<leader>D', vim.lsp.buf.type_definition)
-
-  bufmap('gr', require('telescope.builtin').lsp_references)
-  bufmap('<leader>s', require('telescope.builtin').lsp_document_symbols)
-  bufmap('<leader>S', require('telescope.builtin').lsp_dynamic_workspace_symbols)
-
-  bufmap('K', vim.lsp.buf.hover)
-
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, {})
-end
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 require('neodev').setup({
   override = function(root_dir, library)
     if root_dir:find("/etc/nixos", 1, true) == 1 or
-      root_dir:find("/home/mira/.nix-config", 1, true) == 1 then
+        root_dir:find("/home/mira/.nix-config", 1, true) == 1 then
       library.enabled = true
       library.plugins = true
     end
   end,
 })
 
-require('lspconfig').lua_ls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
+local lspconfig = require('lspconfig')
+
+lspconfig.lua_ls.setup {
+  -- on_attach = on_attach,
+  -- capabilities = capabilities,
   settings = {
     Lua = {
       workspace = {
@@ -56,12 +33,44 @@ require('lspconfig').lua_ls.setup {
 }
 
 -- Nix
-require('lspconfig').rnix.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
+lspconfig.rnix.setup {
+  -- on_attach = on_attach,
+  -- capabilities = capabilities,
 }
 
 -- Haskell
-require('lspconfig')['hls'].setup {
+lspconfig['hls'].setup {
   filetypes = { 'haskell', 'lhaskell', 'cabal' },
 }
+
+lspconfig.tsserver.setup {}
+
+-- Global config
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    -- vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', '<C-q>', vim.lsp.buf.hover, opts)
+    -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    -- vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+    -- vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    -- vim.keymap.set('n', '<space>wl', function()
+    -- print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    -- end, opts)
+    -- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+    -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<A-CR>', vim.lsp.buf.code_action, opts)
+    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<C-A-l>', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+  end,
+})
