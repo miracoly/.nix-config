@@ -60,6 +60,12 @@
         neo-tree-nvim
 
         neodev-nvim
+
+        {
+          plugin = none-ls-nvim;
+          config = toLuaFile ./config/plugin/none-ls.lua;
+        }
+
         nui-nvim
 
         {
@@ -92,10 +98,12 @@
         fd
         haskellPackages.haskell-language-server
         lua-language-server
+        nodePackages.prettier
         nodePackages.typescript-language-server
         nodePackages.volar
         ripgrep
         rnix-lsp
+        stylua
         tree-sitter
         vscode-langservers-extracted
         xclip
