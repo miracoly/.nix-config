@@ -93,9 +93,11 @@
         haskellPackages.haskell-language-server
         lua-language-server
         nodePackages.typescript-language-server
+        nodePackages.volar
         ripgrep
         rnix-lsp
         tree-sitter
+        vscode-langservers-extracted
         xclip
       ];
     };

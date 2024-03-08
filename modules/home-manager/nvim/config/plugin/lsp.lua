@@ -43,7 +43,33 @@ lspconfig['hls'].setup {
   filetypes = { 'haskell', 'lhaskell', 'cabal' },
 }
 
-lspconfig.tsserver.setup {}
+lspconfig.tsserver.setup {
+  init_options = {
+    plugins = {
+      {
+        name = "@vue/typescript-plugin",
+        location = "ANY_VALUE",
+        languages = { "javascript", "typescript", "vue" },
+      },
+    },
+  },
+  filetypes = {
+    "javascript",
+    "typescript",
+    "vue",
+  },
+}
+
+lspconfig.volar.setup {}
+
+lspconfig.eslint.setup({
+  on_attach = function(_, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+})
 
 -- Global config
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -54,21 +80,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local telescope = require('telescope.builtin')
     local opts = { buffer = ev.buf }
-    -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', '<C-b>', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', '<C-A-B>', telescope.lsp_references, opts)
     vim.keymap.set('n', '<C-q>', vim.lsp.buf.hover, opts)
-    -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    -- vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-    -- vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    -- vim.keymap.set('n', '<space>wl', function()
-    -- print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    -- end, opts)
-    -- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', '<A-7>', telescope.lsp_document_symbols, opts)
+    -- vim.keymap.set('n', '<C-A-B>', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<C-p>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts)
+    vim.keymap.set('n', '<C-S-B>', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set({ 'n', 'v' }, '<A-CR>', vim.lsp.buf.code_action, opts)
-    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', '<C-A-l>', function()
       vim.lsp.buf.format { async = true }
     end, opts)

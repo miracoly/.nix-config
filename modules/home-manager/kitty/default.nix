@@ -7,8 +7,10 @@
     settings = import ./settings.nix;
     # theme = "Monokai Pro (Filter Machine)";
     keybindings = {
-      "ctrl+shift+n" = "no_op";
+      # unmap conflicts with neovim
+      "ctrl+shift+b" = "no_op";
       "ctrl+shift+f" = "no_op";
+      "ctrl+shift+n" = "no_op";
     };
   };
 }

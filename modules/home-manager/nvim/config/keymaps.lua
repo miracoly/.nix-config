@@ -7,6 +7,8 @@ local remap = { remap = true }
 -- General
 vim.keymap.set("n", "<C-s>", ":w! <CR>", {})
 vim.keymap.set("n", "<leader>w", ":w! <CR>", {})
+vim.keymap.set("n", "<C-A-Left>", "<C-o>", remap) -- previous position
+vim.keymap.set("n", "<C-A-Right>", "<C-i>", remap) -- next position
 
 -- Window & Tabs
 vim.keymap.set("n", "<A-Left>", ":tabprevious <CR>", silent)
