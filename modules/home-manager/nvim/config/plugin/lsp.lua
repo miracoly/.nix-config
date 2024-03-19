@@ -38,10 +38,10 @@ lspconfig.rnix.setup {
   -- capabilities = capabilities,
 }
 
--- Haskell
-lspconfig['hls'].setup {
-  filetypes = { 'haskell', 'lhaskell', 'cabal' },
-}
+-- -- Haskell
+-- lspconfig['hls'].setup {
+--   filetypes = { 'haskell', 'lhaskell', 'cabal' },
+-- }
 
 lspconfig.tsserver.setup {
   init_options = {

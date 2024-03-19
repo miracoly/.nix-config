@@ -29,10 +29,11 @@
 
         friendly-snippets
 
-        {
-          plugin = haskell-tools-nvim;
-          config = toLuaFile ./config/plugin/haskell-tools.lua;
-        }
+        haskell-tools-nvim
+        # {
+          # plugin = haskell-tools-nvim;
+          # config = toLuaFile ./config/plugin/haskell-tools.lua;
+        # }
 
         {
           plugin = lualine-nvim;
@@ -73,6 +74,8 @@
           config = toLuaFile ./config/plugin/cmp.lua;
         }
 
+        nvim-dap
+
         {
           plugin = nvim-lspconfig;
           config = toLuaFile ./config/plugin/lsp.lua;
@@ -87,6 +90,11 @@
         }
 
         telescope-ui-select-nvim
+        {
+          plugin = toggleterm-nvim;
+          config = toLuaFile ./config/plugin/toggleterm.lua;
+        }
+        
 
         {
           plugin = nvim-treesitter.withAllGrammars;
@@ -96,8 +104,13 @@
 
       extraPackages = with pkgs; [
         fd
+        haskellPackages.fast-tags
+        haskellPackages.ghci-dap
+        haskellPackages.haskell-debug-adapter
         haskellPackages.haskell-language-server
+        haskellPackages.hoogle
         lua-language-server
+        nodePackages.eslint
         nodePackages.prettier
         nodePackages.typescript-language-server
         nodePackages.volar
