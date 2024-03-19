@@ -66,6 +66,7 @@ in
       haskellPackages.yesod-bin
       i3lock-fancy
       inkscape
+      inotify-tools
       insomnia
       jetbrains.clion
       jetbrains.idea-ultimate
@@ -81,6 +82,7 @@ in
       mysql80
       nerdfonts
       nix-index
+      node2nix
       nodejs_20
       nodePackages.npm-check-updates
       nodePackages.yarn
