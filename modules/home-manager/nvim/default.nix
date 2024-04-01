@@ -116,7 +116,6 @@
         nodePackages.typescript-language-server
         nodePackages.volar
         ripgrep
-        rnix-lsp
         stylua
         tree-sitter
         vscode-langservers-extracted

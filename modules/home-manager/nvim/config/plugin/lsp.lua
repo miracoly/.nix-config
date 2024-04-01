@@ -33,8 +33,8 @@ lspconfig.lua_ls.setup {
 }
 
 -- Nix
-lspconfig.rnix.setup {
-}
+-- lspconfig.rnix.setup {
+-- }
 
 -- Standard ML
 lspconfig.millet.setup {}
