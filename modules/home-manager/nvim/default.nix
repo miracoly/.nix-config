@@ -110,6 +110,7 @@
         haskellPackages.haskell-language-server
         haskellPackages.hoogle
         lua-language-server
+        millet
         nodePackages.eslint
         nodePackages.prettier
         nodePackages.typescript-language-server

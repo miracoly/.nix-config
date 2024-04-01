@@ -34,15 +34,12 @@ lspconfig.lua_ls.setup {
 
 -- Nix
 lspconfig.rnix.setup {
-  -- on_attach = on_attach,
-  -- capabilities = capabilities,
 }
 
--- -- Haskell
--- lspconfig['hls'].setup {
---   filetypes = { 'haskell', 'lhaskell', 'cabal' },
--- }
+-- Standard ML
+lspconfig.millet.setup {}
 
+-- Typescript
 lspconfig.tsserver.setup {
   init_options = {
     plugins = {
