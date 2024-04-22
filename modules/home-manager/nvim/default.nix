@@ -18,7 +18,18 @@
         ${builtins.readFile ./config/keymaps.lua}
       '';
 
-      plugins = with pkgs.vimPlugins; [
+      plugins =
+        let
+          vs-tasks = pkgs.vimUtils.buildVimPlugin {
+            name = "vs-tasks";
+            src = pkgs.fetchFromGitHub {
+              owner = "EthanJWright";
+              repo = "vs-tasks.nvim";
+              rev = "5a5d9e5959c8abadb6f979e88a1366c7ac51b876";
+              sha256 = "sha256-OvHBOJfe8EO6zJSmptVUtByX+rKdJ4cucX6l5bM05xg=";
+            };
+          };
+        in with pkgs.vimPlugins; [
         cmp_luasnip
         cmp-nvim-lsp
 
@@ -30,10 +41,6 @@
         friendly-snippets
 
         haskell-tools-nvim
-        # {
-          # plugin = haskell-tools-nvim;
-          # config = toLuaFile ./config/plugin/haskell-tools.lua;
-        # }
 
         {
           plugin = lualine-nvim;
@@ -83,6 +90,7 @@
 
         nvim-web-devicons
         plenary-nvim
+        popup-nvim
 
         {
           plugin = telescope-nvim;
@@ -95,20 +103,20 @@
           config = toLuaFile ./config/plugin/toggleterm.lua;
         }
         
-
         {
           plugin = nvim-treesitter.withAllGrammars;
           config = toLuaFile ./config/plugin/treesitter.lua;
         }
+
+        vs-tasks
       ];
 
       extraPackages = with pkgs; [
         fd
         haskellPackages.fast-tags
-        haskellPackages.ghci-dap
         haskellPackages.haskell-debug-adapter
-        haskellPackages.haskell-language-server
         haskellPackages.hoogle
+        haskell-language-server
         lua-language-server
         millet
         nodePackages.eslint
