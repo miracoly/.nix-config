@@ -64,6 +64,7 @@ in
       haskellPackages.stack
       haskellPackages.stylish-haskell
       haskellPackages.yesod-bin
+      haskell-language-server
       i3lock-fancy
       inkscape
       inotify-tools

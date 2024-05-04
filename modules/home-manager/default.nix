@@ -4,5 +4,6 @@
     ./kitty
     ./nvim
     ./rofi
+    ./vscode
   ];
 }

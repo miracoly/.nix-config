@@ -38,7 +38,8 @@ vim.keymap.set("v", "<C-f>", telescope.current_buffer_fuzzy_find, {})
 
 -- vs-tasks
 local telescopeAll = require("telescope")
-vim.keymap.set("n", "<leader>qt", telescopeAll.extensions.vstask.tasks, {})
+vim.keymap.set("n", "<F22>", telescopeAll.extensions.vstask.tasks, {}) -- S-F10
+vim.keymap.set("n", "<F23>", telescopeAll.extensions.vstask.inputs, {}) -- S-F11
 
 -- Comment
 vim.keymap.set("n", "<C-/>", "gcc", remap)
