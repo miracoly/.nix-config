@@ -109,6 +109,7 @@ in
       steam
       steam-run
       stella
+      terraform
       texlive.combined.scheme-full
       unzip
       yubikey-manager
@@ -466,6 +467,9 @@ in
       decode_jwt() {
         decode_base64_url "$(echo -n "$2" | cut -d "." -f "$1")" | jq .
       }
+
+      autoload -U +X bashcompinit && bashcompinit
+      complete -o nospace -C ${pkgs.terraform}/bin/terraform terraform
     '';
     history.extended = true;
     oh-my-zsh = {
