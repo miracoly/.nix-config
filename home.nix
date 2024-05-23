@@ -475,12 +475,22 @@ in
     oh-my-zsh = {
       enable = true;
       plugins = [
-        "git"
-        "vi-mode"
         "azure"
+        "git"
         "stack"
+        "vi-mode"
       ];
     };
+    plugins = with pkgs; [
+      {
+        name = "zsh-autosuggestions";
+        src = zsh-autosuggestions;
+      }
+      {
+        name = "zsh-autocomplete";
+        src = zsh-autocomplete;
+      }
+    ];
     shellAliases = {
       ls = "ls --color=auto";
       la = "ls -a";
