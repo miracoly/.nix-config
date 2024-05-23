@@ -130,20 +130,9 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = 
-  let
-    pkgs = import (builtins.fetchGit {
-        # Descriptive name to make the store path easier to identify
-        name = "azurecli";
-        url = "https://github.com/NixOS/nixpkgs/";
-        ref = "refs/heads/nixpkgs-unstable";
-        rev = "5a8650469a9f8a1958ff9373bd27fb8e54c4365d";
-    }) {};
-    azurecli = pkgs.azure-cli;
-  in with pkgs; [
+  environment.systemPackages = with pkgs; [
     alsa-utils
     arandr
-    azurecli
     firefox
     git
     man-pages

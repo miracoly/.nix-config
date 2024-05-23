@@ -36,6 +36,7 @@ in
       audacious
       audacity
       asciidoctor
+      azure-cli
       bitwarden
       bitwarden-cli
       brightnessctl
