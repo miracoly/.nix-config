@@ -29,6 +29,7 @@ in
   home.packages = with pkgs;
     let
       ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix { };
+      codecrafters-cli = pkgs.callPackage ./derivations/codecrafters-cli.nix { };
     in
     [
       _1password-gui
@@ -44,6 +45,7 @@ in
       cabal2nix
       calibre
       cc65
+      codecrafters-cli
       dasm
       dbeaver
       discord
