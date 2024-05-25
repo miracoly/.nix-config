@@ -55,6 +55,7 @@ in
       gauge
       gcc
       gdb
+      gh
       ghc
       gimp
       gitlint
@@ -72,8 +73,8 @@ in
       inkscape
       inotify-tools
       insomnia
-      jetbrains.clion
-      jetbrains.idea-ultimate
+      (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.clion ["github-copilot"])
+      (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.idea-ultimate ["github-copilot"])
       jetbrains.pycharm-professional
       jq
       k9s
