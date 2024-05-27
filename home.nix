@@ -549,6 +549,7 @@ in
       "100:name *= 'edX'"
       "100:name *= 'Pikuma'"
       "100:name *= 'Schneider Akademie'"
+      "100:name *= 'A Cloud Guru'"
     ];
 
     fade = true;
