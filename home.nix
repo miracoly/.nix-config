@@ -115,6 +115,7 @@ in
       terraform
       texlive.combined.scheme-full
       unzip
+      xclip
       yubikey-manager
       zip
       zlib
@@ -495,19 +496,20 @@ in
       }
     ];
     shellAliases = {
-      ls = "ls --color=auto";
-      la = "ls -a";
-      ll = "ls -la";
-      l = "ls";
       grep = "grep --color=auto";
       egrep = "egrep --color=auto";
       fgrep = "fgrep --color=auto";
       handover = "git add -A && git commit -m 'handover' && git push";
-      kw = "echo $(date | cut -d' ' -f1,2,3,6) && echo 'Aktuelle Kalenderwoche: $(date +'%W' | sed
-      's/^0*//')'";
-      ssh = "kitty +kitten ssh";
       jwth = "decode_jwt 1";
       jwtp = "decode_jwt 2";
+      kw = "echo $(date | cut -d' ' -f1,2,3,6) && echo 'Aktuelle Kalenderwoche: $(date +'%W' | sed 's/^0*//')'";
+      ls = "ls --color=auto";
+      la = "ls -a";
+      ll = "ls -la";
+      l = "ls";
+      ssh = "kitty +kitten ssh";
+      tf = "terraform";
+      c = "gh copilot suggest";
     };
     zplug = {
       enable = true;
