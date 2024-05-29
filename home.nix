@@ -217,10 +217,16 @@ in
     owner = "rpgtex";
     repo = "DND-5e-LaTeX-Template";
     rev = "v0.8.0";
-    sha256 =
-      "sha256-jSYC0iduKGoUaYI1jrH0cakC45AMug9UodERqsvwVxw=";
+    sha256 = "sha256-jSYC0iduKGoUaYI1jrH0cakC45AMug9UodERqsvwVxw=";
   };
   home.file.dnd-latex-template.target = "texmf/tex/latex/dnd";
+
+  # Azure CLI Autocomplete
+  home.file.azure-cli-completion.source = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/Azure/azure-cli/dev/az.completion";
+    sha256 = "sha256-xCV7HpYI5SupUZVo5j0cIOB4vP2Ux6H/0+qUzN81FwU=";
+  };
+  home.file.azure-cli-completion.target = ".azure-cli/az.completion";
 
   # autorandr
   programs.autorandr = {
@@ -474,6 +480,7 @@ in
 
       autoload -U +X bashcompinit && bashcompinit
       complete -o nospace -C ${pkgs.terraform}/bin/terraform terraform
+      source ~/.azure-cli/az.completion
     '';
     history.extended = true;
     oh-my-zsh = {
