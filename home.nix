@@ -61,6 +61,7 @@ in
       gitlint
       gnumake
       google-chrome
+      haskellPackages.cabal-fmt
       haskellPackages.cabal-install
       haskellPackages.hlint
       haskellPackages.hoogle
