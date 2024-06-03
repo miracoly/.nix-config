@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 {
+  # Kernel
+  boot.kernelPackages = pkgs.linuxPackages_6_9;
+
   # Host specific
   services.xserver.videoDrivers = [ "modesetting" ];
   hardware.opengl.extraPackages = with pkgs; [ intel-media-driver ];
