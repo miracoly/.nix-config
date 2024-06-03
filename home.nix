@@ -47,7 +47,7 @@ in
       cc65
       codecrafters-cli
       dasm
-      dbeaver
+      dbeaver-bin
       discord
       dotty
       exercism
@@ -459,7 +459,7 @@ in
   # zsh
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     enableCompletion = true;
     initExtra = ''
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

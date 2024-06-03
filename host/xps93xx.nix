@@ -3,7 +3,7 @@
   # Host specific
   services.xserver.videoDrivers = [ "modesetting" ];
   hardware.opengl.extraPackages = with pkgs; [ intel-media-driver ];
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;

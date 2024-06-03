@@ -21,7 +21,7 @@
   
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   hardware.opengl.extraPackages = with pkgs; [ intel-media-driver ];
 }
