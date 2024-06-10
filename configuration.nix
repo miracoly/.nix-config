@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
       ./host-specific.nix
       <home-manager/nixos>
@@ -69,13 +70,13 @@
 
     windowManager.i3 = {
       enable = true;
-    #   extraPackages = with pkgs; [
-    #     dmenu
-    #     i3status
-    #     i3lock
-    #   ];
+      #   extraPackages = with pkgs; [
+      #     dmenu
+      #     i3status
+      #     i3lock
+      #   ];
     };
-    
+
     # desktopManager = {
     #   xterm.enable = false;
 
@@ -85,7 +86,7 @@
     #     enableXfwm = false;
     #   };
     # };
-    
+
     # displayManager.defaultSession = "xfce+i3";
   };
 

@@ -18,7 +18,7 @@
   boot.initrd.luks.devices."luks-d32204ca-bfa7-4f5c-99a7-8cf46dc8d5ff".keyFile = "/crypto_keyfile.bin";
 
   networking.hostName = "miras-xps-9730"; # Define your hostname.
-  
+
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
   services.libinput.enable = true;

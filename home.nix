@@ -74,8 +74,8 @@ in
       inkscape
       inotify-tools
       insomnia
-      (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.clion ["github-copilot"])
-      (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.idea-ultimate ["github-copilot"])
+      (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.clion [ "github-copilot" ])
+      (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.idea-ultimate [ "github-copilot" ])
       jetbrains.pycharm-professional
       jq
       k9s
@@ -88,6 +88,7 @@ in
       mysql80
       nerdfonts
       nix-index
+      nixpkgs-fmt
       node2nix
       nodejs_20
       nodePackages.npm-check-updates

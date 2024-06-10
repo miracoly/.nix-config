@@ -6,7 +6,7 @@ stdenv.mkDerivation rec {
   # https://github.com/pjreddie/darknet
   src = fetchzip {
     url =
-    "https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.2/dependency-check-8.4.2-release.zip";
+      "https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.2/dependency-check-8.4.2-release.zip";
     hash = "sha256-PFESR8yInkhyU8kQUJtICbSiGv49gsiavK2EhxNoXOY=";
   };
 
