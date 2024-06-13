@@ -124,6 +124,7 @@
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
   home-manager.users.mira = import ./home.nix;
+  home-manager.backupFileExtension = "backup";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
