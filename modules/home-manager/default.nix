@@ -7,6 +7,7 @@
     ./i3status
     ./kitty
     ./nvim
+    ./picom
     ./redshift
     ./rofi
     ./vscode
