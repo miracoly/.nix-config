@@ -13,6 +13,9 @@
     "/crypto_keyfile.bin" = null;
   };
 
+#  set a custom kernel parameter to 'thunderbolt.host_reset=false
+  boot.kernelParams = [ "thunderbolt.host_reset=false" ];
+
   # Enable swap on luks
   boot.initrd.luks.devices."luks-d32204ca-bfa7-4f5c-99a7-8cf46dc8d5ff".device = "/dev/disk/by-uuid/d32204ca-bfa7-4f5c-99a7-8cf46dc8d5ff";
   boot.initrd.luks.devices."luks-d32204ca-bfa7-4f5c-99a7-8cf46dc8d5ff".keyFile = "/crypto_keyfile.bin";
