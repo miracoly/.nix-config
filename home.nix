@@ -92,6 +92,7 @@ in
       node2nix
       nodejs_20
       nodePackages.npm-check-updates
+      nodePackages.pnpm
       nodePackages.yarn
       nomacs
       p7zip
