@@ -110,6 +110,7 @@
 
   environment.shells = with pkgs; [ zsh ];
   environment.pathsToLink = [ "/share/zsh" ];
+  environment.etc.hosts.mode = "0644";
 
   programs.zsh.enable = true;
 

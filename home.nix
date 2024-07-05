@@ -53,6 +53,7 @@ in
       dotty
       exercism
       fceux
+      fluxcd
       gauge
       gcc
       gdb
@@ -82,7 +83,9 @@ in
       k9s
       kate
       keepassxc
+      kind
       kubectl
+      (wrapHelm kubernetes-helm {plugins = [kubernetes-helmPlugins.helm-secrets];})
       libnotify
       maven
       minikube
@@ -113,9 +116,11 @@ in
       rofimoji
       sbt
       slack
+      sops
       steam
       steam-run
       stella
+      telepresence2
       terraform
       texlive.combined.scheme-full
       unzip
