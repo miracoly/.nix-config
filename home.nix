@@ -2,7 +2,7 @@
 let
   homedir = "/home/mira";
   secrets = import ./.secrets.nix;
-  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/2741b4b489b55df32afac57bc4bfd220e8bf617e.tar.gz") {};
+  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/2741b4b489b55df32afac57bc4bfd220e8bf617e.tar.gz") { };
 in
 {
 
@@ -85,7 +85,7 @@ in
       keepassxc
       kind
       kubectl
-      (wrapHelm kubernetes-helm {plugins = [kubernetes-helmPlugins.helm-secrets];})
+      (wrapHelm kubernetes-helm { plugins = [ kubernetes-helmPlugins.helm-secrets ]; })
       libnotify
       maven
       minikube

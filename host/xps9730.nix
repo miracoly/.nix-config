@@ -13,7 +13,7 @@
     "/crypto_keyfile.bin" = null;
   };
 
-#  set a custom kernel parameter to 'thunderbolt.host_reset=false
+  #  set a custom kernel parameter to 'thunderbolt.host_reset=false
   boot.kernelParams = [ "thunderbolt.host_reset=false" ];
 
   # Enable swap on luks
