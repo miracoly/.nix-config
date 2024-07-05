@@ -133,6 +133,8 @@
   # Docker
   virtualisation.docker.enable = true;
 
+  environment.etc."bin/bash".source = "${pkgs.bash}/bin/bash";
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
