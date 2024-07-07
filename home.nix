@@ -24,6 +24,7 @@ in
   home.stateVersion = "23.05";
 
   home.sessionPath = [
+    "${homedir}/.local/bin"
     "${homedir}/.local/share/coursier/bin"
   ];
 
@@ -91,6 +92,7 @@ in
       minikube
       mysql80
       nerdfonts
+      nil
       nix-index
       nixpkgs-fmt
       node2nix
