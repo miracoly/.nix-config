@@ -64,6 +64,8 @@ in
       ssh = "kitty +kitten ssh";
       tf = "terraform";
       c = "gh copilot suggest";
+      vim = "nvim";
+      vi = "nvim";
     };
     zplug = {
       enable = true;
