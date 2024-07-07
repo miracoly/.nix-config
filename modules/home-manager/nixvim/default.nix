@@ -103,7 +103,7 @@ in
 
               # navigate to left/right window
               "<C-h>" = "<C-w>h";
-              "<C>l" = "<C-w>l";
+              "<C-l>" = "<C-w>l";
 
               # resize with arrows
               "<C-Up>" = ":resize -2<CR>";
@@ -114,29 +114,67 @@ in
               # move current line up/down
               # M = Alt key
               "<C-S-Up>" = ":move-2<CR>";
-              "<C-S-Down>" = ":move+<CR>";
+              "<C-S-telescope = {
+      enable = true;
+
+      keymaps = {
+        # Find files using Telescope command-line sugar.
+        "<leader>ff" = "find_files";
+        "<leader>fg" = "live_grep";
+        "<leader>b" = "buffers";
+        "<leader>fh" = "help_tags";
+        "<leader>fd" = "diagnostics";
+
+        # FZF like bindings
+        "<C-p>" = "git_files";
+        "<leader>p" = "oldfiles";
+        "<C-f>" = "live_grep";
+      };
+
+      settings.defaults = {
+        file_ignore_patterns = [
+          "^.git/"
+          "^.mypy_cache/"
+          "^__pycache__/"
+          "^output/"
+          "^data/"
+          "%.ipynb"
+        ];
+        set_env.COLORTERM = "truecolor";
+      };
+    };Down>" = ":move+<CR>";
             };
-        #        visual =
-        #          lib.mapAttrsToList
-        #            (key: action: {
-        #              mode = "v";
-        #              inherit action key;
-        #            })
-        #            {
-        #              # better indenting
-        #              ">" = ">gv";
-        #              "<" = "<gv";
-        #              "<TAB>" = ">gv";
-        #              "<S-TAB>" = "<gv";
-        #
-        #              # move selected line / block of text in visual mode
-        #              "K" = ":m '<-2<CR>gv=gv";
-        #              "J" = ":m '>+1<CR>gv=gv";
-        #            };
+        insert =
+          lib.mapAttrsToList
+            (key: action: {
+              mode = "i";
+              inherit action key;
+            })
+            {
+              # better indenting
+              "<S-TAB>" = "<C-d>";
+            };
+        visual =
+          lib.mapAttrsToList
+            (key: action: {
+              mode = "v";
+              inherit action key;
+            })
+            {
+              # better indenting
+              ">" = ">gv";
+              "<" = "<gv";
+              "<TAB>" = ">gv";
+              "<S-TAB>" = "<gv";
+
+              # move selected line / block of text in visual mode
+              "K" = ":m '<-2<CR>gv=gv";
+              "J" = ":m '>+1<CR>gv=gv";
+            };
       in
       config.nixvim.helpers.keymaps.mkKeymaps
         { options.silent = true; }
-        (normal); # ++ visual);
+        (normal ++ insert ++ visual);
 
     plugins = {
       bufferline = {
@@ -145,27 +183,6 @@ in
 
       cmp = {
         enable = true;
-        #        mapping = {
-        #          "<CR>" = "cmp.mapping.confirm({ select = true })";
-        #          "<Tab>" = {
-        #            action = ''
-        #              function(fallback)
-        #                if cmp.visible() then
-        #                  cmp.select_next_item()
-        #                elseif luasnip.expandable() then
-        #                  luasnip.expand()
-        #                elseif luasnip.expand_or_jumpable() then
-        #                  luasnip.expand_or_jump()
-        #                elseif check_backspace() then
-        #                  fallback()
-        #                else
-        #                  fallback()
-        #                end
-        #              end
-        #            '';
-        #            modes = [ "i" "s" ];
-        #          };
-        #        };
       };
 
       cmp-nvim-lua.enable = true;
@@ -235,6 +252,36 @@ in
             "fileformat"
             "filetype"
           ];
+        };
+      };
+
+      telescope = {
+        enable = true;
+
+        keymaps = {
+          # Find files using Telescope command-line sugar.
+          "<C-S-n>" = "find_files";
+          "<C-S-f>" = "live_grep";
+          "<leader>b" = "buffers";
+          # "<leader>fh" = "help_tags";
+          "<leader>fd" = "diagnostics";
+
+          # FZF like bindings
+          # "<C-p>" = "git_files";
+          # "<leader>p" = "oldfiles";
+          "<C-f>" = "live_grep";
+        };
+
+        settings.defaults = {
+          file_ignore_patterns = [
+            "^.git/"
+            "^.mypy_cache/"
+            "^__pycache__/"
+            "^output/"
+            "^data/"
+            "%.ipynb"
+          ];
+          set_env.COLORTERM = "truecolor";
         };
       };
     };
