@@ -114,36 +114,37 @@ in
               # move current line up/down
               # M = Alt key
               "<C-S-Up>" = ":move-2<CR>";
-              "<C-S-telescope = {
-      enable = true;
-
-      keymaps = {
-        # Find files using Telescope command-line sugar.
-        "<leader>ff" = "find_files";
-        "<leader>fg" = "live_grep";
-        "<leader>b" = "buffers";
-        "<leader>fh" = "help_tags";
-        "<leader>fd" = "diagnostics";
-
-        # FZF like bindings
-        "<C-p>" = "git_files";
-        "<leader>p" = "oldfiles";
-        "<C-f>" = "live_grep";
-      };
-
-      settings.defaults = {
-        file_ignore_patterns = [
-          "^.git/"
-          "^.mypy_cache/"
-          "^__pycache__/"
-          "^output/"
-          "^data/"
-          "%.ipynb"
-        ];
-        set_env.COLORTERM = "truecolor";
-      };
-    };Down>" = ":move+<CR>";
+              "<C-S-Down>" = ":move+<CR>";
             };
+        telescope = {
+          enable = true;
+
+          keymaps = {
+            # Find files using Telescope command-line sugar.
+            "<leader>ff" = "find_files";
+            "<leader>fg" = "live_grep";
+            "<leader>b" = "buffers";
+            "<leader>fh" = "help_tags";
+            "<leader>fd" = "diagnostics";
+
+            # FZF like bindings
+            "<C-p>" = "git_files";
+            "<leader>p" = "oldfiles";
+            "<C-f>" = "live_grep";
+          };
+
+          settings.defaults = {
+            file_ignore_patterns = [
+              "^.git/"
+              "^.mypy_cache/"
+              "^__pycache__/"
+              "^output/"
+              "^data/"
+              "%.ipynb"
+            ];
+            set_env.COLORTERM = "truecolor";
+          };
+        };
         insert =
           lib.mapAttrsToList
             (key: action: {
@@ -168,7 +169,7 @@ in
               "<S-TAB>" = "<gv";
 
               # move selected line / block of text in visual mode
-              "K" = ":m '<-2<CR>gv=gv";
+              "K" = ":m '<-2<CR>gv = gv ";
               "J" = ":m '>+1<CR>gv=gv";
             };
       in
