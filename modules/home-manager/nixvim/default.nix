@@ -8,6 +8,11 @@ let
 in
 {
   imports = [ nixvim.homeManagerModules.nixvim ];
+
+  home.packages = with pkgs; [
+    ripgrep
+  ];
+
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
@@ -101,6 +106,10 @@ in
               "<leader>w" = ":w<CR>";
               "<C-s>" = ":w<CR>";
 
+              # navigate to left/right tab
+              "<A-Left>" = ":tabprevious <CR>";
+              "<A-Right>" = ":tabnext <CR>";
+
               # navigate to left/right window
               "<C-h>" = "<C-w>h";
               "<C-l>" = "<C-w>l";
@@ -169,7 +178,7 @@ in
               "<S-TAB>" = "<gv";
 
               # move selected line / block of text in visual mode
-              "K" = ":m '<-2<CR>gv = gv ";
+              "K" = ":m '<-2<CR>gv=gv";
               "J" = ":m '>+1<CR>gv=gv";
             };
       in
@@ -283,6 +292,10 @@ in
             "%.ipynb"
           ];
           set_env.COLORTERM = "truecolor";
+        };
+
+        extensions = {
+          fzf-native.enable = true;
         };
       };
     };
