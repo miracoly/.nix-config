@@ -107,8 +107,10 @@ in
               "<C-s>" = ":w<CR>";
 
               # navigate to left/right tab
-              "<A-Left>" = ":tabprevious <CR>";
-              "<A-Right>" = ":tabnext <CR>";
+              "<A-Left>" = ":tabprevious<CR>";
+              "<A-Right>" = ":tabnext<CR>";
+              "<A-h>" = ":tabprevious<CR>";
+              "<A-l>" = ":tabnext<CR>";
 
               # navigate to left/right window
               "<C-h>" = "<C-w>h";
@@ -124,36 +126,10 @@ in
               # M = Alt key
               "<C-S-Up>" = ":move-2<CR>";
               "<C-S-Down>" = ":move+<CR>";
+
+              # neo-tree
+              "<A-1>" = ":Neotree action=focus reveal toggle<CR>";
             };
-        telescope = {
-          enable = true;
-
-          keymaps = {
-            # Find files using Telescope command-line sugar.
-            "<leader>ff" = "find_files";
-            "<leader>fg" = "live_grep";
-            "<leader>b" = "buffers";
-            "<leader>fh" = "help_tags";
-            "<leader>fd" = "diagnostics";
-
-            # FZF like bindings
-            "<C-p>" = "git_files";
-            "<leader>p" = "oldfiles";
-            "<C-f>" = "live_grep";
-          };
-
-          settings.defaults = {
-            file_ignore_patterns = [
-              "^.git/"
-              "^.mypy_cache/"
-              "^__pycache__/"
-              "^output/"
-              "^data/"
-              "%.ipynb"
-            ];
-            set_env.COLORTERM = "truecolor";
-          };
-        };
         insert =
           lib.mapAttrsToList
             (key: action: {
@@ -198,6 +174,20 @@ in
       cmp-nvim-lua.enable = true;
       cmp-nvim-lsp.enable = true;
       cmp-zsh.enable = true;
+
+      comment = {
+        enable = true;
+
+        settings = {
+          opleader.line = "<C-/>";
+          toggler.line = "<C-/>";
+          post_hook = ''
+            function(ctx)
+              vim.api.nvim_command('normal! j')
+            end
+          '';
+        };
+      };
 
       lsp = {
         enable = true;
@@ -265,6 +255,16 @@ in
         };
       };
 
+      neo-tree = {
+        enable = true;
+
+        closeIfLastWindow = true;
+        window = {
+          width = 30;
+          autoExpandWidth = true;
+        };
+      };
+
       telescope = {
         enable = true;
 
@@ -278,8 +278,8 @@ in
 
           # FZF like bindings
           # "<C-p>" = "git_files";
-          # "<leader>p" = "oldfiles";
-          "<C-f>" = "live_grep";
+          "<C-e>" = "oldfiles";
+          "<C-f>" = "current_buffer_fuzzy_find";
         };
 
         settings.defaults = {
