@@ -193,6 +193,7 @@ in
         enable = true;
         servers = {
           eslint.enable = true;
+          hls.enable = true;
           nil-ls.enable = true;
           lua-ls = {
             enable = true;
@@ -205,17 +206,19 @@ in
           silent = true;
           diagnostic = {
             # Navigate in diagnostics
-            "<leader>k" = "goto_prev";
-            "<leader>j" = "goto_next";
+            "<F14>" = "goto_prev";
+            "<F2>" = "goto_next";
           };
 
           lspBuf = {
-            gd = "definition";
-            gD = "references";
-            gt = "type_definition";
+            "<C-b>" = "definition";
+            "<C-A-b>" = "references";
+            "<C-S-b>" = "type_definition";
             gi = "implementation";
-            K = "hover";
-            "<F2>" = "rename";
+            "<C-q>" = "hover";
+            "<C-p>" = "signature_help";
+            "<A-CR>" = "code_action";
+            "<F18>" = "rename";
           };
         };
       };
@@ -297,6 +300,13 @@ in
         extensions = {
           fzf-native.enable = true;
         };
+      };
+
+      treesitter = {
+        enable = true;
+
+        nixvimInjections = true;
+        folding = true;
       };
     };
   };
