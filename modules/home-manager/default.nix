@@ -6,8 +6,8 @@
     ./i3
     ./i3status
     ./kitty
-    # ./nixvim
-    ./nvim
+    ./nixvim
+    # ./nvim
     ./picom
     ./redshift
     ./rofi
