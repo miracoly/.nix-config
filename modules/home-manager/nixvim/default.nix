@@ -106,6 +106,14 @@ in
               "<leader>w" = ":w<CR>";
               "<C-s>" = ":w<CR>";
 
+              # navigate to prev/next location
+              "<C-A-Left>" = "<C-o>";
+              "<C-A-Right>" = "<C-i>";
+
+              # navigate to left/right buffer
+              "<A-j>" = ":bp<CR>";
+              "<A-k>" = ":bn<CR>";
+
               # navigate to left/right tab
               "<A-Left>" = ":tabprevious<CR>";
               "<A-Right>" = ":tabnext<CR>";
@@ -265,6 +273,44 @@ in
         window = {
           width = 30;
           autoExpandWidth = true;
+        };
+      };
+
+      none-ls = {
+        enable = true;
+        onAttach = ''
+          function(client, bufnr)
+            -- Set the keymap for formatting
+            vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-A-l>',
+              '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', { noremap = true, silent = true })
+          end
+        '';
+        sources = {
+          code_actions = {
+            statix.enable = true;
+            # gitsigns.enable = true;
+          };
+          diagnostics = {
+            actionlint.enable = true;
+            checkstyle.enable = true;
+            deadnix.enable = true;
+            statix.enable = true;
+            # pylint.enable = true;
+          };
+          formatting = {
+            stylua.enable = true;
+            shfmt.enable = true;
+            nixpkgs_fmt.enable = true;
+            # google_java_format.enable = false;
+            # prettier = {
+            # enable = true;
+            # disableTsServerFormatter = true;
+            # };
+          };
+          completion = {
+            luasnip.enable = true;
+            spell.enable = true;
+          };
         };
       };
 
