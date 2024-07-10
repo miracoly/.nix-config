@@ -170,6 +170,14 @@ in
         { options.silent = true; }
         (normal ++ insert ++ visual);
 
+    extraPlugins = with pkgs; [
+      vimPlugins.overseer-nvim
+    ];
+
+    extraConfigLua = ''
+      require('overseer').setup()
+    '';
+
     plugins = {
       bufferline = {
         enable = true;
@@ -194,6 +202,21 @@ in
               vim.api.nvim_command('normal! j')
             end
           '';
+        };
+      };
+
+      dressing = {
+        enable = true;
+        settings = {
+          select = {
+            backend = [
+              "telescope"
+              # "fzf_lua"
+              # "fzf"
+              # "builtin"
+              # "nui"
+            ];
+          };
         };
       };
 
