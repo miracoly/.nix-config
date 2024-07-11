@@ -217,6 +217,10 @@ in
         };
       };
 
+      copilot-vim = {
+        enable = true;
+      };
+
       dressing = {
         enable = true;
         settings = {
@@ -255,6 +259,10 @@ in
             changedelete.text = " 󰐊";
           };
         };
+      };
+
+      indent-blankline = {
+        enable = true;
       };
 
       lazygit = {
