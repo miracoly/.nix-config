@@ -52,7 +52,7 @@ in
       #   patterns
       smartcase = true; # Override the 'ignorecase' option if the search pattern contains upper
       #   case characters
-      scrolloff = 8; # Number of screen lines to show around the cursor
+      scrolloff = 4; # Number of screen lines to show around the cursor
       cursorline = false; # Highlight the screen line of the cursor
       cursorcolumn = false; # Highlight the screen column of the cursor
       signcolumn = "yes"; # Whether to show the signcolumn
@@ -125,10 +125,10 @@ in
               "<C-l>" = "<C-w>l";
 
               # resize with arrows
-              "<C-Up>" = ":resize -2<CR>";
-              "<C-Down>" = ":resize +2<CR>";
-              "<C-Left>" = ":vertical resize +2<CR>";
-              "<C-Right>" = ":vertical resize -2<CR>";
+              "<C-Down>" = ":resize -2<CR>";
+              "<C-Up>" = ":resize +2<CR>";
+              "<C-Right>" = ":vertical resize +2<CR>";
+              "<C-Left>" = ":vertical resize -2<CR>";
 
               # move current line up/down
               # M = Alt key
@@ -137,6 +137,10 @@ in
 
               # neo-tree
               "<A-1>" = ":Neotree action=focus reveal toggle<CR>";
+
+              # oversser
+              "<F22>" = ":OverseerRun<CR>";
+              "<F23>" = ":OverseerToggle<CR>";
             };
         insert =
           lib.mapAttrsToList
@@ -175,7 +179,15 @@ in
     ];
 
     extraConfigLua = ''
-      require('overseer').setup()
+      require('overseer').setup({
+        task_list = {
+          -- Define default direction for the task list window
+          direction = "bottom",  -- Opens the task list in a horizontal split
+          min_height = 10,  -- Minimum height for the task list window
+          max_height = 30,  -- Maximum height for the task list window
+          default_detail = 1,
+        },
+      })
     '';
 
     plugins = {
@@ -217,7 +229,36 @@ in
               # "nui"
             ];
           };
+          mappings = {
+            i = {
+              "<C-c>" = "Close";
+              "<CR>" = "Confirm";
+              "<Down>" = "HistoryNext";
+              "<Up>" = "HistoryPrev";
+            };
+            n = {
+              "<CR>" = "Confirm";
+              "<Esc>" = "Close";
+            };
+          };
         };
+      };
+
+      gitsigns = {
+        enable = true;
+        settings = {
+          signs = {
+            add.text = " ▎";
+            change.text = " ▎";
+            delete.text = " 󰐊";
+            topdelete.text = " 󰐊";
+            changedelete.text = " 󰐊";
+          };
+        };
+      };
+
+      lazygit = {
+        enable = true;
       };
 
       lsp = {
@@ -368,6 +409,13 @@ in
 
         extensions = {
           fzf-native.enable = true;
+        };
+      };
+
+      toggleterm = {
+        enable = true;
+        settings = {
+          open_mapping = "[[<F60>]]";
         };
       };
 
