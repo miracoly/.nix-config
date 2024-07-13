@@ -176,6 +176,7 @@ in
 
     extraPlugins = with pkgs; [
       vimPlugins.overseer-nvim
+      vimPlugins.nvim-web-devicons
     ];
 
     extraConfigLua = ''
@@ -188,6 +189,23 @@ in
           default_detail = 1,
         },
       })
+
+      local cmp = require'cmp'
+
+      -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline({'/', "?" }, {
+        sources = {
+          { name = 'buffer' }
+        }
+      })
+      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline(':', {
+        sources = cmp.config.sources({
+          { name = 'path' }
+        }, {
+          { name = 'cmdline' }
+        }),
+      })
     '';
 
     plugins = {
@@ -197,10 +215,63 @@ in
 
       cmp = {
         enable = true;
+        settings = {
+          autoEnableSources = true;
+          performance = {
+            debounce = 60;
+            fetchingTimeout = 200;
+            maxViewEntries = 20;
+          };
+          snippet = {
+            expand = ''
+              function(args)
+                require('luasnip').lsp_expand(args.body)
+              end
+            '';
+          };
+          formatting = { fields = [ "kind" "abbr" "menu" ]; };
+
+          mapping = {
+            "<C-Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+            "<C-j>" = "cmp.mapping.select_next_item()";
+            "<C-k>" = "cmp.mapping.select_prev_item()";
+            "<Esc>" = "cmp.mapping.abort()";
+            "<C-b>" = "cmp.mapping.scroll_docs(-4)";
+            "<C-f>" = "cmp.mapping.scroll_docs(4)";
+            "<C-Space>" = "cmp.mapping.complete()";
+            "<C-CR>" = "cmp.mapping.confirm({ select = true })";
+            "<S-CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })";
+          };
+
+          sources = [
+            { name = "git"; }
+            { name = "nvim_lsp"; }
+            { name = "emoji"; }
+            {
+              name = "buffer"; # text within current buffer
+              option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
+              keywordLength = 3;
+            }
+            {
+              name = "path"; # file system paths
+              keywordLength = 3;
+            }
+            {
+              name = "luasnip"; # snippets
+              keywordLength = 3;
+            }
+          ];
+        };
       };
 
       cmp-nvim-lua.enable = true;
+
+      cmp-buffer.enable = true; # Enable suggestions for buffer in current file
+      cmp-cmdline.enable = false; # Enable autocomplete for command line
       cmp-nvim-lsp.enable = true;
+      # cmp-nvim-lua.enable = true;
+      cmp_luasnip.enable = true; # Enable suggestions for code snippets
+      cmp-path.enable = true; # Enable suggestions for file system paths
       cmp-zsh.enable = true;
 
       comment = {
@@ -215,6 +286,10 @@ in
             end
           '';
         };
+      };
+
+      copilot-chat = {
+        enable = true;
       };
 
       copilot-vim = {
@@ -288,6 +363,7 @@ in
             # Navigate in diagnostics
             "<F14>" = "goto_prev";
             "<F2>" = "goto_next";
+            "<F25>" = "open_float";
           };
 
           lspBuf = {
@@ -300,6 +376,18 @@ in
             "<A-CR>" = "code_action";
             "<F18>" = "rename";
           };
+
+        };
+      };
+
+      lspkind = {
+        enable = true;
+        symbolMap = {
+          Copilot = " ";
+        };
+        extraOptions = {
+          maxwidth = 50;
+          ellipsis_char = "...";
         };
       };
 
@@ -336,6 +424,10 @@ in
             "filetype"
           ];
         };
+      };
+
+      luasnip = {
+        enable = true;
       };
 
       neo-tree = {
