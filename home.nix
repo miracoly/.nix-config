@@ -2,7 +2,7 @@
 let
   homedir = "/home/mira";
   secrets = import ./.secrets.nix;
-  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/2741b4b489b55df32afac57bc4bfd220e8bf617e.tar.gz") { };
+  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/7e7c39ea35c5cdd002cd4588b03a3fb9ece6fad9.tar.gz") { };
 in
 {
 
@@ -33,6 +33,8 @@ in
       let
         ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix { };
         codecrafters-cli = pkgs.callPackage ./derivations/codecrafters-cli.nix { };
+        pnpm = unstable.nodePackages.pnpm;
+        zed-editor = unstable.zed-editor;
       in
       [
         _1password-gui
@@ -99,7 +101,6 @@ in
         node2nix
         nodejs_20
         nodePackages.npm-check-updates
-        unstable.nodePackages.pnpm
         nodePackages.yarn
         nomacs
         p7zip
@@ -109,6 +110,7 @@ in
         peek
         pinta
         pipenv
+        pnpm
         pulseaudio
         python311
         racket
@@ -129,6 +131,7 @@ in
         unzip
         xclip
         yubikey-manager
+        zed-editor
         zip
         zlib
         zoom-us
