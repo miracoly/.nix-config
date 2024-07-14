@@ -1,4 +1,4 @@
-{ ... }:
+_:
 {
   programs.kitty = {
     enable = true;
@@ -11,6 +11,7 @@
       "ctrl+shift+b" = "no_op";
       "ctrl+shift+f" = "no_op";
       "ctrl+shift+n" = "no_op";
+      "ctrl+shift+w" = "no_op";
     };
   };
 }

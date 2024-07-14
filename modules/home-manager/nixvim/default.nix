@@ -123,6 +123,8 @@ in
               # navigate to left/right window
               "<C-h>" = "<C-w>h";
               "<C-l>" = "<C-w>l";
+              "<C-j>" = "<C-w>j";
+              "<C-k>" = "<C-w>k";
 
               # resize with arrows
               "<C-Down>" = ":resize -2<CR>";
@@ -185,7 +187,7 @@ in
           -- Define default direction for the task list window
           direction = "bottom",  -- Opens the task list in a horizontal split
           min_height = 10,  -- Minimum height for the task list window
-          max_height = 30,  -- Maximum height for the task list window
+          max_height = 10,  -- Maximum height for the task list window
           default_detail = 1,
         },
       })
@@ -235,7 +237,12 @@ in
             "<C-Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
             "<C-j>" = "cmp.mapping.select_next_item()";
             "<C-k>" = "cmp.mapping.select_prev_item()";
-            "<Esc>" = "cmp.mapping.abort()";
+            "<ESC>" = ''
+              function ()
+                cmp.mapping.close()
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, true, true), 'n', true)
+              end
+            '';
             "<C-b>" = "cmp.mapping.scroll_docs(-4)";
             "<C-f>" = "cmp.mapping.scroll_docs(4)";
             "<C-Space>" = "cmp.mapping.complete()";
@@ -347,13 +354,34 @@ in
       lsp = {
         enable = true;
         servers = {
+          bashls = {
+            enable = true;
+            settings = {
+              telemetry = {
+                enable = false;
+              };
+            };
+          };
+          clangd = {
+            enable = true;
+            settings = {
+              telemetry = {
+                enable = false;
+              };
+            };
+          };
           eslint.enable = true;
+          graphql.enable = true;
           hls.enable = true;
+          html.enable = true;
+          jsonls.enable = true;
           nil-ls.enable = true;
           lua-ls = {
             enable = true;
             settings.telemetry.enable = false;
           };
+          tailwindcss.enable = true;
+          terraformls.enable = true;
           tsserver.enable = true;
           volar.enable = true;
         };
@@ -521,9 +549,17 @@ in
 
       treesitter = {
         enable = true;
-
         nixvimInjections = true;
         folding = true;
+        incrementalSelection = {
+          enable = true;
+          keymaps = {
+            initSelection = "<C-w>";
+            nodeIncremental = "<C-w>";
+            # scopeIncremental = "grc";
+            nodeDecremental = "<C-S-w>";
+          };
+        };
       };
     };
   };
