@@ -146,6 +146,17 @@ in
               # oversser
               "<F22>" = ":OverseerRun<CR>";
               "<F23>" = ":OverseerToggle<CR>";
+
+              # lazygit
+              "<C-S-k>" = ":LazyGit<CR>";
+
+              # gitsigns
+              "<leader>gr" = ":Gitsigns reset_hunk<CR>"; # reset hunk
+              "<leader>gs" = ":Gitsigns preview_hunk<CR>"; # show hunk
+              "<leader>gtb" = ":Gitsigns toggle_current_line_blame<CR>"; # toggle blame
+              "<leader>gb" = ":Gitsigns blame_line<CR>"; # blame line
+              "<F7>" = ":Gitsigns next_hunk<CR>"; # next hunk
+              "<F19>" = ":Gitsigns prev_hunk<CR>"; # prev hunk
             };
         insert =
           lib.mapAttrsToList
