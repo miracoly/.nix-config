@@ -144,8 +144,10 @@ in
               "<A-1>" = ":Neotree action=focus reveal toggle<CR>";
 
               # oversser
-              "<F22>" = ":OverseerRun<CR>";
-              "<F23>" = ":OverseerToggle<CR>";
+              "<F22>" = ":OverseerRestartLastAndOpen<CR>"; # S-F10
+              "<F58>" = ":OverseerRun<CR>"; # A-F10
+              "<A-4>" = ":OverseerToggle<CR>";
+
               # github copilot
               "<leader>c" = ":CopilotChatToggle<CR>";
 
@@ -198,7 +200,10 @@ in
     ];
 
     extraConfigLua = ''
-      require('overseer').setup({
+      -- Overseer
+      local overseer = require('overseer')
+
+      overseer.setup({
         task_list = {
           -- Define default direction for the task list window
           direction = "bottom",  -- Opens the task list in a horizontal split
@@ -207,6 +212,16 @@ in
           default_detail = 1,
         },
       })
+
+      vim.api.nvim_create_user_command("OverseerRestartLastAndOpen", function()
+        local tasks = overseer.list_tasks({ recent_first = true })
+        if vim.tbl_isempty(tasks) then
+          vim.notify("No tasks found", vim.log.levels.WARN)
+        else
+          overseer.run_action(tasks[1], "restart")
+          overseer.open({ enter = false })
+        end
+      end, {})
 
       local cmp = require'cmp'
 
