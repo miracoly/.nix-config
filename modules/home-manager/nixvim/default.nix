@@ -146,6 +146,8 @@ in
               # oversser
               "<F22>" = ":OverseerRun<CR>";
               "<F23>" = ":OverseerToggle<CR>";
+              # github copilot
+              "<leader>c" = ":CopilotChatToggle<CR>";
 
               # lazygit
               "<C-S-k>" = ":LazyGit<CR>";
