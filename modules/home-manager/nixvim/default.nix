@@ -227,6 +227,10 @@ in
     '';
 
     plugins = {
+      autoclose = {
+        enable = true;
+      };
+
       bufferline = {
         enable = true;
       };
