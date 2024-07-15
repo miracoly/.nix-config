@@ -18,7 +18,10 @@ in
     defaultEditor = true;
     vimdiffAlias = true;
 
-    colorschemes.gruvbox.enable = true;
+    colorschemes.nightfox = {
+      enable = true;
+      flavor = "nordfox";
+    };
 
     globals = {
       mapleader = " ";
