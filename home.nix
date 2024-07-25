@@ -76,7 +76,7 @@ in
         haskellPackages.stylish-haskell
         haskellPackages.yesod-bin
         haskell-language-server
-        i3lock-fancy
+        i3lock-fancy-rapid
         inkscape
         inotify-tools
         insomnia
@@ -166,6 +166,7 @@ in
       QT_AUTO_SCREEN_SCALE_FACTOR = 2;
       ROFI_SYSTEMD_TERM = "kitty";
       KUBECONFIG = "${homedir}/.kube/config:${homedir}/.kube/udp-staging.config";
+      GPG_TTY = "$(tty)";
     };
 
     file = {
@@ -275,7 +276,7 @@ in
 
     screen-locker = {
       enable = true;
-      lockCmd = "/usr/bin/env i3lock";
+      lockCmd = "${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 5 3";
       xautolock.enable = true;
     };
   };

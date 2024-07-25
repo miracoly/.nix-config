@@ -71,7 +71,7 @@
           "${mod}+Shift+f" = "exec rofi -show filebrowser -modi filebrowser";
           "${mod}+Shift+s" = "exec --no-startup-id rofi-systemd";
           "${mod}+Shift+mod1+p" = "exec rofi -show p -modi p:'rofi-power-menu'";
-          "${mod}+Shift+mod1+l" = "exec --no-startup-id i3lock-fancy";
+          "${mod}+Shift+mod1+l" = "exec --no-startup-id ${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 5 3";
           "${mod}+Shift+mod1+h" = "exec echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge";
           "${mod}+Shift+mod1+m" = "exec echo 'Xft.dpi: 200' | ${pkgs.xorg.xrdb}/bin/xrdb -merge";
           "Print" = "exec flameshot gui";
