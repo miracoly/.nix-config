@@ -33,8 +33,8 @@ in
       let
         ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix { };
         codecrafters-cli = pkgs.callPackage ./derivations/codecrafters-cli.nix { };
-        pnpm = unstable.nodePackages.pnpm;
-        zed-editor = unstable.zed-editor;
+        inherit (unstable.nodePackages) pnpm;
+        inherit (unstable) zed-editor;
       in
       [
         _1password-gui
@@ -103,11 +103,13 @@ in
         nodePackages.npm-check-updates
         nodePackages.yarn
         nomacs
+        openssl
         p7zip
         pa_applet
         pandoc
         pciutils
         peek
+        pinentry-curses
         pinta
         pipenv
         pnpm
@@ -129,8 +131,14 @@ in
         terraform
         texlive.combined.scheme-full
         unzip
+        wget
         xclip
         yubikey-manager
+        yubikey-manager-qt
+        yubikey-personalization
+        yubikey-personalization-gui
+        yubico-piv-tool
+        yubioath-flutter
         zed-editor
         zip
         zlib
@@ -157,6 +165,7 @@ in
       DOTNET_CLI_TELEMETRY_OPTOUT = 1;
       QT_AUTO_SCREEN_SCALE_FACTOR = 2;
       ROFI_SYSTEMD_TERM = "kitty";
+      KUBECONFIG = "${homedir}/.kube/config:${homedir}/.kube/udp-staging.config";
     };
 
     file = {
@@ -252,6 +261,16 @@ in
     dunst.enable = true;
 
     flameshot.enable = true;
+
+    gpg-agent = {
+      enable = true;
+      enableSshSupport = true;
+      extraConfig = ''
+        allow-loopback-pinentry
+      '';
+      pinentryPackage = pkgs.pinentry-curses;
+    };
+
     network-manager-applet.enable = true;
 
     screen-locker = {
@@ -265,6 +284,8 @@ in
 
     feh.enable = true;
     firefox.enable = true;
+
+    gpg.enable = true;
 
     # Let Home Manager install and manage itself.
     home-manager.enable = true;

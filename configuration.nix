@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports =
@@ -12,6 +12,9 @@
       ./host-specific.nix
       <home-manager/nixos>
     ];
+
+  services.dbus.packages = [ pkgs.gcr ];
+
 
   services.geoclue2.enable = true;
 
@@ -51,6 +54,7 @@
       thunar-volman
     ];
   };
+
   # Thumbnails
   services.tumbler.enable = true;
 
@@ -153,10 +157,10 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
