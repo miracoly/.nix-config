@@ -194,9 +194,9 @@ in
         { options.silent = true; }
         (normal ++ insert ++ visual);
 
-    extraPlugins = with pkgs; [
-      vimPlugins.overseer-nvim
-      vimPlugins.nvim-web-devicons
+    extraPlugins = with pkgs.vimPlugins; [
+      nvim-web-devicons
+      overseer-nvim
     ];
 
     extraConfigLua = ''
@@ -243,7 +243,7 @@ in
 
     plugins = {
       autoclose = {
-        enable = true;
+        enable = false;
       };
 
       bufferline = {
