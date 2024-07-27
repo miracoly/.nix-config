@@ -431,7 +431,7 @@ in
 
           lspBuf = {
             "<C-b>" = "definition";
-            "<C-A-b>" = "references";
+            # "<C-A-b>" = "references";
             "<C-S-b>" = "type_definition";
             gi = "implementation";
             "<C-q>" = "hover";
@@ -556,6 +556,9 @@ in
           # "<C-p>" = "git_files";
           "<C-e>" = "oldfiles";
           "<C-f>" = "current_buffer_fuzzy_find";
+
+          # LSP
+          "<C-A-b>" = "lsp_references";
         };
 
         settings.defaults = {
@@ -572,6 +575,7 @@ in
 
         extensions = {
           fzf-native.enable = true;
+          ui-select.enable = true;
         };
       };
 
