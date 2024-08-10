@@ -46,6 +46,7 @@ in
         bitwarden
         bitwarden-cli
         brightnessctl
+        bruno
         ca65-symbls-to-nl
         cabal2nix
         calibre
