@@ -2,10 +2,11 @@
 let
   homedir = "/home/mira";
   secrets = import ./.secrets.nix;
-  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/7e7c39ea35c5cdd002cd4588b03a3fb9ece6fad9.tar.gz") { };
+  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/7e7c39ea35c5cdd002cd4588b03a3fb9ece6fad9.tar.gz") {
+    config.allowUnfree = true;
+  };
 in
 {
-
   imports = [ ./modules ];
   home = {
 
@@ -35,6 +36,7 @@ in
         codecrafters-cli = pkgs.callPackage ./derivations/codecrafters-cli.nix { };
         inherit (unstable.nodePackages) pnpm;
         inherit (unstable) zed-editor;
+        ideaUltimateUnstable = unstable.jetbrains.idea-ultimate;
       in
       [
         _1password-gui
@@ -81,9 +83,11 @@ in
         inkscape
         inotify-tools
         insomnia
-        (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.clion [ "github-copilot" ])
-        (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.idea-ultimate [ "github-copilot" ])
-        jetbrains.pycharm-professional
+        # (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.clion [ "github-copilot" ])
+        # (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.idea-ultimate [ "github-copilot" ])
+        # jetbrains.idea-ultimate
+        ideaUltimateUnstable
+        # jetbrains.pycharm-professional
         jq
         k9s
         kate
