@@ -53,6 +53,7 @@ in
         cabal2nix
         calibre
         cc65
+        chromium
         codecrafters-cli
         dasm
         dbeaver-bin
@@ -129,7 +130,6 @@ in
         sbt
         slack
         sops
-        steam
         steam-run
         stella
         telepresence2
