@@ -287,11 +287,15 @@ in
   };
 
   programs = {
-
     feh.enable = true;
     firefox.enable = true;
 
-    gpg.enable = true;
+    gpg = {
+      enable = true;
+      publicKeys = [
+        { source = ./config/gpg/public-key.asc; }
+      ];
+    };
 
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
