@@ -71,6 +71,7 @@ in
         gitlint
         gnumake
         google-chrome
+        graphviz
         haskellPackages.cabal-fmt
         haskellPackages.cabal-install
         haskellPackages.hlint
@@ -84,6 +85,7 @@ in
         inkscape
         inotify-tools
         insomnia
+        jetbrains.clion
         # (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.clion [ "github-copilot" ])
         # (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.idea-ultimate [ "github-copilot" ])
         # jetbrains.idea-ultimate
@@ -100,6 +102,7 @@ in
         maven
         minikube
         mysql80
+        nasm
         nerdfonts
         nil
         nix-index
