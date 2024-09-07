@@ -42,6 +42,7 @@ stdenv.mkDerivation {
     mkdir -p build
     make install INSTALL_ROOT=build
     cp -r build/usr/bin/* $out/bin
+    cp -r Linux $out/bin
 
     runHook postInstall
   '';
