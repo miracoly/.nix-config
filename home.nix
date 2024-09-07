@@ -34,6 +34,7 @@ in
       let
         ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix { };
         codecrafters-cli = pkgs.callPackage ./derivations/codecrafters-cli.nix { };
+        sasm = pkgs.callPackage ./derivations/sasm.nix { };
         inherit (unstable.nodePackages) pnpm;
         inherit (unstable) zed-editor;
         ideaUltimateUnstable = unstable.jetbrains.idea-ultimate;
@@ -69,6 +70,7 @@ in
         ghc
         gimp
         gitlint
+        gnome.ghex
         gnumake
         google-chrome
         graphviz
@@ -130,6 +132,7 @@ in
         rofi-power-menu
         rofi-systemd
         rofimoji
+        sasm
         sbt
         slack
         sops
