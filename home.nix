@@ -2,7 +2,7 @@
 let
   homedir = "/home/mira";
   secrets = import ./.secrets.nix;
-  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/7e7c39ea35c5cdd002cd4588b03a3fb9ece6fad9.tar.gz") {
+  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/574d1eac1c200690e27b8eb4e24887f8df7ac27c.tar.gz") {
     config.allowUnfree = true;
   };
 in
@@ -35,7 +35,6 @@ in
         ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix { };
         codecrafters-cli = pkgs.callPackage ./derivations/codecrafters-cli.nix { };
         sasm = pkgs.callPackage ./derivations/sasm.nix { };
-        inherit (unstable.nodePackages) pnpm;
         inherit (unstable) zed-editor;
         ideaUltimateUnstable = unstable.jetbrains.idea-ultimate;
       in
