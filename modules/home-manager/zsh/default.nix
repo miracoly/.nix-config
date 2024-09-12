@@ -34,6 +34,7 @@ in
       enable = true;
       plugins = [
         "azure"
+        "fzf"
         "git"
         "stack"
         "vi-mode"
