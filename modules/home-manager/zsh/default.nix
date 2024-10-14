@@ -28,6 +28,8 @@ in
       autoload -U +X bashcompinit && bashcompinit
       complete -o nospace -C ${pkgs.terraform}/bin/terraform terraform
       source ~/.azure-cli/az.completion
+
+      PROMPT_EOL_MARK=${"''"}
     '';
     history.extended = true;
     oh-my-zsh = {
