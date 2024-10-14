@@ -13,10 +13,6 @@
       <home-manager/nixos>
     ];
 
-  services.dbus.packages = [ pkgs.gcr ];
-
-
-  services.geoclue2.enable = true;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -64,66 +60,75 @@
     };
   };
 
-  # Thumbnails
-  services.tumbler.enable = true;
+  services = {
+    dbus.packages = [ pkgs.gcr ];
 
-  # X11
-  services.xserver = {
-    enable = true;
-    xkb = {
-      variant = "";
-      layout = "us";
-    };
-    dpi = 192;
+    geoclue2.enable = true;
 
-    xautolock = {
+    # Smartcard
+    pcscd.enable = true;
+
+    pipewire = {
       enable = true;
-      locker = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # If you want to use JACK applications, uncomment this
+      #jack.enable = true;
     };
 
-    windowManager.i3 = {
+    # Printing
+    printing.enable = true;
+    avahi.enable = true;
+    avahi.nssmdns4 = true;
+
+    # Thumbnails
+    tumbler.enable = true;
+
+    # X11
+    xserver = {
       enable = true;
-      #   extraPackages = with pkgs; [
-      #     dmenu
-      #     i3status
-      #     i3lock
-      #   ];
+      xkb = {
+        variant = "";
+        layout = "us";
+      };
+      dpi = 192;
+
+      xautolock = {
+        enable = true;
+        locker = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+      };
+
+      windowManager.i3 = {
+        enable = true;
+        #   extraPackages = with pkgs; [
+        #     dmenu
+        #     i3status
+        #     i3lock
+        #   ];
+      };
+
+      # desktopManager = {
+      #   xterm.enable = false;
+
+      #   xfce = {
+      #     enable = true;
+      #     noDesktop = true;
+      #     enableXfwm = false;
+      #   };
+      # };
+
+      # displayManager.defaultSession = "xfce+i3";
     };
-
-    # desktopManager = {
-    #   xterm.enable = false;
-
-    #   xfce = {
-    #     enable = true;
-    #     noDesktop = true;
-    #     enableXfwm = false;
-    #   };
-    # };
-
-    # displayManager.defaultSession = "xfce+i3";
   };
 
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+
+  environment = {
+    shells = with pkgs; [ zsh ];
+    pathsToLink = [ "/share/zsh" ];
+    etc.hosts.mode = "0644";
   };
-
-  # Smartcard
-  services.pcscd.enable = true;
-
-  # Printing
-  services.printing.enable = true;
-  services.avahi.enable = true;
-  services.avahi.nssmdns4 = true;
-
-  environment.shells = with pkgs; [ zsh ];
-  environment.pathsToLink = [ "/share/zsh" ];
-  environment.etc.hosts.mode = "0644";
 
   programs.zsh.enable = true;
 
@@ -135,10 +140,12 @@
     shell = pkgs.zsh;
   };
 
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
-  home-manager.users.mira = import ./home.nix;
-  home-manager.backupFileExtension = "backup";
+  home-manager = {
+    useUserPackages = true;
+    useGlobalPkgs = true;
+    users.mira = import ./home.nix;
+    backupFileExtension = "backup";
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -188,5 +195,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-
 }
