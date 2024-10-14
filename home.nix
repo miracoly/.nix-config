@@ -69,9 +69,11 @@ in
         ghc
         gimp
         gitlint
+        gnome.gnome-disk-utility
         gnome.ghex
         gnumake
         google-chrome
+        gradle
         graphviz
         haskellPackages.cabal-fmt
         haskellPackages.cabal-install
@@ -113,6 +115,7 @@ in
         nodePackages.npm-check-updates
         nodePackages.yarn
         nomacs
+        obs-studio
         openssl
         p7zip
         pa_applet
