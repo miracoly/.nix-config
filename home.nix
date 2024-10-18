@@ -40,6 +40,7 @@ in
       in
       [
         _1password-gui
+        alejandra
         appimage-run
         audacious
         audacity
