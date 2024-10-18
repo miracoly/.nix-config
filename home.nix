@@ -2,7 +2,7 @@
 let
   homedir = "/home/mira";
   secrets = import ./.secrets.nix;
-  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/574d1eac1c200690e27b8eb4e24887f8df7ac27c.tar.gz") {
+  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/b713071a827ebeeea6df50175ffdd170adb4b1f1.tar.gz") {
     config.allowUnfree = true;
   };
 in
