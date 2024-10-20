@@ -41,6 +41,7 @@ in
       [
         _1password-gui
         alejandra
+        anki
         appimage-run
         audacious
         audacity
