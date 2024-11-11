@@ -63,7 +63,7 @@
   services = {
     dbus.packages = [ pkgs.gcr ];
 
-    geoclue2.enable = true;
+    geoclue2.enable = false;
 
     # Smartcard
     pcscd.enable = true;

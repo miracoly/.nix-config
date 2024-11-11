@@ -1,13 +1,17 @@
-{ ... }:
+_:
 {
   services.redshift = {
     enable = true;
-    provider = "geoclue2";
-    settings.redshift = {
-      adjustment-method = "randr";
-      brightness-day = 1;
-      brightness-night = 0.7;
-      gamma = 1;
+    provider = "manual";
+    longitude = 13.41;
+    latitude = 52.52;
+    settings = {
+      redshift = {
+        adjustment-method = "randr";
+        brightness-day = 1;
+        brightness-night = 0.7;
+        gamma = 1;
+      };
     };
     temperature = {
       day = 5500;
