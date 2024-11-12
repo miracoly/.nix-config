@@ -1,11 +1,11 @@
-{ config, ... }:
-let
-  homedir = config.home.homeDirectory;
-in
+_:
 {
   services.copyq.enable = true;
-  home.file.copyq.source = "${homedir}/.nix-config/config/copyq/copyq.conf";
-  home.file.copyq.target = ".config/copyq/copyq.conf";
-  home.file.copyq-commands.source = "${homedir}/.nix-config/config/copyq/copyq-commands.ini";
-  home.file.copyq-commands.target = ".config/copyq/copyq-commands.ini";
+  home.file = {
+    copyq.source = ./copyq.conf;
+    copyq.target = ".config/copyq/copyq.conf";
+
+    copyq-commands.source = ./copyq-commands.ini;
+    copyq-commands.target = ".config/copyq/copyq-commands.ini";
+  };
 }

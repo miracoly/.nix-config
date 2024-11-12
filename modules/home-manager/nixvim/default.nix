@@ -1,11 +1,4 @@
-{ config, lib, pkgs, ... }:
-let
-  nixvim = import (builtins.fetchGit {
-    url = "https://github.com/nix-community/nixvim";
-    ref = "nixos-24.05";
-    # When using a different channel you can use `ref = "nixos-<version>"` to set it here
-  });
-in
+{ config, lib, pkgs, nixvim, ... }:
 {
   imports = [ nixvim.homeManagerModules.nixvim ];
 
@@ -307,7 +300,6 @@ in
       };
 
       cmp-nvim-lua.enable = true;
-
       cmp-buffer.enable = true; # Enable suggestions for buffer in current file
       cmp-cmdline.enable = false; # Enable autocomplete for command line
       cmp-nvim-lsp.enable = true;
@@ -407,7 +399,9 @@ in
           };
           eslint.enable = true;
           graphql.enable = true;
-          hls.enable = true;
+          hls = {
+            enable = true;
+          };
           html.enable = true;
           jsonls.enable = true;
           nil-ls.enable = true;
