@@ -3,17 +3,12 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { pkgs, ... }:
-
 {
   imports =
     [
       # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
-      ./host-specific.nix
-      <home-manager/nixos>
+      ./host/xps9730.nix
     ];
-
-
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -138,13 +133,6 @@
     description = "miracoly";
     extraGroups = [ "networkmanager" "wheel" "docker" "input" ];
     shell = pkgs.zsh;
-  };
-
-  home-manager = {
-    useUserPackages = true;
-    useGlobalPkgs = true;
-    users.mira = import ./home.nix;
-    backupFileExtension = "backup";
   };
 
   # Allow unfree packages

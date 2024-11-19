@@ -1,7 +1,4 @@
-{ pkgs, config, ... }:
-let
-  homedir = config.home.homeDirectory;
-in
+{ pkgs, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -77,6 +74,6 @@ in
       ];
     };
   };
-  home.file.p10k.source = "${homedir}/.nix-config/config/p10k/p10k.zsh";
+  home.file.p10k.source = ./p10k.zsh;
   home.file.p10k.target = ".p10k.zsh";
 }

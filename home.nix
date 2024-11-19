@@ -1,10 +1,6 @@
-{ lib, pkgs, ... }:
+{ pkgs, pkgs-unstable, dnd-latex-template, wallpaper, ... }:
 let
   homedir = "/home/mira";
-  secrets = import ./.secrets.nix;
-  unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/b713071a827ebeeea6df50175ffdd170adb4b1f1.tar.gz") {
-    config.allowUnfree = true;
-  };
 in
 {
   imports = [ ./modules ];
@@ -35,8 +31,6 @@ in
         ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix { };
         codecrafters-cli = pkgs.callPackage ./derivations/codecrafters-cli.nix { };
         sasm = pkgs.callPackage ./derivations/sasm.nix { };
-        inherit (unstable) zed-editor;
-        ideaUltimateUnstable = unstable.jetbrains.idea-ultimate;
       in
       [
         _1password-gui
@@ -71,8 +65,8 @@ in
         ghc
         gimp
         gitlint
-        gnome.gnome-disk-utility
         gnome.ghex
+        gnome.gnome-disk-utility
         gnumake
         google-chrome
         gradle
@@ -91,11 +85,7 @@ in
         inotify-tools
         insomnia
         jetbrains.clion
-        # (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.clion [ "github-copilot" ])
-        # (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.idea-ultimate [ "github-copilot" ])
-        # jetbrains.idea-ultimate
-        ideaUltimateUnstable
-        # jetbrains.pycharm-professional
+        pkgs-unstable.jetbrains.idea-ultimate
         jq
         k9s
         kate
@@ -154,7 +144,7 @@ in
         yubikey-personalization-gui
         yubico-piv-tool
         yubioath-flutter
-        zed-editor
+        # zed-editor
         zip
         zlib
         zoom-us
@@ -186,20 +176,15 @@ in
 
     file = {
       # Applications
-      yubikey-rofi.source = "${homedir}/.nix-config/config/applications/yubikey-rofi.desktop";
+      yubikey-rofi.source = ./config/applications/yubikey-rofi.desktop;
       yubikey-rofi.target = ".local/share/applications/yubikey-rofi.desktop";
 
       # Other .dotfiles
-      ideavim.source = "${homedir}/.nix-config/config/ideavim/.ideavimrc";
+      ideavim.source = ./config/ideavim/.ideavimrc;
       ideavim.target = ".ideavimrc";
 
       # Latex Dnd Templage
-      dnd-latex-template.source = pkgs.fetchFromGitHub {
-        owner = "rpgtex";
-        repo = "DND-5e-LaTeX-Template";
-        rev = "v0.8.0";
-        sha256 = "sha256-jSYC0iduKGoUaYI1jrH0cakC45AMug9UodERqsvwVxw=";
-      };
+      dnd-latex-template.source = dnd-latex-template;
       dnd-latex-template.target = "texmf/tex/latex/dnd";
 
       # Azure CLI Autocomplete
@@ -208,66 +193,10 @@ in
         sha256 = "sha256-xCV7HpYI5SupUZVo5j0cIOB4vP2Ux6H/0+qUzN81FwU=";
       };
       azure-cli-completion.target = ".azure-cli/az.completion";
-    };
 
-    activation = {
-      wallpaper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        if [ ! -d "${homedir}/Pictures/wallpaper" ]; then
-          ${pkgs.git}/bin/git clone https://miracoly@github.com/miracoly/wallpaper.git ${homedir}/Pictures/wallpaper
-        else
-          ${pkgs.git}/bin/git -C ${homedir}/Pictures/wallpaper pull
-        fi
-      '';
-    };
-  };
-
-  accounts.email.accounts = with secrets.email; {
-    miracoly = with miracoly; {
-      inherit address;
-      folders = {
-        drafts = "Drafts";
-        inbox = "Inbox";
-        sent = "Sent";
-        trash = "Trash";
-      };
-      imap = {
-        host = "posteo.de";
-        port = 993;
-        tls.enable = true;
-      };
-      primary = true;
-      inherit realName;
-      signature = { };
-      smtp = {
-        host = "posteo.de";
-        port = 587;
-        tls.enable = true;
-      };
-      thunderbird.enable = true;
-      userName = address;
-    };
-    kb = with kb; {
-      inherit address;
-      folders = {
-        drafts = "Drafts";
-        inbox = "Inbox";
-        sent = "Sent";
-        trash = "Trash";
-      };
-      imap = {
-        host = "imap.gmail.com";
-        port = 993;
-        tls.enable = true;
-      };
-      inherit realName;
-      signature = { };
-      smtp = {
-        host = "smtp.gmail.com";
-        port = 587;
-        tls.enable = true;
-      };
-      thunderbird.enable = true;
-      userName = address;
+      # Wallpaper
+      wallpaper.source = wallpaper;
+      wallpaper.target = "Pictures/wallpaper";
     };
   };
 
@@ -317,7 +246,6 @@ in
     htop.enable = true;
 
     java.enable = true;
-    java.package = pkgs.jdk21;
 
     # git
     git = {
