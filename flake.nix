@@ -63,7 +63,7 @@
           inherit system;
           modules = [
             ./configuration.nix
-            ./hosts/xps9730.nix
+            ./hosts/xps93xx.nix
             home-manager.nixosModules.home-manager
             miras-home-manager
           ];
