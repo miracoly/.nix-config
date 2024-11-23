@@ -26,6 +26,12 @@ in
       "${homedir}/.local/share/coursier/bin"
     ];
 
+    pointerCursor = {
+      name = "Vanilla-DMZ";
+      package = pkgs.vanilla-dmz;
+      size = 48;
+    };
+
     packages = with pkgs;
       let
         ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix { };
