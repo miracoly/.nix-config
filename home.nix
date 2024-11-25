@@ -102,6 +102,7 @@ in
         libnotify
         maven
         minikube
+        mob
         mysql80
         nasm
         nerdfonts
