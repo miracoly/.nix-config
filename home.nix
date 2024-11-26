@@ -170,6 +170,7 @@ in
         xorg.libXcursor
         xorg.libXrender
         xorg.libXrandr
+        pkgs-unstable.zed-editor
       ];
 
     sessionVariables = {
