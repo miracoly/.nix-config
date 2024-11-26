@@ -108,6 +108,7 @@ in
         nerdfonts
         nil
         nix-index
+        nixd
         nixpkgs-fmt
         node2nix
         nodejs_20
