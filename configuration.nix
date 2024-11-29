@@ -126,7 +126,7 @@
   users.users.mira = {
     isNormalUser = true;
     description = "miracoly";
-    extraGroups = [ "networkmanager" "wheel" "docker" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "input" "dialout" ];
     shell = pkgs.zsh;
   };
 
