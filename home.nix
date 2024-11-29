@@ -43,6 +43,7 @@ in
         alejandra
         anki
         appimage-run
+        arduino-ide
         audacious
         audacity
         asciidoctor
