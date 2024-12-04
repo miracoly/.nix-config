@@ -69,8 +69,11 @@
 
     # Printing
     printing.enable = true;
-    avahi.enable = true;
-    avahi.nssmdns4 = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
 
     # Thumbnails
     tumbler.enable = true;
