@@ -1,6 +1,16 @@
 {
   description = "My Home configuration";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+    ];
+
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
+
   inputs = {
     dnd-latex-template = {
       url = "github:rpgtex/DND-5e-LaTeX-Template/stable";

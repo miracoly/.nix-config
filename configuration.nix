@@ -180,6 +180,12 @@
         "nix-command"
         "flakes"
       ];
+
+      trusted-users = [ "mira" ];
+
+      substituters = [
+        "https://cache.nixos.org"
+      ];
     };
   };
 

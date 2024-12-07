@@ -54,6 +54,7 @@ in
         bruno
         ca65-symbls-to-nl
         cabal2nix
+        cachix
         calibre
         cc65
         chromium
