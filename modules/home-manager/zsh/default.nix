@@ -33,6 +33,7 @@
       enable = true;
       plugins = [
         "azure"
+        "direnv"
         "fzf"
         "git"
         "stack"

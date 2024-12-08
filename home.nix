@@ -237,6 +237,12 @@ in
   };
 
   programs = {
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
+
     feh.enable = true;
     firefox.enable = true;
     fzf = {
