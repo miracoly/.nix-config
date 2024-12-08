@@ -89,6 +89,7 @@ in
         haskellPackages.yesod-bin
         haskell-language-server
         i3lock-fancy-rapid
+        ihp-new
         inkscape
         inotify-tools
         insomnia
