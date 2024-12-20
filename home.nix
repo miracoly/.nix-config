@@ -130,6 +130,7 @@ in
         pipenv
         pnpm
         pulseaudio
+        purescript
         python311
         racket
         rofi-bluetooth
@@ -141,6 +142,7 @@ in
         sbt
         slack
         sops
+        spago
         steam-run
         stella
         telepresence2
