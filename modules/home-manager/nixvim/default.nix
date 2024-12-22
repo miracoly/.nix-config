@@ -19,6 +19,7 @@
     globals = {
       mapleader = " ";
       maplocalleader = " ";
+      have_nerd_fonts = true;
     };
 
     clipboard = {
@@ -27,7 +28,8 @@
     };
 
     opts = {
-      updatetime = 100; # Faster completion
+      updatetime = 250; # Faster completion
+      timeoutlen = 300; # Faster completion
 
       # Line numbers
       relativenumber = true; # Relative line numbers
@@ -48,8 +50,8 @@
       #   patterns
       smartcase = true; # Override the 'ignorecase' option if the search pattern contains upper
       #   case characters
-      scrolloff = 4; # Number of screen lines to show around the cursor
-      cursorline = false; # Highlight the screen line of the cursor
+      scrolloff = 9; # Number of screen lines to show around the cursor
+      cursorline = true; # Highlight the screen line of the cursor
       cursorcolumn = false; # Highlight the screen column of the cursor
       signcolumn = "yes"; # Whether to show the signcolumn
       colorcolumn = "81"; # Columns to highlight
@@ -73,11 +75,21 @@
       foldlevel = 99; # Folds with a level higher than this number will be closed
 
       virtualedit = "block"; # Allow the cursor to move where there is no text in Visual mode
+
+      showmode = false; # Don't show the mode, since it's already in the status line
+      breakindent = true; # Indent wrapped lines
+
+      list = true;
+      listchars = { 
+        tab = "» ";
+        trail = "·";
+        nbsp = "␣";
+      };
     };
 
     keymaps =
       let
-        normal =
+        _normal =
           lib.mapAttrsToList
             (key: action: {
               mode = "n";
@@ -87,7 +99,7 @@
               "<Space>" = "<NOP>";
 
               # Esc to clear search results
-              "<esc>" = ":noh<CR>";
+              "<Esc>" = ":noh<CR>";
 
               # fix Y behaviour
               Y = "y$";
@@ -106,7 +118,7 @@
               "<C-A-Left>" = "<C-o>";
               "<C-A-Right>" = "<C-i>";
 
-              # navigate to left/right buffer
+              # navigate to eft/right buffer
               "<A-j>" = ":bp<CR>";
               "<A-k>" = ":bn<CR>";
 
@@ -115,12 +127,6 @@
               "<A-Right>" = ":tabnext<CR>";
               "<A-h>" = ":tabprevious<CR>";
               "<A-l>" = ":tabnext<CR>";
-
-              # navigate to left/right window
-              "<C-h>" = "<C-w>h";
-              "<C-l>" = "<C-w>l";
-              "<C-j>" = "<C-w>j";
-              "<C-k>" = "<C-w>k";
 
               # resize with arrows
               "<C-Down>" = ":resize -2<CR>";
@@ -155,6 +161,43 @@
               "<F7>" = ":Gitsigns next_hunk<CR>"; # next hunk
               "<F19>" = ":Gitsigns prev_hunk<CR>"; # prev hunk
             };
+        normal = map (entry: entry // { mode = "n"; }) [
+          {
+            key = "<leader>q";
+            action = "<cmd>lua vim.diagnostic.setloclist()<CR>";
+            options = {
+              desc = "Open diagnostic [Q]uickfix list";
+            };
+          }
+          {
+            key = "<C-h>";
+            action = "<C-w><C-h>";
+            options = {
+              desc = "Move focus to the left window";
+            };
+          }
+          {
+            key = "<C-l>";
+            action = "<C-w><C-l>";
+            options = {
+              desc = "Move focus to the right window";
+            };
+          }
+          {
+            key = "<C-j>";
+            action = "<C-w><C-j>";
+            options = {
+              desc = "Move focus to the lower window";
+            };
+          }
+          {
+            key = "<C-k>";
+            action = "<C-w><C-k>";
+            options = {
+              desc = "Move focus to the upper window";
+            };
+          }
+        ];
         insert =
           lib.mapAttrsToList
             (key: action: {
@@ -182,10 +225,20 @@
               "K" = ":m '<-2<CR>gv=gv";
               "J" = ":m '>+1<CR>gv=gv";
             };
+        terminal = [
+          {
+            mode = "t";
+            key = "<Esc><Esc>";
+            action = "<C-\\><C-n>";
+            options = {
+              desc = "Exit terminal mode";
+            };
+          }
+        ];
       in
       config.lib.nixvim.keymaps.mkKeymaps
         { options.silent = true; }
-        (normal ++ insert ++ visual);
+        (_normal ++ normal ++ insert ++ visual ++ terminal);
 
     extraPlugins = with pkgs.vimPlugins; [
       nvim-web-devicons
