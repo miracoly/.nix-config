@@ -75,6 +75,6 @@
 
   hardware = {
     bluetooth.enable = true;
-    opengl.extraPackages = with pkgs; [ intel-media-driver ];
+    graphics.extraPackages = with pkgs; [ intel-media-driver ];
   };
 }

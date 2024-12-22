@@ -183,7 +183,7 @@
               "J" = ":m '>+1<CR>gv=gv";
             };
       in
-      config.nixvim.helpers.keymaps.mkKeymaps
+      config.lib.nixvim.keymaps.mkKeymaps
         { options.silent = true; }
         (normal ++ insert ++ visual);
 
@@ -401,17 +401,18 @@
           graphql.enable = true;
           hls = {
             enable = true;
+            installGhc = true;
           };
           html.enable = true;
           jsonls.enable = true;
-          nil-ls.enable = true;
-          lua-ls = {
+          nil_ls.enable = true;
+          lua_ls = {
             enable = true;
             settings.telemetry.enable = false;
           };
           tailwindcss.enable = true;
           terraformls.enable = true;
-          tsserver.enable = true;
+          ts_ls.enable = true;
           volar.enable = true;
         };
         keymaps = {
@@ -450,36 +451,38 @@
 
       lualine = {
         enable = true;
-        sections = {
-          lualine_x = [
-            "diagnostics"
+        settings = {
+          sections = {
+            lualine_x = [
+              "diagnostics"
 
-            # Show active language server
-            {
-              name.__raw = ''
-                function()
-                    local msg = ""
-                    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-                    local clients = vim.lsp.get_active_clients()
-                    if next(clients) == nil then
-                        return msg
-                    end
-                    for _, client in ipairs(clients) do
-                        local filetypes = client.config.filetypes
-                        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                            return client.name
-                        end
-                    end
-                    return msg
-                end
-              '';
-              icon = "";
-              color.fg = "#ffffff";
-            }
-            "encoding"
-            "fileformat"
-            "filetype"
-          ];
+              # Show active language server
+              {
+                __unkeyed-1.__raw = ''
+                  function()
+                      local msg = ""
+                      local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+                      local clients = vim.lsp.get_active_clients()
+                      if next(clients) == nil then
+                          return msg
+                      end
+                      for _, client in ipairs(clients) do
+                          local filetypes = client.config.filetypes
+                          if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                              return client.name
+                          end
+                      end
+                      return msg
+                  end
+                '';
+                icon = "";
+                color.fg = "#ffffff";
+              }
+              "encoding"
+              "fileformat"
+              "filetype"
+            ];
+          };
         };
       };
 
@@ -499,13 +502,15 @@
 
       none-ls = {
         enable = true;
-        onAttach = ''
-          function(client, bufnr)
-            -- Set the keymap for formatting
-            vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-A-l>',
-              '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', { noremap = true, silent = true })
-          end
-        '';
+        settings = {
+          onAttach = ''
+            function(client, bufnr)
+              -- Set the keymap for formatting
+              vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-A-l>',
+                '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', { noremap = true, silent = true })
+            end
+          '';
+        };
         sources = {
           code_actions = {
             statix.enable = true;
@@ -576,7 +581,7 @@
       toggleterm = {
         enable = true;
         settings = {
-          open_mapping = "[[<F60>]]";
+          open_mapping = "[[<F60>]]"; # Alt-F12
         };
       };
 
@@ -584,15 +589,21 @@
         enable = true;
         nixvimInjections = true;
         folding = true;
-        incrementalSelection = {
-          enable = true;
-          keymaps = {
-            initSelection = "<C-w>";
-            nodeIncremental = "<C-w>";
-            # scopeIncremental = "grc";
-            nodeDecremental = "<C-S-w>";
+        settings = {
+          incremental_selection = {
+            enable = true;
+            keymaps = {
+              init_selection = "<C-w>";
+              node_incremental = "<C-w>";
+              # scopeIncremental = "grc";
+              node_decremental = "<C-S-w>";
+            };
           };
         };
+      };
+
+      web-devicons = {
+        enable = true;
       };
     };
   };

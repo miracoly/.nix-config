@@ -73,8 +73,8 @@ in
         ghc
         gimp
         gitlint
-        gnome.ghex
-        gnome.gnome-disk-utility
+        ghex
+        gnome-disk-utility
         gnumake
         google-chrome
         gradle
