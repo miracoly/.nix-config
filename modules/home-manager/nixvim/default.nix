@@ -80,7 +80,7 @@
       breakindent = true; # Indent wrapped lines
 
       list = true;
-      listchars = { 
+      listchars = {
         tab = "» ";
         trail = "·";
         nbsp = "␣";
@@ -114,30 +114,11 @@
               "<leader>w" = ":w<CR>";
               "<C-s>" = ":w<CR>";
 
-              # navigate to prev/next location
-              "<C-A-Left>" = "<C-o>";
-              "<C-A-Right>" = "<C-i>";
-
-              # navigate to eft/right buffer
-              "<A-j>" = ":bp<CR>";
-              "<A-k>" = ":bn<CR>";
-
-              # navigate to left/right tab
-              "<A-Left>" = ":tabprevious<CR>";
-              "<A-Right>" = ":tabnext<CR>";
-              "<A-h>" = ":tabprevious<CR>";
-              "<A-l>" = ":tabnext<CR>";
-
               # resize with arrows
               "<C-Down>" = ":resize -2<CR>";
               "<C-Up>" = ":resize +2<CR>";
               "<C-Right>" = ":vertical resize +2<CR>";
               "<C-Left>" = ":vertical resize -2<CR>";
-
-              # move current line up/down
-              # M = Alt key
-              "<C-S-Up>" = ":move-2<CR>";
-              "<C-S-Down>" = ":move+<CR>";
 
               # neo-tree
               "<A-1>" = ":Neotree action=focus reveal toggle<CR>";
@@ -148,56 +129,209 @@
               "<A-4>" = ":OverseerToggle<CR>";
 
               # github copilot
-              "<leader>c" = ":CopilotChatToggle<CR>";
+              "<leader>cp" = ":CopilotChatToggle<CR>";
 
               # lazygit
               "<C-S-k>" = ":LazyGit<CR>";
+            };
+        normal = lib.pipe
+          {
+            buffer = [
+              # # Buffers & Tabs
+              # "<A-k>" = ":bn<CR>"; # next buffer
+              # "<A-j>" = ":bp<CR>"; # previous buffer
+              # "<leader>bn" = ":enew<CR>"; # new buffer
+              # "<leader>bv" = ":vnew<CR>"; # new vertical buffer
+              # "<leader>bh" = ":new<CR>"; # new horizontal buffer
+              # "<leader>bd" = ":bd<CR>"; # close buffer
+              # "<A-h>" = ":tabprevious<CR>";
+              # "<A-l>" = ":tabnext<CR>";
+              # "<leader>bt" = ":tabnew<CR>";
+              #
+              {
+                key = "<A-k>";
+                action = ":bn<CR>";
+              }
+              {
+                key = "<A-j>";
+                action = ":bp<CR>";
+              }
+              {
+                key = "<leader>bn";
+                action = ":enew<CR>";
+                options = {
+                  desc = "New buffer";
+                };
+              }
+              {
+                key = "<leader>bv";
+                action = ":vnew<CR>";
+                options = {
+                  desc = "New vertical buffer";
+                };
+              }
+              {
+                key = "<leader>bh";
+                action = ":new<CR>";
+                options = {
+                  desc = "New horizontal buffer";
+                };
+              }
+              {
+                key = "<leader>bd";
+                action = ":bd<CR>";
+                options = {
+                  desc = "Close buffer";
+                };
+              }
+              {
+                key = "<A-h>";
+                action = ":tabprevious<CR>";
+              }
+              {
+                key = "<A-l>";
+                action = ":tabnext<CR>";
+              }
+              {
+                key = "<leader>bt";
+                action = ":tabnew<CR>";
+                options = {
+                  desc = "New tab";
+                };
+              }
 
-              # gitsigns
-              "<leader>gr" = ":Gitsigns reset_hunk<CR>"; # reset hunk
-              "<leader>gs" = ":Gitsigns preview_hunk<CR>"; # show hunk
-              "<leader>gtb" = ":Gitsigns toggle_current_line_blame<CR>"; # toggle blame
-              "<leader>gb" = ":Gitsigns blame_line<CR>"; # blame line
-              "<F7>" = ":Gitsigns next_hunk<CR>"; # next hunk
-              "<F19>" = ":Gitsigns prev_hunk<CR>"; # prev hunk
-            };
-        normal = map (entry: entry // { mode = "n"; }) [
-          {
-            key = "<leader>q";
-            action = "<cmd>lua vim.diagnostic.setloclist()<CR>";
-            options = {
-              desc = "Open diagnostic [Q]uickfix list";
-            };
+            ];
+            diagnostic = [
+              {
+                key = "<leader>q";
+                action = "<cmd>lua vim.diagnostic.setloclist()<CR>";
+                options = {
+                  desc = "Open diagnostic [Q]uickfix list";
+                };
+              }
+              {
+                key = "<leader>e";
+                action = "<cmd>lua vim.diagnostic.open_float()<CR>";
+                options = {
+                  desc = "Show diagnostic [E]rror messages";
+                };
+              }
+            ];
+            window = [
+              {
+                key = "<C-h>";
+                action = "<C-w><C-h>";
+                options = {
+                  desc = "Move focus to the left window";
+                };
+              }
+              {
+                key = "<C-l>";
+                action = "<C-w><C-l>";
+                options = {
+                  desc = "Move focus to the right window";
+                };
+              }
+              {
+                key = "<C-j>";
+                action = "<C-w><C-j>";
+                options = {
+                  desc = "Move focus to the lower window";
+                };
+              }
+              {
+                key = "<C-k>";
+                action = "<C-w><C-k>";
+                options = {
+                  desc = "Move focus to the upper window";
+                };
+              }
+            ];
+            gitsigns = [
+              {
+                key = "<leader>hr";
+                action = ":Gitsigns reset_hunk<CR>";
+                options = {
+                  desc = "Reset hunk";
+                };
+              }
+              {
+                key = "<leader>cs";
+                action = ":Gitsigns preview_hunk<CR>";
+                options = {
+                  desc = "Show hunk";
+                };
+              }
+              {
+                key = "<leader>tb";
+                action = ":Gitsigns toggle_current_line_blame<CR>";
+                options = {
+                  desc = "Toggle blame";
+                };
+              }
+              {
+                key = "<leader>hb";
+                action = ":Gitsigns blame_line<CR>";
+                options = {
+                  desc = "Blame line";
+                };
+              }
+              {
+                key = "]c";
+                action = ":Gitsigns next_hunk<CR>";
+                options = {
+                  desc = "Jump to next git [c]hange";
+                };
+              }
+              {
+                key = "[c";
+                action = ":Gitsigns prev_hunk<CR>";
+                options = {
+                  desc = "Jump to previous git [c]hange";
+                };
+              }
+            ];
+            telescope = [
+              {
+                key = "<leader>/";
+                action = {
+                  __raw = ''
+                    function()
+                      require('telescope.builtin').current_buffer_fuzzy_find(
+                        require('telescope.themes').get_dropdown {
+                          winblend = 10, previewer = false,
+                        }
+                      );
+                    end
+                  '';
+                };
+                options = {
+                  desc = "[/] Search in current buffer";
+                };
+              }
+              {
+                key = "<leader>s/";
+                action = {
+                  __raw = ''
+                    function()
+                      require('telescope.builtin').live_grep {
+                        grep_open_files = true,
+                        prompt_title = 'Search in open files',
+                      }
+                    end
+                  '';
+                };
+                options = {
+                  desc = "[S]earch [/] in Open Files";
+                };
+              }
+            ];
           }
-          {
-            key = "<C-h>";
-            action = "<C-w><C-h>";
-            options = {
-              desc = "Move focus to the left window";
-            };
-          }
-          {
-            key = "<C-l>";
-            action = "<C-w><C-l>";
-            options = {
-              desc = "Move focus to the right window";
-            };
-          }
-          {
-            key = "<C-j>";
-            action = "<C-w><C-j>";
-            options = {
-              desc = "Move focus to the lower window";
-            };
-          }
-          {
-            key = "<C-k>";
-            action = "<C-w><C-k>";
-            options = {
-              desc = "Move focus to the upper window";
-            };
-          }
-        ];
+          [
+            builtins.attrValues
+            builtins.concatLists
+            (map (entry: entry // { mode = "n"; }))
+          ];
         insert =
           lib.mapAttrsToList
             (key: action: {
@@ -225,6 +359,19 @@
               "K" = ":m '<-2<CR>gv=gv";
               "J" = ":m '>+1<CR>gv=gv";
             };
+        _terminal =
+          lib.mapAttrsToList
+            (key: action: {
+              mode = "t";
+              inherit action key;
+            })
+            {
+              # resize with arrows
+              "<C-Down>" = "<cmd>resize -2<CR>";
+              "<C-Up>" = "<cmd>resize +2<CR>";
+              "<C-Right>" = "<cmd>vertical resize +2<CR>";
+              "<C-Left>" = "<cmd>vertical resize -2<CR>";
+            };
         terminal = [
           {
             mode = "t";
@@ -238,7 +385,24 @@
       in
       config.lib.nixvim.keymaps.mkKeymaps
         { options.silent = true; }
-        (_normal ++ normal ++ insert ++ visual ++ terminal);
+        (_normal ++ normal ++ insert ++ visual ++ _terminal ++ terminal);
+
+    autoGroups = {
+      kickstart-highlight-yank = {
+        clear = true;
+      };
+    };
+
+    autoCmd = [
+      {
+        desc = "Highlight when yanking (copying) text";
+        group = "kickstart-highlight-yank";
+        callback = {
+          __raw = "function() vim.highlight.on_yank() end";
+        };
+        event = "TextYankPost";
+      }
+    ];
 
     extraPlugins = with pkgs.vimPlugins; [
       nvim-web-devicons
@@ -470,25 +634,111 @@
         };
         keymaps = {
           silent = true;
-          diagnostic = {
-            # Navigate in diagnostics
-            "<F14>" = "goto_prev";
-            "<F2>" = "goto_next";
-            "<F25>" = "open_float";
-          };
-
           lspBuf = {
-            "<C-b>" = "definition";
-            # "<C-A-b>" = "references";
-            "<C-S-b>" = "type_definition";
-            gi = "implementation";
             "<C-q>" = "hover";
+            "<leader>rn" = {
+              action = "rename";
+              desc = "[R]e[n]ame";
+            };
+            "gD" = {
+              action = "declaration";
+              desc = "[G]o to [D]eclaration";
+            };
             "<C-p>" = "signature_help";
-            "<A-CR>" = "code_action";
-            "<F18>" = "rename";
           };
 
+          extra = [
+            {
+              key = "gd";
+              action = {
+                __raw = "require('telescope.builtin').lsp_definitions";
+              };
+              options = {
+                desc = "[G]o to [D]efinition";
+              };
+            }
+            {
+              key = "gr";
+              action = {
+                __raw = "require('telescope.builtin').lsp_references";
+              };
+              options = {
+                desc = "[G]oto [R]eferences";
+              };
+            }
+            {
+              key = "gI";
+              action = {
+                __raw = "require('telescope.builtin').lsp_implementations";
+              };
+              options = {
+                desc = "[G]o to [I]mplementation";
+              };
+            }
+            {
+              key = "<leader>D";
+              action = {
+                __raw = "require('telescope.builtin').lsp_type_definitions";
+              };
+              options = {
+                desc = "Type [D]efinition";
+              };
+            }
+            {
+              key = "<leader>ds";
+              action = {
+                __raw = "require('telescope.builtin').lsp_document_symbols";
+              };
+              options = {
+                desc = "[D]ocument [S]ymbol";
+              };
+            }
+            {
+              key = "<leader>ws";
+              action = {
+                __raw = "require('telescope.builtin').lsp_dynamic_workspace_symbols";
+              };
+              options = {
+                desc = "[W]orkspace [S]ymbol";
+              };
+            }
+            {
+              key = "<leader>ca";
+              action = {
+                __raw = "vim.lsp.buf.code_action";
+              };
+              mode = [ "n" "x" ];
+              options = {
+                desc = "[C]ode [A]ction";
+              };
+            }
+          ];
         };
+        
+        onAttach = ''
+          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+            local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
+            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+              buffer = bufnr,
+              group = highlight_augroup,
+              callback = vim.lsp.buf.document_highlight,
+            })
+
+            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+              buffer = bufnr,
+              group = highlight_augroup,
+              callback = vim.lsp.buf.clear_references,
+            })
+
+            vim.api.nvim_create_autocmd('LspDetach', {
+              group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+              callback = function(event2)
+                vim.lsp.buf.clear_references()
+                vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+              end,
+            })
+          end
+        '';
       };
 
       lspkind = {
@@ -593,21 +843,74 @@
         };
       };
 
+      sleuth = {
+        enable = true;
+      };
+
       telescope = {
         enable = true;
 
         keymaps = {
-          # Find files using Telescope command-line sugar.
-          "<C-S-n>" = "find_files";
-          "<C-S-f>" = "live_grep";
-          "<leader>b" = "buffers";
-          # "<leader>fh" = "help_tags";
-          "<leader>fd" = "diagnostics";
-
-          # FZF like bindings
-          # "<C-p>" = "git_files";
-          "<C-e>" = "oldfiles";
-          "<C-f>" = "current_buffer_fuzzy_find";
+          "<leader>sh" = {
+            action = "help_tags";
+            options = {
+              desc = "[S]earch [H]elp";
+            };
+          };
+          "<leader>sk" = {
+            action = "keymaps";
+            options = {
+              desc = "[S]earch [K]eymaps";
+            };
+          };
+          "<leader>sf" = {
+            action = "find_files";
+            options = {
+              desc = "[S]earch [F]iles";
+            };
+          };
+          "<leader>ss" = {
+            action = "builtin";
+            options = {
+              desc = "[S]earch [S]elect Telescope";
+            };
+          };
+          "<leader>sw" = {
+            action = "grep_string";
+            options = {
+              desc = "[S]earch [W]ord";
+            };
+          };
+          "<leader>sg" = {
+            action = "live_grep";
+            options = {
+              desc = "[S]earch by [G]rep";
+            };
+          };
+          "<leader>sd" = {
+            action = "diagnotics";
+            options = {
+              desc = "[S]earch [D]iagnostics";
+            };
+          };
+          "<leader>sr" = {
+            action = "resume";
+            options = {
+              desc = "[S]earch [R]esume";
+            };
+          };
+          "<leader>so" = {
+            action = "oldfiles";
+            options = {
+              desc = "[S]earch [O]ld (Recent) files";
+            };
+          };
+          "<leader><leader>" = {
+            action = "buffers";
+            options = {
+              desc = "[ ] Find existing buffers";
+            };
+          };
 
           # LSP
           "<C-A-b>" = "lsp_references";
@@ -657,6 +960,81 @@
 
       web-devicons = {
         enable = true;
+      };
+
+      which-key = {
+        enable = true;
+        settings = {
+          icons = {
+            keys = {
+              Up = "<Up> ";
+              Down = "<Down> ";
+              Left = "<Left> ";
+              Right = "<Right> ";
+              C = "<C-…> ";
+              M = "<M-…> ";
+              D = "<D-…> ";
+              S = "<S-…> ";
+              CR = "<CR> ";
+              Esc = "<Esc> ";
+              ScrollWheelDown = "<ScrollWheelDown> ";
+              ScrollWheelUp = "<ScrollWheelUp> ";
+              NL = "<NL> ";
+              BS = "<BS> ";
+              Space = "<Space> ";
+              Tab = "<Tab> ";
+              F1 = "<F1>";
+              F2 = "<F2>";
+              F3 = "<F3>";
+              F4 = "<F4>";
+              F5 = "<F5>";
+              F6 = "<F6>";
+              F7 = "<F7>";
+              F8 = "<F8>";
+              F9 = "<F9>";
+              F10 = "<F10>";
+              F11 = "<F11>";
+              F12 = "<F12>";
+            };
+          };
+
+          spec = [
+            {
+              __unkeyed = "<leader>b";
+              group = "[B]uffer";
+            }
+            {
+              __unkeyed = "<leader>c";
+              group = "[C]ode";
+              mode = [ "n" "x" ];
+            }
+            {
+              __unkeyed = "<leader>d";
+              group = "[D]ocument";
+            }
+            {
+              __unkeyed = "<leader>r";
+              group = "[R]ename";
+            }
+            {
+              __unkeyed = "<leader>s";
+              group = "[S]earch";
+            }
+            {
+              __unkeyed = "<leader>w";
+              group = "[W]orkspace";
+            }
+            {
+              __unkeyed = "<leader>t";
+              group = "[T]oggle";
+            }
+            {
+              __unkeyed = "<leader>h";
+              group = "Git [H]unk";
+              mode = [ "n" "v" ];
+            }
+          ];
+        };
       };
     };
   };
