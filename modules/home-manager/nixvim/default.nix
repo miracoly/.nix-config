@@ -128,26 +128,12 @@
               "<F58>" = ":OverseerRun<CR>"; # A-F10
               "<A-4>" = ":OverseerToggle<CR>";
 
-              # github copilot
-              "<leader>cp" = ":CopilotChatToggle<CR>";
-
               # lazygit
               "<C-S-k>" = ":LazyGit<CR>";
             };
         normal = lib.pipe
           {
             buffer = [
-              # # Buffers & Tabs
-              # "<A-k>" = ":bn<CR>"; # next buffer
-              # "<A-j>" = ":bp<CR>"; # previous buffer
-              # "<leader>bn" = ":enew<CR>"; # new buffer
-              # "<leader>bv" = ":vnew<CR>"; # new vertical buffer
-              # "<leader>bh" = ":new<CR>"; # new horizontal buffer
-              # "<leader>bd" = ":bd<CR>"; # close buffer
-              # "<A-h>" = ":tabprevious<CR>";
-              # "<A-l>" = ":tabnext<CR>";
-              # "<leader>bt" = ":tabnew<CR>";
-              #
               {
                 key = "<A-k>";
                 action = ":bn<CR>";
@@ -199,7 +185,29 @@
                   desc = "New tab";
                 };
               }
-
+              {
+                key = "<leader>bc";
+                action = ":tabnew<CR>";
+                options = {
+                  desc = "Close tab";
+                };
+              }
+            ];
+            copilot = [
+              {
+                key = "<leader>tc";
+                action = ":CopilotChatToggle<CR>";
+                options = {
+                  desc = "[T]oggle Copilot [C]hat";
+                };
+              }
+              {
+                key = "<leader>tp";
+                action.__raw = builtins.readFile ./lua/copilot/toggle.lua;
+                options = {
+                  desc = "[T]oggle Co[p]ilot";
+                };
+              }
             ];
             diagnostic = [
               {
@@ -479,58 +487,40 @@
           formatting = { fields = [ "kind" "abbr" "menu" ]; };
 
           mapping = {
-            "<C-Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
-            "<C-j>" = "cmp.mapping.select_next_item()";
-            "<C-k>" = "cmp.mapping.select_prev_item()";
+            "<C-n>" = "cmp.mapping.select_next_item()";
+            "<C-p>" = "cmp.mapping.select_prev_item()";
             "<ESC>" = ''
               function ()
                 cmp.mapping.close()
                 vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, true, true), 'n', true)
               end
             '';
-            "<C-b>" = "cmp.mapping.scroll_docs(-4)";
-            "<C-f>" = "cmp.mapping.scroll_docs(4)";
+            "<C-j>" = "cmp.mapping.scroll_docs(4)";
+            "<C-k>" = "cmp.mapping.scroll_docs(-4)";
             "<C-Space>" = "cmp.mapping.complete()";
             "<C-CR>" = "cmp.mapping.confirm({ select = true })";
             "<S-CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })";
           };
 
           sources = [
-            { name = "git"; }
             { name = "nvim_lsp"; }
-            { name = "emoji"; }
+            { name = "nvim_lua"; }
+            { name = "path"; }
+            { name = "luasnip"; }
             {
-              name = "buffer"; # text within current buffer
-              option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
-              keywordLength = 3;
-            }
-            {
-              name = "path"; # file system paths
-              keywordLength = 3;
-            }
-            {
-              name = "luasnip"; # snippets
-              keywordLength = 3;
+              name = "buffer";
+              keyword_length = 3;
             }
           ];
         };
       };
 
-      cmp-nvim-lua.enable = true;
-      cmp-buffer.enable = true; # Enable suggestions for buffer in current file
-      cmp-cmdline.enable = false; # Enable autocomplete for command line
-      cmp-nvim-lsp.enable = true;
-      # cmp-nvim-lua.enable = true;
-      cmp_luasnip.enable = true; # Enable suggestions for code snippets
-      cmp-path.enable = true; # Enable suggestions for file system paths
-      cmp-zsh.enable = true;
-
       comment = {
         enable = true;
 
         settings = {
-          opleader.line = "<C-/>";
-          toggler.line = "<C-/>";
+          opleader.line = "<leader>k";
+          toggler.line = "<leader>k";
           post_hook = ''
             function(ctx)
               vim.api.nvim_command('normal! j')
@@ -644,7 +634,7 @@
               action = "declaration";
               desc = "[G]o to [D]eclaration";
             };
-            "<C-p>" = "signature_help";
+            # "<C-p>" = "signature_help";
           };
 
           extra = [
@@ -714,31 +704,8 @@
             }
           ];
         };
-        
-        onAttach = ''
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-            local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
-            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-              buffer = bufnr,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.document_highlight,
-            })
 
-            vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-              buffer = bufnr,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.clear_references,
-            })
-
-            vim.api.nvim_create_autocmd('LspDetach', {
-              group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
-              callback = function(event2)
-                vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
-              end,
-            })
-          end
-        '';
+        onAttach = builtins.readFile ./lua/lsp/onAttach.lua;
       };
 
       lspkind = {
@@ -805,15 +772,6 @@
 
       none-ls = {
         enable = true;
-        settings = {
-          onAttach = ''
-            function(client, bufnr)
-              -- Set the keymap for formatting
-              vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-A-l>',
-                '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', { noremap = true, silent = true })
-            end
-          '';
-        };
         sources = {
           code_actions = {
             statix.enable = true;
