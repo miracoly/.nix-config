@@ -107,11 +107,8 @@
               # back and fourth between the two most recent files
               # "<C-c>" = ":b#<CR>";
 
-              # close by Ctrl+F4
-              "<F28>" = ":bd<CR>";
-
               # save by Space+w or Ctrl+s
-              "<leader>w" = ":w<CR>";
+              "<Enter>" = ":w<CR>";
               "<C-s>" = ":w<CR>";
 
               # resize with arrows
@@ -133,6 +130,22 @@
             };
         normal = lib.pipe
           {
+            general = [
+              {
+                key = "<leader>wq";
+                action = ":wqa<CR>";
+                options = {
+                  desc = "Save and [Q]uit";
+                };
+              }
+              {
+                key = "<leader>tt";
+                action = ":99ToggleTerm direction=float name=\"Main Terminal\"<CR>";
+                options = {
+                  desc = "[T]oggle floating [T]erminal";
+                };
+              }
+            ];
             buffer = [
               {
                 key = "<A-k>";
@@ -187,7 +200,7 @@
               }
               {
                 key = "<leader>bc";
-                action = ":tabnew<CR>";
+                action = ":tabclose<CR>";
                 options = {
                   desc = "Close tab";
                 };
@@ -264,7 +277,7 @@
                 };
               }
               {
-                key = "<leader>cs";
+                key = "<leader>hs";
                 action = ":Gitsigns preview_hunk<CR>";
                 options = {
                   desc = "Show hunk";
@@ -285,17 +298,17 @@
                 };
               }
               {
-                key = "]c";
+                key = "]h";
                 action = ":Gitsigns next_hunk<CR>";
                 options = {
-                  desc = "Jump to next git [c]hange";
+                  desc = "Jump to next git [h]unk";
                 };
               }
               {
-                key = "[c";
+                key = "[h";
                 action = ":Gitsigns prev_hunk<CR>";
                 options = {
-                  desc = "Jump to previous git [c]hange";
+                  desc = "Jump to previous git [h]hunk";
                 };
               }
             ];
@@ -379,6 +392,12 @@
               "<C-Up>" = "<cmd>resize +2<CR>";
               "<C-Right>" = "<cmd>vertical resize +2<CR>";
               "<C-Left>" = "<cmd>vertical resize -2<CR>";
+
+              # window navigation 
+              "<C-h>" = "<C-\\><C-n><C-w>h";
+              "<C-j>" = "<C-\\><C-n><C-w>j";
+              "<C-k>" = "<C-\\><C-n><C-w>k";
+              "<C-l>" = "<C-\\><C-n><C-w>l";
             };
         terminal = [
           {
@@ -503,7 +522,6 @@
           };
 
           sources = [
-            { name = "gh_issues"; }
             { name = "nvim_lsp"; }
             { name = "nvim_lua"; }
             { name = "path"; }
@@ -511,8 +529,14 @@
             {
               name = "buffer";
               keyword_length = 5;
+              max_item_count = 10;
             }
           ];
+
+          experimental = {
+            native_menu = false;
+            ghost_text = true;
+          };
         };
       };
 
@@ -907,7 +931,7 @@
       toggleterm = {
         enable = true;
         settings = {
-          open_mapping = "[[<F60>]]"; # Alt-F12
+          open_mapping = "[[<C-/>]]";
         };
       };
 
