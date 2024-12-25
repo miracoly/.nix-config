@@ -5,3 +5,4 @@ nohup.out
 *secret*
 host-specific.nix
 .pre-commit-config.yaml
+.direnv/
