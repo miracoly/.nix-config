@@ -394,10 +394,10 @@
               "<C-Left>" = "<cmd>vertical resize -2<CR>";
 
               # window navigation 
-              "<C-h>" = "<C-\\><C-n><C-w>h";
-              "<C-j>" = "<C-\\><C-n><C-w>j";
-              "<C-k>" = "<C-\\><C-n><C-w>k";
-              "<C-l>" = "<C-\\><C-n><C-w>l";
+              # "<C-h>" = "<C-\\><C-n><C-w>h";
+              # "<C-j>" = "<C-\\><C-n><C-w>j";
+              # "<C-k>" = "<C-\\><C-n><C-w>k";
+              # "<C-l>" = "<C-\\><C-n><C-w>l";
             };
         terminal = [
           {
