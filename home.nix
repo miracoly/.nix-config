@@ -108,6 +108,7 @@ in
         mob
         mysql80
         nasm
+        ncdu
         nerdfonts
         nil
         nix-index
