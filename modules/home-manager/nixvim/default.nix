@@ -503,13 +503,14 @@
           };
 
           sources = [
+            { name = "gh_issues"; }
             { name = "nvim_lsp"; }
             { name = "nvim_lua"; }
             { name = "path"; }
             { name = "luasnip"; }
             {
               name = "buffer";
-              keyword_length = 3;
+              keyword_length = 5;
             }
           ];
         };
@@ -710,6 +711,17 @@
 
       lspkind = {
         enable = true;
+        cmp = {
+          enable = true;
+          menu = {
+            buffer = "[buf]";
+            nvim_lsp = "[LSP]";
+            path = "[path]";
+            luasnip = "[snip]";
+            nvim_lua = "[api]";
+            gh_issues = "[issues]";
+          };
+        };
         symbolMap = {
           Copilot = " ";
         };
