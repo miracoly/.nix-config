@@ -8,6 +8,7 @@
   imports = [nixvim.homeManagerModules.nixvim];
 
   home.packages = with pkgs; [
+    cppcheck
     ripgrep
     zsh
   ];
@@ -813,24 +814,44 @@
         sources = {
           code_actions = {
             statix.enable = true;
-            # gitsigns.enable = true;
+            refactoring.enable = true;
           };
           diagnostics = {
             actionlint.enable = true;
+            cppcheck.enable = true;
+            checkmake.enable = true;
             checkstyle.enable = true;
             deadnix.enable = true;
+            dotenv_linter.enable = true;
+            editorconfig_checker.enable = true;
+            gitlint.enable = true;
+            hadolint.enable = true;
+            markdownlint.enable = true;
+            # markuplint.enable = true;
+            mypy.enable = true;
+            pylint.enable = true;
+            selene.enable = true;
             statix.enable = true;
-            # pylint.enable = true;
+            stylelint.enable = true;
+            terraform_validate.enable = true;
+            # textidote.enable = true;
+            tidy.enable = true;
           };
           formatting = {
             alejandra.enable = true;
+            astyle = {
+              enable = true;
+              settings = {
+                filetypes = ["arduino"];
+              };
+            };
+            clang_format.enable = true;
+            prettier = {
+              enable = true;
+              disableTsServerFormatter = true;
+            };
             stylua.enable = true;
             shfmt.enable = true;
-            # google_java_format.enable = false;
-            # prettier = {
-            # enable = true;
-            # disableTsServerFormatter = true;
-            # };
           };
           completion = {
             luasnip.enable = true;
