@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   services.picom = {
     enable = true;
     backend = "glx";
@@ -22,7 +21,7 @@
     ];
 
     fade = true;
-    fadeSteps = [ 0.03 0.03 ];
+    fadeSteps = [0.03 0.03];
 
     settings = {
       detect-client-opacity = true;
@@ -57,15 +56,24 @@
       "class_g = 'Cairo-clock'"
       "_GTK_FRAME_EXTENTS@:c"
     ];
-    shadowOffsets = [ (-7) (-7) ];
+    shadowOffsets = [(-7) (-7)];
     shadowOpacity = 0.6;
 
     wintypes = {
-      tooltip = { fade = true; shadow = true; opacity = 0.9; focus = true; full-shadow = false; };
-      dock = { shadow = false; clip-shadow-above = true; };
-      dnd = { shadow = false; };
-      popup_menu = { opacity = 0.9; };
-      dropdown_menu = { opacity = 0.9; };
+      tooltip = {
+        fade = true;
+        shadow = true;
+        opacity = 0.9;
+        focus = true;
+        full-shadow = false;
+      };
+      dock = {
+        shadow = false;
+        clip-shadow-above = true;
+      };
+      dnd = {shadow = false;};
+      popup_menu = {opacity = 0.9;};
+      dropdown_menu = {opacity = 0.9;};
     };
   };
 }

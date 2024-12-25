@@ -1,15 +1,19 @@
-{ config, lib, pkgs, modulesPath, ... }:
 {
-  imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}: {
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
   # Kernel
   boot = {
     kernelPackages = pkgs.linuxPackages_6_11;
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = ["kvm-intel"];
 
-    extraModulePackages = [ ];
+    extraModulePackages = [];
 
     loader = {
       systemd-boot.enable = true;
@@ -18,7 +22,7 @@
 
     # Setup keyfile
     initrd = {
-      availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+      availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
 
       secrets = {
         "/crypto_keyfile.bin" = null;
@@ -48,7 +52,7 @@
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-uuid/6bff4513-a2f2-47bb-88c9-8de78a3d5eea"; }
+    {device = "/dev/disk/by-uuid/6bff4513-a2f2-47bb-88c9-8de78a3d5eea";}
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -64,13 +68,13 @@
 
   # Host specific
   services = {
-    xserver.videoDrivers = [ "modesetting" ];
+    xserver.videoDrivers = ["modesetting"];
     blueman.enable = true;
     libinput.enable = true;
   };
 
   hardware = {
-    graphics.extraPackages = with pkgs; [ intel-media-driver ];
+    graphics.extraPackages = with pkgs; [intel-media-driver];
     bluetooth.enable = true;
   };
 

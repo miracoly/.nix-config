@@ -1,45 +1,47 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  ...
+}: {
   xsession.windowManager.i3 = {
     enable = true;
-    config =
-      let
-        keybindings = {
-          mod = "Mod4";
-          up = "k";
-          down = "j";
-          left = "h";
-          right = "l";
-        };
-      in
-      {
-        bars = [
-          {
-            colors = {
-              background = "#455559aa";
-              statusline = "#FFF5F4";
-              separator = "#8F736F";
-            };
-            extraConfig = ''
-              separator_symbol " | "
-              i3bar_command i3bar --transparency
-            '';
-            fonts = {
-              names = [ "JetBrainsMonoNLNerdFont" ];
-              size = 10.0;
-            };
-            statusCommand = "i3status";
-          }
-        ];
-        colors.background = "#282420";
-        floating.border = 0;
-        fonts = {
-          names = [ "JetBrainsMonoNLNerdFont" ];
-          size = 10.0;
-        };
-        gaps.inner = 10;
+    config = let
+      keybindings = {
+        mod = "Mod4";
+        up = "k";
+        down = "j";
+        left = "h";
+        right = "l";
+      };
+    in {
+      bars = [
+        {
+          colors = {
+            background = "#455559aa";
+            statusline = "#FFF5F4";
+            separator = "#8F736F";
+          };
+          extraConfig = ''
+            separator_symbol " | "
+            i3bar_command i3bar --transparency
+          '';
+          fonts = {
+            names = ["JetBrainsMonoNLNerdFont"];
+            size = 10.0;
+          };
+          statusCommand = "i3status";
+        }
+      ];
+      colors.background = "#282420";
+      floating.border = 0;
+      fonts = {
+        names = ["JetBrainsMonoNLNerdFont"];
+        size = 10.0;
+      };
+      gaps.inner = 10;
 
-        keybindings = with keybindings; lib.mkOptionDefault {
+      keybindings = with keybindings;
+        lib.mkOptionDefault {
           "floating_modifier" = mod;
           "tiling_drag modifier" = "titlebar";
 
@@ -87,9 +89,10 @@
           "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl -q set 5%+";
         };
 
-        menu = "rofi -show drun";
+      menu = "rofi -show drun";
 
-        modes = with keybindings; lib.mkOptionDefault {
+      modes = with keybindings;
+        lib.mkOptionDefault {
           resize = {
             "${up}" = "resize shrink height 100 px or 10 ppt";
             "${down}" = "resize grow height 100 px or 10 ppt";
@@ -99,25 +102,49 @@
           };
         };
 
-        modifier = keybindings.mod;
+      modifier = keybindings.mod;
 
-        startup = [
-          { command = "blueman-applet"; notification = false; }
-          { command = "copyq"; always = true; notification = false; }
-          # TODO - image does not exist in setup
-          { command = "feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &"; always = true; notification = false; }
-          { command = "flameshot"; notification = false; }
-          { command = "pa-applet"; notification = false; }
-          { command = "picom -b"; always = true; notification = false; }
-          { command = "setxkbmap -layout 'de,de' -variant 'us,qwerty' -option 'grp:win_space_toggle'"; notification = false; }
-          # { command = "echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
-        ];
-        terminal = "kitty";
-        window = {
-          border = 0;
-          hideEdgeBorders = "both";
-          titlebar = false;
-        };
+      startup = [
+        {
+          command = "blueman-applet";
+          notification = false;
+        }
+        {
+          command = "copyq";
+          always = true;
+          notification = false;
+        }
+        # TODO - image does not exist in setup
+        {
+          command = "feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &";
+          always = true;
+          notification = false;
+        }
+        {
+          command = "flameshot";
+          notification = false;
+        }
+        {
+          command = "pa-applet";
+          notification = false;
+        }
+        {
+          command = "picom -b";
+          always = true;
+          notification = false;
+        }
+        {
+          command = "setxkbmap -layout 'de,de' -variant 'us,qwerty' -option 'grp:win_space_toggle'";
+          notification = false;
+        }
+        # { command = "echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
+      ];
+      terminal = "kitty";
+      window = {
+        border = 0;
+        hideEdgeBorders = "both";
+        titlebar = false;
       };
+    };
   };
 }

@@ -1,5 +1,9 @@
-{ lib, config, pkgs, ... }:
 {
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   programs.rofi = {
     enable = true;
     font = "JetBrainsMonoNLNerdFont 24";

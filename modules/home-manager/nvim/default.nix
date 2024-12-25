@@ -1,134 +1,135 @@
-{ lib, config, pkgs, ... }:
 {
-  programs.neovim =
-    let
-      toLua = str: "lua << EOF\n${str}\nEOF\n";
-      toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  programs.neovim = let
+    toLua = str: "lua << EOF\n${str}\nEOF\n";
+    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+  in {
+    enable = true;
+    defaultEditor = true;
+
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+
+    extraLuaConfig = ''
+      ${builtins.readFile ./config/init.lua}
+      ${builtins.readFile ./config/keymaps.lua}
+    '';
+
+    plugins = let
+      vs-tasks = pkgs.vimUtils.buildVimPlugin {
+        name = "vs-tasks";
+        src = pkgs.fetchFromGitHub {
+          owner = "EthanJWright";
+          repo = "vs-tasks.nvim";
+          rev = "5a5d9e5959c8abadb6f979e88a1366c7ac51b876";
+          sha256 = "sha256-OvHBOJfe8EO6zJSmptVUtByX+rKdJ4cucX6l5bM05xg=";
+        };
+      };
     in
-    {
-      enable = true;
-      defaultEditor = true;
+      with pkgs.vimPlugins; [
+        cmp_luasnip
+        cmp-nvim-lsp
 
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
+        {
+          plugin = comment-nvim;
+          config = toLua ''require("Comment").setup()'';
+        }
 
-      extraLuaConfig = ''
-        ${builtins.readFile ./config/init.lua}
-        ${builtins.readFile ./config/keymaps.lua}
-      '';
+        friendly-snippets
 
-      plugins =
-        let
-          vs-tasks = pkgs.vimUtils.buildVimPlugin {
-            name = "vs-tasks";
-            src = pkgs.fetchFromGitHub {
-              owner = "EthanJWright";
-              repo = "vs-tasks.nvim";
-              rev = "5a5d9e5959c8abadb6f979e88a1366c7ac51b876";
-              sha256 = "sha256-OvHBOJfe8EO6zJSmptVUtByX+rKdJ4cucX6l5bM05xg=";
-            };
-          };
-        in
-        with pkgs.vimPlugins; [
-          cmp_luasnip
-          cmp-nvim-lsp
+        haskell-tools-nvim
 
-          {
-            plugin = comment-nvim;
-            config = toLua ''require("Comment").setup()'';
-          }
+        {
+          plugin = lualine-nvim;
+          config = toLua ''
+            require('lualine').setup({
+              options = {
+                theme = 'monokai-pro'
+              }
+            })
+          '';
+        }
 
-          friendly-snippets
+        luasnip
 
-          haskell-tools-nvim
+        {
+          plugin = monokai-pro-nvim;
+          config = toLua ''
+            require("monokai-pro").setup({
+              filter = "machine"
+            })
+            vim.cmd("colorscheme monokai-pro")
+          '';
+        }
 
-          {
-            plugin = lualine-nvim;
-            config = toLua ''
-              require('lualine').setup({
-                options = {
-                  theme = 'monokai-pro'
-                }
-              })
-            '';
-          }
+        neo-tree-nvim
 
-          luasnip
+        neodev-nvim
 
-          {
-            plugin = monokai-pro-nvim;
-            config = toLua ''
-              require("monokai-pro").setup({
-                filter = "machine"
-              })
-              vim.cmd("colorscheme monokai-pro")
-            '';
-          }
+        {
+          plugin = none-ls-nvim;
+          config = toLuaFile ./config/plugin/none-ls.lua;
+        }
 
-          neo-tree-nvim
+        nui-nvim
 
-          neodev-nvim
+        {
+          plugin = nvim-cmp;
+          config = toLuaFile ./config/plugin/cmp.lua;
+        }
 
-          {
-            plugin = none-ls-nvim;
-            config = toLuaFile ./config/plugin/none-ls.lua;
-          }
+        nvim-dap
 
-          nui-nvim
+        {
+          plugin = nvim-lspconfig;
+          config = toLuaFile ./config/plugin/lsp.lua;
+        }
 
-          {
-            plugin = nvim-cmp;
-            config = toLuaFile ./config/plugin/cmp.lua;
-          }
+        nvim-web-devicons
+        plenary-nvim
+        popup-nvim
 
-          nvim-dap
+        {
+          plugin = telescope-nvim;
+          config = toLuaFile ./config/plugin/telescope.lua;
+        }
 
-          {
-            plugin = nvim-lspconfig;
-            config = toLuaFile ./config/plugin/lsp.lua;
-          }
+        telescope-ui-select-nvim
+        {
+          plugin = toggleterm-nvim;
+          config = toLuaFile ./config/plugin/toggleterm.lua;
+        }
 
-          nvim-web-devicons
-          plenary-nvim
-          popup-nvim
+        {
+          plugin = nvim-treesitter.withAllGrammars;
+          config = toLuaFile ./config/plugin/treesitter.lua;
+        }
 
-          {
-            plugin = telescope-nvim;
-            config = toLuaFile ./config/plugin/telescope.lua;
-          }
-
-          telescope-ui-select-nvim
-          {
-            plugin = toggleterm-nvim;
-            config = toLuaFile ./config/plugin/toggleterm.lua;
-          }
-
-          {
-            plugin = nvim-treesitter.withAllGrammars;
-            config = toLuaFile ./config/plugin/treesitter.lua;
-          }
-
-          vs-tasks
-        ];
-
-      extraPackages = with pkgs; [
-        fd
-        haskellPackages.fast-tags
-        haskellPackages.haskell-debug-adapter
-        haskellPackages.hoogle
-        haskell-language-server
-        lua-language-server
-        millet
-        nodePackages.eslint
-        nodePackages.prettier
-        nodePackages.typescript-language-server
-        nodePackages.volar
-        ripgrep
-        stylua
-        tree-sitter
-        vscode-langservers-extracted
-        xclip
+        vs-tasks
       ];
-    };
+
+    extraPackages = with pkgs; [
+      fd
+      haskellPackages.fast-tags
+      haskellPackages.haskell-debug-adapter
+      haskellPackages.hoogle
+      haskell-language-server
+      lua-language-server
+      millet
+      nodePackages.eslint
+      nodePackages.prettier
+      nodePackages.typescript-language-server
+      nodePackages.volar
+      ripgrep
+      stylua
+      tree-sitter
+      vscode-langservers-extracted
+      xclip
+    ];
+  };
 }

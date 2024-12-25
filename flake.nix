@@ -37,47 +37,48 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      miras-home-manager =
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.mira = import ./home.nix;
-            backupFileExtension = "backup";
-            extraSpecialArgs = {
-              inherit (inputs) dnd-latex-template nixvim wallpaper;
-              pkgs-unstable = import inputs.nixpkgs-unstable {
-                inherit system;
-                config.allowUnfree = true;
-              };
-            };
+  outputs = {
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+    miras-home-manager = {
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        users.mira = import ./home.nix;
+        backupFileExtension = "backup";
+        extraSpecialArgs = {
+          inherit (inputs) dnd-latex-template nixvim wallpaper;
+          pkgs-unstable = import inputs.nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
           };
-        };
-    in
-    {
-      nixosConfigurations = {
-        miras-xps-9730 = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./configuration.nix
-            ./hosts/xps9730.nix
-            home-manager.nixosModules.home-manager
-            miras-home-manager
-          ];
-        };
-
-        miras-xps-93xx = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./configuration.nix
-            ./hosts/xps93xx.nix
-            home-manager.nixosModules.home-manager
-            miras-home-manager
-          ];
         };
       };
     };
+  in {
+    nixosConfigurations = {
+      miras-xps-9730 = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./configuration.nix
+          ./hosts/xps9730.nix
+          home-manager.nixosModules.home-manager
+          miras-home-manager
+        ];
+      };
+
+      miras-xps-93xx = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./configuration.nix
+          ./hosts/xps93xx.nix
+          home-manager.nixosModules.home-manager
+          miras-home-manager
+        ];
+      };
+    };
+  };
 }

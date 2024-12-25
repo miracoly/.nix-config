@@ -1,4 +1,7 @@
-{ stdenv, fetchFromGitHub }:
+{
+  stdenv,
+  fetchFromGitHub,
+}:
 stdenv.mkDerivation rec {
   name = "ca65-symbls-to-nl";
   version = "1.0";

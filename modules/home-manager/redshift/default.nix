@@ -1,5 +1,4 @@
-_:
-{
+_: {
   services.redshift = {
     enable = true;
     provider = "manual";

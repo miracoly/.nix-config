@@ -1,11 +1,12 @@
-{ stdenv
-, lib
-, libsForQt5
-, nasm
-, qt5
-, fetchFromGitHub
-, makeDesktopItem
-, copyDesktopItems
+{
+  stdenv,
+  lib,
+  libsForQt5,
+  nasm,
+  qt5,
+  fetchFromGitHub,
+  makeDesktopItem,
+  copyDesktopItems,
 }:
 stdenv.mkDerivation {
   pname = "sasm";
@@ -53,7 +54,7 @@ stdenv.mkDerivation {
         name = "sasm";
         exec = "sasm";
         desktopName = "SASM";
-        categories = [ "Development" "IDE" ];
+        categories = ["Development" "IDE"];
       })
   ];
 

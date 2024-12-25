@@ -1,5 +1,4 @@
-_:
-{
+_: {
   services.copyq.enable = true;
   home.file = {
     copyq.source = ./copyq.conf;

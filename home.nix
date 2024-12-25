@@ -1,11 +1,14 @@
-{ pkgs, pkgs-unstable, dnd-latex-template, wallpaper, ... }:
-let
-  homedir = "/home/mira";
-in
 {
-  imports = [ ./modules ];
+  pkgs,
+  pkgs-unstable,
+  dnd-latex-template,
+  wallpaper,
+  ...
+}: let
+  homedir = "/home/mira";
+in {
+  imports = [./modules];
   home = {
-
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
     username = "mira";
@@ -32,153 +35,151 @@ in
       size = 48;
     };
 
-    packages = with pkgs;
-      let
-        ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix { };
-        codecrafters-cli = pkgs.callPackage ./derivations/codecrafters-cli.nix { };
-        sasm = pkgs.callPackage ./derivations/sasm.nix { };
-      in
-      [
-        _1password-gui
-        alejandra
-        anki
-        appimage-run
-        arduino-ide
-        audacious
-        audacity
-        asciidoctor
-        azure-cli
-        bitwarden
-        bitwarden-cli
-        brightnessctl
-        bruno
-        ca65-symbls-to-nl
-        cabal2nix
-        cachix
-        calibre
-        cc65
-        chromium
-        codecrafters-cli
-        dasm
-        dbeaver-bin
-        discord
-        dotty
-        exercism
-        fceux
-        fluxcd
-        gauge
-        gcc
-        gdb
-        gh
-        ghc
-        gimp
-        gitlint
-        ghex
-        gnome-disk-utility
-        gnumake
-        google-chrome
-        gradle
-        graphviz
-        haskellPackages.cabal-fmt
-        haskellPackages.cabal-install
-        haskellPackages.hlint
-        haskellPackages.hoogle
-        haskellPackages.ormolu
-        haskellPackages.stack
-        haskellPackages.stylish-haskell
-        haskellPackages.yesod-bin
-        haskell-language-server
-        i3lock-fancy-rapid
-        ihp-new
-        inkscape
-        inotify-tools
-        insomnia
-        jetbrains.clion
-        pkgs-unstable.jetbrains.idea-ultimate
-        jq
-        k9s
-        kate
-        keepassxc
-        kind
-        kubectl
-        (wrapHelm kubernetes-helm { plugins = [ kubernetes-helmPlugins.helm-secrets ]; })
-        libnotify
-        maven
-        minikube
-        mob
-        mysql80
-        nasm
-        ncdu
-        nerdfonts
-        nil
-        nix-index
-        nixd
-        nixpkgs-fmt
-        node2nix
-        nodejs_20
-        nodePackages.npm-check-updates
-        nodePackages.yarn
-        nomacs
-        obs-studio
-        openssl
-        p7zip
-        pa_applet
-        pandoc
-        pciutils
-        peek
-        pinentry-curses
-        pinta
-        pipenv
-        pnpm
-        pulseaudio
-        purescript
-        python311
-        racket
-        rofi-bluetooth
-        rofi-file-browser
-        rofi-power-menu
-        rofi-systemd
-        rofimoji
-        sasm
-        sbt
-        slack
-        sops
-        spago
-        steam-run
-        stella
-        telepresence2
-        terraform
-        texlive.combined.scheme-full
-        unzip
-        wget
-        xclip
-        yubikey-manager
-        yubikey-manager-qt
-        yubikey-personalization
-        yubikey-personalization-gui
-        yubico-piv-tool
-        yubioath-flutter
-        # zed-editor
-        zip
-        zlib
-        zoom-us
-        # needed for cypress
-        # gtk2
-        gtk3
-        nss
-        xorg.libXScrnSaver
-        xorg.libXdamage
-        xorg.libX11
-        xorg.libxcb
-        xorg.libXcomposite
-        xorg.libXi
-        xorg.libXext
-        xorg.libXfixes
-        xorg.libXcursor
-        xorg.libXrender
-        xorg.libXrandr
-        pkgs-unstable.zed-editor
-      ];
+    packages = with pkgs; let
+      ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix {};
+      codecrafters-cli = pkgs.callPackage ./derivations/codecrafters-cli.nix {};
+      sasm = pkgs.callPackage ./derivations/sasm.nix {};
+    in [
+      _1password-gui
+      alejandra
+      anki
+      appimage-run
+      arduino-ide
+      audacious
+      audacity
+      asciidoctor
+      azure-cli
+      bitwarden
+      bitwarden-cli
+      brightnessctl
+      bruno
+      ca65-symbls-to-nl
+      cabal2nix
+      cachix
+      calibre
+      cc65
+      chromium
+      codecrafters-cli
+      dasm
+      dbeaver-bin
+      discord
+      dotty
+      exercism
+      fceux
+      fluxcd
+      gauge
+      gcc
+      gdb
+      gh
+      ghc
+      gimp
+      gitlint
+      ghex
+      gnome-disk-utility
+      gnumake
+      google-chrome
+      gradle
+      graphviz
+      haskellPackages.cabal-fmt
+      haskellPackages.cabal-install
+      haskellPackages.hlint
+      haskellPackages.hoogle
+      haskellPackages.ormolu
+      haskellPackages.stack
+      haskellPackages.stylish-haskell
+      haskellPackages.yesod-bin
+      haskell-language-server
+      i3lock-fancy-rapid
+      ihp-new
+      inkscape
+      inotify-tools
+      insomnia
+      jetbrains.clion
+      pkgs-unstable.jetbrains.idea-ultimate
+      jq
+      k9s
+      kate
+      keepassxc
+      kind
+      kubectl
+      (wrapHelm kubernetes-helm {plugins = [kubernetes-helmPlugins.helm-secrets];})
+      libnotify
+      maven
+      minikube
+      mob
+      mysql80
+      nasm
+      ncdu
+      nerdfonts
+      nil
+      nix-index
+      nixd
+      nixpkgs-fmt
+      node2nix
+      nodejs_20
+      nodePackages.npm-check-updates
+      nodePackages.yarn
+      nomacs
+      obs-studio
+      openssl
+      p7zip
+      pa_applet
+      pandoc
+      pciutils
+      peek
+      pinentry-curses
+      pinta
+      pipenv
+      pnpm
+      pulseaudio
+      purescript
+      python311
+      racket
+      rofi-bluetooth
+      rofi-file-browser
+      rofi-power-menu
+      rofi-systemd
+      rofimoji
+      sasm
+      sbt
+      slack
+      sops
+      spago
+      steam-run
+      stella
+      telepresence2
+      terraform
+      texlive.combined.scheme-full
+      unzip
+      wget
+      xclip
+      yubikey-manager
+      yubikey-manager-qt
+      yubikey-personalization
+      yubikey-personalization-gui
+      yubico-piv-tool
+      yubioath-flutter
+      # zed-editor
+      zip
+      zlib
+      zoom-us
+      # needed for cypress
+      # gtk2
+      gtk3
+      nss
+      xorg.libXScrnSaver
+      xorg.libXdamage
+      xorg.libX11
+      xorg.libxcb
+      xorg.libXcomposite
+      xorg.libXi
+      xorg.libXext
+      xorg.libXfixes
+      xorg.libXcursor
+      xorg.libXrender
+      xorg.libXrandr
+      pkgs-unstable.zed-editor
+    ];
 
     sessionVariables = {
       FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT = 1;
@@ -257,7 +258,7 @@ in
     gpg = {
       enable = true;
       publicKeys = [
-        { source = ./config/gpg/public-key.asc; }
+        {source = ./config/gpg/public-key.asc;}
       ];
     };
 
@@ -304,7 +305,7 @@ in
   systemd.user.targets.tray = {
     Unit = {
       Description = "Home Manager System Tray";
-      Requires = [ "graphical-session-pre.target" ];
+      Requires = ["graphical-session-pre.target"];
     };
   };
 }

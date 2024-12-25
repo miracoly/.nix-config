@@ -1,9 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -51,7 +49,7 @@
   };
 
   services = {
-    dbus.packages = [ pkgs.gcr ];
+    dbus.packages = [pkgs.gcr];
 
     geoclue2.enable = false;
 
@@ -118,8 +116,8 @@
   security.rtkit.enable = true;
 
   environment = {
-    shells = with pkgs; [ zsh ];
-    pathsToLink = [ "/share/zsh" ];
+    shells = with pkgs; [zsh];
+    pathsToLink = ["/share/zsh"];
     etc.hosts.mode = "0644";
   };
 
@@ -129,7 +127,7 @@
   users.users.mira = {
     isNormalUser = true;
     description = "miracoly";
-    extraGroups = [ "networkmanager" "wheel" "docker" "input" "dialout" ];
+    extraGroups = ["networkmanager" "wheel" "docker" "input" "dialout"];
     shell = pkgs.zsh;
   };
 
@@ -171,7 +169,7 @@
   # Or disable the firewall altogether.
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 8080 ];
+    allowedTCPPorts = [8080];
   };
 
   nix = {
@@ -181,7 +179,7 @@
         "flakes"
       ];
 
-      trusted-users = [ "mira" ];
+      trusted-users = ["mira"];
 
       substituters = [
         "https://cache.nixos.org"

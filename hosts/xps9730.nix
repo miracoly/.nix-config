@@ -1,5 +1,10 @@
-{ pkgs, lib, config, modulesPath, ... }:
 {
+  pkgs,
+  lib,
+  config,
+  modulesPath,
+  ...
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -8,10 +13,10 @@
     kernelPackages = pkgs.linuxPackages_6_11;
 
     #  set a custom kernel parameter to 'thunderbolt.host_reset=false
-    kernelParams = [ "thunderbolt.host_reset=false" ];
-    kernelModules = [ "kvm-intel" ];
+    kernelParams = ["thunderbolt.host_reset=false"];
+    kernelModules = ["kvm-intel"];
 
-    extraModulePackages = [ ];
+    extraModulePackages = [];
 
     # Bootloader.
     loader = {
@@ -20,8 +25,8 @@
     };
 
     initrd = {
-      availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-      kernelModules = [ ];
+      availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
+      kernelModules = [];
 
       # Setup keyfile
       secrets = {
@@ -45,15 +50,14 @@
       fsType = "ext4";
     };
 
-    "/boot" =
-      {
-        device = "/dev/disk/by-uuid/CA5D-DC05";
-        fsType = "vfat";
-      };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/CA5D-DC05";
+      fsType = "vfat";
+    };
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-uuid/01b71c3e-d128-49d7-99da-c8eefd704075"; }
+    {device = "/dev/disk/by-uuid/01b71c3e-d128-49d7-99da-c8eefd704075";}
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -75,6 +79,6 @@
 
   hardware = {
     bluetooth.enable = true;
-    graphics.extraPackages = with pkgs; [ intel-media-driver ];
+    graphics.extraPackages = with pkgs; [intel-media-driver];
   };
 }
