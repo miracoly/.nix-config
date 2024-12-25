@@ -31,6 +31,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
+
     wallpaper = {
       url = "github:miracoly/wallpaper/main";
       flake = false;
@@ -38,11 +40,14 @@
   };
 
   outputs = {
+    self,
     nixpkgs,
     home-manager,
     ...
   } @ inputs: let
     system = "x86_64-linux";
+    supportedSystems = [system];
+    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     miras-home-manager = {
       home-manager = {
         useGlobalPkgs = true;
@@ -59,6 +64,22 @@
       };
     };
   in {
+    checks = forAllSystems (system: {
+      pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          alejandra.enable = true;
+        };
+      };
+    });
+
+    devShells = forAllSystems (system: {
+      default = nixpkgs.legacyPackages.${system}.mkShell {
+        inherit (self.checks.${system}.pre-commit-check) shellHook;
+        buildInputs = self.checks.${system}.pre-commit-check.enabledPackages;
+      };
+    });
+
     nixosConfigurations = {
       miras-xps-9730 = nixpkgs.lib.nixosSystem {
         inherit system;

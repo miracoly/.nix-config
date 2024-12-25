@@ -66,6 +66,7 @@
       c = "gh copilot suggest";
       vim = "nvim";
       vi = "nvim";
+      copy = "xclip -selection clipboard";
     };
     zplug = {
       enable = true;
