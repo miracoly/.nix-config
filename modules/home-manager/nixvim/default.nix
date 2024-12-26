@@ -532,6 +532,7 @@
         enable = true;
         settings = {
           autoEnableSources = true;
+          formatting = {fields = ["kind" "abbr" "menu"];};
           performance = {
             debounce = 60;
             fetchingTimeout = 200;
@@ -544,8 +545,17 @@
               end
             '';
           };
-          formatting = {fields = ["kind" "abbr" "menu"];};
-
+          sorting.comparators =
+            builtins.map
+            (entry: "require('cmp.config.compare')." + entry)
+            [
+              "locality"
+              "recently_used"
+              "score"
+              "offset"
+              "order"
+              "length"
+            ];
           mapping = {
             "<C-n>" = "cmp.mapping.select_next_item()";
             "<C-p>" = "cmp.mapping.select_prev_item()";
@@ -563,10 +573,18 @@
           };
 
           sources = [
-            {name = "nvim_lsp";}
+            {name = "luasnip";}
+            {
+              name = "nvim_lsp";
+              # Disable LSP snippets in favor of friendly-snippets & Co.
+              entry_filter = ''
+                function(entry)
+                  return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
+                end
+              '';
+            }
             {name = "nvim_lua";}
             {name = "path";}
-            {name = "luasnip";}
             {
               name = "buffer";
               keyword_length = 5;
@@ -779,6 +797,16 @@
                 desc = "[C]ode [A]ction";
               };
             }
+            {
+              key = "<C-[>";
+              action = {
+                __raw = "vim.lsp.buf.signature_help";
+              };
+              mode = ["n" "i"];
+              options = {
+                desc = "[S]ignature [H]Help";
+              };
+            }
           ];
         };
 
@@ -857,6 +885,11 @@
           width = 30;
           autoExpandWidth = true;
         };
+      };
+
+      refactoring = {
+        enable = true;
+        enableTelescope = true;
       };
 
       none-ls = {
