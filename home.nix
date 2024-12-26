@@ -49,6 +49,7 @@ in {
       audacity
       asciidoctor
       azure-cli
+      bat
       bitwarden
       bitwarden-cli
       brightnessctl

@@ -67,6 +67,7 @@
       vim = "nvim";
       vi = "nvim";
       copy = "xclip -selection clipboard";
+      cat = "bat";
     };
     zplug = {
       enable = true;
