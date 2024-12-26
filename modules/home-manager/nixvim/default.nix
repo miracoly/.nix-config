@@ -634,6 +634,10 @@
         };
       };
 
+      friendly-snippets = {
+        enable = true;
+      };
+
       gitsigns = {
         enable = true;
         settings = {
@@ -842,6 +846,7 @@
 
       luasnip = {
         enable = true;
+        fromVscode = [{}];
       };
 
       neo-tree = {
