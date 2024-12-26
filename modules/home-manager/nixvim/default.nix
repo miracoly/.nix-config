@@ -9,6 +9,9 @@
 
   home.packages = with pkgs; [
     cppcheck
+    haskellPackages.haskell-debug-adapter
+    haskellPackages.fast-tags
+    haskellPackages.hoogle
     ripgrep
     zsh
   ];
@@ -152,6 +155,13 @@
               action = ":99ToggleTerm direction=float name=\"Main Terminal\"<CR>";
               options = {
                 desc = "[T]oggle floating [T]erminal";
+              };
+            }
+            {
+              key = "<leader>do";
+              action = "<cmd>Outline<CR>";
+              options = {
+                desc = "[D]ocument [O]utline";
               };
             }
           ];
@@ -414,21 +424,53 @@
       kickstart-highlight-yank = {
         clear = true;
       };
+      haskell-keymaps = {
+        clear = true;
+      };
     };
 
     autoCmd = [
       {
         desc = "Highlight when yanking (copying) text";
         group = "kickstart-highlight-yank";
+        event = "TextYankPost";
         callback = {
           __raw = "function() vim.highlight.on_yank() end";
         };
-        event = "TextYankPost";
+      }
+      {
+        desc = "Add Haskell keymaps for Haskell files";
+        group = "haskell-keymaps";
+        event = "FileType";
+        pattern = "haskell";
+        callback.__raw = ''
+          function(event)
+            local ht = require('haskell-tools')
+            local bufnr = event.buf
+            local map = function(keys, func, desc, mode)
+              mode = mode or "n"
+              vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "λ: " .. desc })
+            end
+
+            map('<leader>ll', vim.lsp.codelens.run, "Run code[l]enses")
+            map('<leader>ls', ht.hoogle.hoogle_signature, "Search Hoogle [S]ignature")
+            map('<leader>la', ht.lsp.buf_eval_all, "Evaluate [a]ll codelenses")
+            map('<leader>lr', ht.repl.toggle, "Toggle [R]epl")
+            map('<leader>lb',
+              function()
+                ht.repl.toggle(vim.api.nvim_buf_get_name(0))
+              end,
+              "Toggle Repl for current [B]uffer"
+            )
+            map('<leader>lq', ht.repl.quit, "[Q]uit Repl")
+          end
+        '';
       }
     ];
 
     extraPlugins = with pkgs.vimPlugins; [
-      nvim-web-devicons
+      haskell-tools-nvim
+      outline-nvim
       overseer-nvim
     ];
 
@@ -472,6 +514,9 @@
           { name = 'cmdline' }
         }),
       })
+
+      -- Outline
+      require('outline').setup {}
     '';
 
     plugins = {
@@ -558,6 +603,10 @@
         enable = true;
       };
 
+      dap = {
+        enable = true;
+      };
+
       dressing = {
         enable = true;
         settings = {
@@ -627,10 +676,6 @@
           };
           eslint.enable = true;
           graphql.enable = true;
-          hls = {
-            enable = true;
-            installGhc = true;
-          };
           html.enable = true;
           jsonls.enable = true;
           nil_ls.enable = true;
@@ -659,6 +704,10 @@
               desc = "[G]o to [D]eclaration";
             };
             # "<C-p>" = "signature_help";
+            "<leader>f" = {
+              action = "format";
+              desc = "[F]ormat";
+            };
           };
 
           extra = [
@@ -1045,6 +1094,11 @@
             {
               __unkeyed = "<leader>t";
               group = "[T]oggle";
+            }
+            {
+              __unkeyed = "<leader>l";
+              group = "[L]ambda (Haskell)";
+              icon = "λ";
             }
             {
               __unkeyed = "<leader>h";

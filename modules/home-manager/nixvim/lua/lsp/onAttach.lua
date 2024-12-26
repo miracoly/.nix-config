@@ -43,12 +43,5 @@
     end, "[T]oggle Inlay [H]ints")
   end
 
-  -- Add a keybinding to format the current buffer
-  if client.supports_method("textDocument/formatting") then
-    map("<leader>f", function()
-      vim.lsp.buf.format({ bufnr = bufnr })
-    end, "[F]ormat")
-  end
-
   ---@diagnostic disable-next-line: undefined-global
 end)(client, bufnr, vim)
