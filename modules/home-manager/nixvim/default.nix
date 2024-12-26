@@ -233,13 +233,6 @@
           ];
           diagnostic = [
             {
-              key = "<leader>q";
-              action = "<cmd>lua vim.diagnostic.setloclist()<CR>";
-              options = {
-                desc = "Open diagnostic [Q]uickfix list";
-              };
-            }
-            {
               key = "<leader>e";
               action = "<cmd>lua vim.diagnostic.open_float()<CR>";
               options = {
@@ -653,7 +646,10 @@
         keymaps = {
           silent = true;
           lspBuf = {
-            "<C-q>" = "hover";
+            "<leader>q" = {
+              action = "hover";
+              desc = "[Q]uickinfo";
+            };
             "<leader>rn" = {
               action = "rename";
               desc = "[R]e[n]ame";
@@ -905,7 +901,7 @@
             };
           };
           "<leader>sd" = {
-            action = "diagnotics";
+            action = "diagnostics";
             options = {
               desc = "[S]earch [D]iagnostics";
             };
