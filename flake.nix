@@ -33,6 +33,11 @@
 
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
 
+    nvim-dap-vscode-js = {
+      url = "github:mxsdev/nvim-dap-vscode-js";
+      flake = false;
+    };
+
     wallpaper = {
       url = "github:miracoly/wallpaper/main";
       flake = false;
@@ -55,7 +60,15 @@
         users.mira = import ./home.nix;
         backupFileExtension = "backup";
         extraSpecialArgs = {
-          inherit (inputs) dnd-latex-template nixvim wallpaper;
+          inherit
+            (inputs)
+            dnd-latex-template
+            nixvim
+            wallpaper
+            ;
+          nvim-extraPlugins = {
+            inherit (inputs) nvim-dap-vscode-js;
+          };
           pkgs-unstable = import inputs.nixpkgs-unstable {
             inherit system;
             config.allowUnfree = true;
