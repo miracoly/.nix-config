@@ -294,6 +294,38 @@
               };
             }
           ];
+          neotest = [
+            {
+              key = "<leader>rt";
+              action.__raw = "require('neotest').run.run";
+              options = {
+                desc = "[R]un nearest [t]est";
+              };
+            }
+            {
+              key = "<leader>rT";
+              action.__raw = ''
+                function() require('neotest').run.run(vim.fn.expand('%')) end
+              '';
+              options = {
+                desc = "[R]un all [T]ests in File";
+              };
+            }
+            {
+              key = "<leader>rl";
+              action.__raw = "require('neotest').run.run_last";
+              options = {
+                desc = "[R]un [L]ast Test";
+              };
+            }
+            {
+              key = "<leader>ts";
+              action.__raw = "require('neotest').summary.toggle";
+              options = {
+                desc = "[T]oggle Test [S]ummary";
+              };
+            }
+          ];
           telescope = [
             {
               key = "<leader>/";
@@ -884,6 +916,14 @@
         window = {
           width = 30;
           autoExpandWidth = true;
+        };
+      };
+
+      neotest = {
+        enable = true;
+        adapters = {
+          vitest.enable = true;
+          haskell.enable = true;
         };
       };
 
