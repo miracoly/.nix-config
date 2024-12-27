@@ -142,29 +142,6 @@
       normal =
         lib.pipe
         {
-          general = [
-            {
-              key = "<leader>wq";
-              action = ":qa!<CR>";
-              options = {
-                desc = "Force [Q]uit";
-              };
-            }
-            {
-              key = "<leader>tt";
-              action = ":99ToggleTerm direction=float name=\"Main Terminal\"<CR>";
-              options = {
-                desc = "[T]oggle floating [T]erminal";
-              };
-            }
-            {
-              key = "<leader>do";
-              action = "<cmd>Outline<CR>";
-              options = {
-                desc = "[D]ocument [O]utline";
-              };
-            }
-          ];
           buffer = [
             {
               key = "<A-k>";
@@ -250,33 +227,26 @@
               };
             }
           ];
-          window = [
+          general = [
             {
-              key = "<C-h>";
-              action = "<C-w><C-h>";
+              key = "<leader>wq";
+              action = ":qa!<CR>";
               options = {
-                desc = "Move focus to the left window";
+                desc = "Force [Q]uit";
               };
             }
             {
-              key = "<C-l>";
-              action = "<C-w><C-l>";
+              key = "<leader>tt";
+              action = ":99ToggleTerm direction=float name=\"Main Terminal\"<CR>";
               options = {
-                desc = "Move focus to the right window";
+                desc = "[T]oggle floating [T]erminal";
               };
             }
             {
-              key = "<C-j>";
-              action = "<C-w><C-j>";
+              key = "<leader>do";
+              action = "<cmd>Outline<CR>";
               options = {
-                desc = "Move focus to the lower window";
-              };
-            }
-            {
-              key = "<C-k>";
-              action = "<C-w><C-k>";
-              options = {
-                desc = "Move focus to the upper window";
+                desc = "[D]ocument [O]utline";
               };
             }
           ];
@@ -356,6 +326,36 @@
               };
               options = {
                 desc = "[S]earch [/] in Open Files";
+              };
+            }
+          ];
+          window = [
+            {
+              key = "<C-h>";
+              action = "<C-w><C-h>";
+              options = {
+                desc = "Move focus to the left window";
+              };
+            }
+            {
+              key = "<C-l>";
+              action = "<C-w><C-l>";
+              options = {
+                desc = "Move focus to the right window";
+              };
+            }
+            {
+              key = "<C-j>";
+              action = "<C-w><C-j>";
+              options = {
+                desc = "Move focus to the lower window";
+              };
+            }
+            {
+              key = "<C-k>";
+              action = "<C-w><C-k>";
+              options = {
+                desc = "Move focus to the upper window";
               };
             }
           ];
@@ -717,13 +717,13 @@
               action = "hover";
               desc = "[Q]uickinfo";
             };
-            "<leader>rn" = {
+            "<leader>cr" = {
               action = "rename";
-              desc = "[R]e[n]ame";
+              desc = "[R]ename";
             };
             "gD" = {
               action = "declaration";
-              desc = "[G]o to [D]eclaration";
+              desc = "Go to [D]eclaration";
             };
             # "<C-p>" = "signature_help";
             "<leader>f" = {
@@ -1119,7 +1119,7 @@
             }
             {
               __unkeyed = "<leader>r";
-              group = "[R]ename";
+              group = "[R]un";
             }
             {
               __unkeyed = "<leader>s";
