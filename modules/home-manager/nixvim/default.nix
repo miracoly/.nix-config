@@ -221,6 +221,13 @@
           ];
           debug = [
             {
+              key = "<leader>td";
+              action.__raw = "require('dapui').toggle";
+              options = {
+                desc = "[T]oggle [D]ebug UI";
+              };
+            }
+            {
               key = "<leader>tb";
               action.__raw = "require('dap').toggle_breakpoint";
               options = {
@@ -246,6 +253,20 @@
               action.__raw = "require('dap').step_into";
               options = {
                 desc = "Step Into";
+              };
+            }
+            {
+              key = "<F26>"; # Ctrl + F2
+              action.__raw = "require('dap').disconnect";
+              options = {
+                desc = "Show [Q]uick Debug Info";
+              };
+            }
+            {
+              key = "<leader>Q";
+              action.__raw = "require('dap.ui.widgets').preview";
+              options = {
+                desc = "bla";
               };
             }
           ];
@@ -361,6 +382,15 @@
               action.__raw = "require('neotest').run.run_last";
               options = {
                 desc = "[R]un [L]ast Test";
+              };
+            }
+            {
+              key = "<leader>rd";
+              action.__raw = ''
+                function() require('neotest').run.run{ strategy = 'dap'} end
+              '';
+              options = {
+                desc = "[R]un with [D]ebugger";
               };
             }
             {
