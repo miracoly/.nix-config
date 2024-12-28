@@ -219,6 +219,36 @@
               };
             }
           ];
+          debug = [
+            {
+              key = "<leader>tb";
+              action.__raw = "require('dap').toggle_breakpoint";
+              options = {
+                desc = "[T]oggle [B]reakpoint";
+              };
+            }
+            {
+              key = "<F9>";
+              action.__raw = "require('dap').continue";
+              options = {
+                desc = "Continue";
+              };
+            }
+            {
+              key = "<F8>";
+              action.__raw = "require('dap').step_over";
+              options = {
+                desc = "Step Over";
+              };
+            }
+            {
+              key = "<F7>";
+              action.__raw = "require('dap').step_into";
+              options = {
+                desc = "Step Into";
+              };
+            }
+          ];
           diagnostic = [
             {
               key = "<leader>e";
@@ -564,6 +594,26 @@
 
       -- Outline
       require('outline').setup {}
+
+      -- dap
+      require("dap").adapters["pwa-node"] = {
+        type = "server",
+        host = "localhost",
+        port = "8123",
+        executable = {
+          command = "js-debug",
+        }
+      }
+
+      for _, language in ipairs({ "typescript", "javascript" }) do
+        require("dap").configurations[language] = {
+          type = "pwa-node",
+          request = "launch",
+          name = "Launch file",
+          program = "\$\{file\}",
+          cwd = "\$\{workspaceFolder\}",
+        }
+      end
     '';
 
     plugins = {
@@ -945,6 +995,10 @@
           vitest.enable = true;
           haskell.enable = true;
         };
+      };
+
+      nui = {
+        enable = true;
       };
 
       refactoring = {
