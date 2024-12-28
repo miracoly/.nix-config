@@ -267,10 +267,24 @@
               };
             }
             {
-              key = "<leader>tb";
+              key = "<leader>h<leader>";
+              action = ":Gitsigns stage_hunk<CR>";
+              options = {
+                desc = "Stage hunk";
+              };
+            }
+            {
+              key = "<leader>hu";
+              action = ":Gitsigns undo_stage_hunk<CR>";
+              options = {
+                desc = "Unstage hunk";
+              };
+            }
+            {
+              key = "<leader>tg";
               action = ":Gitsigns toggle_current_line_blame<CR>";
               options = {
-                desc = "Toggle blame";
+                desc = "Toggle [G]it blame";
               };
             }
             {
