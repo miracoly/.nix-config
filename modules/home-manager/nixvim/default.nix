@@ -619,6 +619,10 @@
               "Toggle Repl for current [B]uffer"
             )
             map('<leader>lq', ht.repl.quit, "[Q]uit Repl")
+            map('<leader>lh',
+              require('telescope._extensions.hoogle.live_hoogle_search'),
+              "Search [H]oogle"
+            )
           end
         '';
       }
@@ -628,6 +632,7 @@
       haskell-tools-nvim
       outline-nvim
       overseer-nvim
+      telescope_hoogle
     ];
 
     extraConfigLua = ''
@@ -673,6 +678,11 @@
 
       -- Outline
       require('outline').setup {}
+
+      -- Telescope Haskell
+      local telescope = require('telescope')
+      telescope.setup {}
+      telescope.load_extension('hoogle')
 
       -- dap
       local dap, dapui = require("dap"), require("dapui")
