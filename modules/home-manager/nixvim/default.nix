@@ -522,10 +522,59 @@
           };
         }
       ];
+      mixed =
+        lib.pipe
+        {
+          luasnip = [
+            {
+              mode = "i";
+              key = "<C-K>";
+              action.__raw = "require('luasnip').expand";
+              options = {
+                desc = "Expand snippet";
+              };
+            }
+            {
+              mode = ["i" "s"];
+              key = "<C-L>";
+              action.__raw = "function() require('luasnip').jump(1) end";
+              options = {
+                desc = "Jump forward";
+              };
+            }
+            {
+              mode = ["i" "s"];
+              key = "<C-H>";
+              action.__raw = "function() require('luasnip').jump(-1) end";
+              options = {
+                desc = "Jump backward";
+              };
+            }
+            {
+              mode = ["i" "s"];
+              key = "<C-E>";
+              action.__raw = ''
+                function()
+                  local ls = require("luasnip")
+                  if ls.choice_active() then
+                    ls.change_choice(1)
+                  end
+                end
+              '';
+              options = {
+                desc = "Change choice";
+              };
+            }
+          ];
+        }
+        [
+          builtins.attrValues
+          builtins.concatLists
+        ];
     in
       config.lib.nixvim.keymaps.mkKeymaps
       {options.silent = true;}
-      (_normal ++ normal ++ insert ++ visual ++ _terminal ++ terminal);
+      (_normal ++ normal ++ insert ++ visual ++ _terminal ++ terminal ++ mixed);
 
     autoGroups = {
       kickstart-highlight-yank = {
