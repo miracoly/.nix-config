@@ -33,6 +33,11 @@
 
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
 
+    purescript-overlay = {
+      url = "github:thomashoneyman/purescript-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     wallpaper = {
       url = "github:miracoly/wallpaper/main";
       flake = false;
@@ -59,6 +64,7 @@
             (inputs)
             dnd-latex-template
             nixvim
+            purescript-overlay
             wallpaper
             ;
           pkgs-unstable = import inputs.nixpkgs-unstable {

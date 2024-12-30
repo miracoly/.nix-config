@@ -2,6 +2,7 @@
   pkgs,
   pkgs-unstable,
   dnd-latex-template,
+  purescript-overlay,
   wallpaper,
   ...
 }: let
@@ -134,6 +135,7 @@ in {
       pnpm
       pulseaudio
       purescript
+      purescript-overlay.packages.${pkgs.system}.spago
       python311
       racket
       rofi-bluetooth
@@ -145,7 +147,6 @@ in {
       sbt
       slack
       sops
-      spago
       steam-run
       stella
       telepresence2
