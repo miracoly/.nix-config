@@ -1,10 +1,13 @@
 {
   config,
   lib,
-  pkgs,
   nixvim,
+  pkgs,
+  purescript-overlay,
   ...
-}: {
+}: let
+  purescriptls = purescript-overlay.packages.${pkgs.system}.purescript-language-server;
+in {
   imports = [nixvim.homeManagerModules.nixvim];
 
   home.packages = with pkgs; [
@@ -12,6 +15,7 @@
     haskellPackages.haskell-debug-adapter
     haskellPackages.fast-tags
     haskellPackages.hoogle
+    purescriptls
     ripgrep
     vscode-js-debug
     zsh
@@ -36,6 +40,12 @@
     clipboard = {
       register = "unnamedplus";
       providers.xclip.enable = true;
+    };
+
+    filetype = {
+      extension = {
+        purs = "purescript";
+      };
     };
 
     opts = {
@@ -827,6 +837,10 @@
           lua_ls = {
             enable = true;
             settings.telemetry.enable = false;
+          };
+          purescriptls = {
+            enable = true;
+            package = purescriptls;
           };
           tailwindcss.enable = true;
           terraformls.enable = true;
