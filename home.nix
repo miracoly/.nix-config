@@ -134,7 +134,7 @@ in {
       pipenv
       pnpm
       pulseaudio
-      purescript
+      purescript-overlay.packages.${pkgs.system}.purs
       purescript-overlay.packages.${pkgs.system}.spago
       python311
       racket
