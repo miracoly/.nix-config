@@ -145,7 +145,7 @@
     alsa-utils
     arandr
     firefox
-    git
+    gitFull
     man-pages
     man-pages-posix
     nixos-option
