@@ -67,6 +67,7 @@ in {
       dbeaver-bin
       discord
       dotty
+      entr
       exercism
       fceux
       fluxcd
