@@ -43,7 +43,8 @@ in {
     in [
       _1password-gui
       alejandra
-      anki
+      # anki
+      anki-bin
       appimage-run
       arduino-ide
       audacious
