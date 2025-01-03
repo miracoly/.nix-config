@@ -1077,7 +1077,15 @@ in {
                 filetypes = ["arduino"];
               };
             };
-            clang_format.enable = true;
+            clang_format = {
+              enable = true;
+              settings = {
+                extra_args = [
+                  "-style=file"
+                  "-fallback-style=Google"
+                ];
+              };
+            };
             prettier = {
               enable = true;
               disableTsServerFormatter = true;
