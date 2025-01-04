@@ -501,8 +501,6 @@ in {
         })
         {
           # better indenting
-          ">" = ">gv";
-          "<" = "<gv";
           "<TAB>" = ">gv";
           "<S-TAB>" = "<gv";
 
@@ -1300,10 +1298,10 @@ in {
           incremental_selection = {
             enable = true;
             keymaps = {
-              init_selection = "<C-w>";
-              node_incremental = "<C-w>";
+              init_selection = "<C-.>";
+              node_incremental = "<C-.>";
               # scopeIncremental = "grc";
-              node_decremental = "<C-S-w>";
+              node_decremental = "<C-,>";
             };
           };
           indent.enable = true;
