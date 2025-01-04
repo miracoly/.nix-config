@@ -1036,6 +1036,14 @@ in {
         enable = true;
       };
 
+      nvim-autopairs = {
+        enable = true;
+        settings = {
+          check_ts = true;
+          enable_check_bracket_line = false;
+        };
+      };
+
       refactoring = {
         enable = true;
         enableTelescope = true;
