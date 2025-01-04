@@ -12,6 +12,7 @@ in {
 
   home.packages = with pkgs; [
     cppcheck
+    clang-tools
     haskellPackages.haskell-debug-adapter
     haskellPackages.fast-tags
     haskellPackages.hoogle
@@ -903,6 +904,7 @@ in {
           };
           clangd = {
             enable = true;
+            cmd = ["clangd" "--offset-encoding=utf-16"];
             settings = {
               telemetry = {
                 enable = false;
