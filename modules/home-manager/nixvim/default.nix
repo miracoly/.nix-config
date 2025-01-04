@@ -576,6 +576,86 @@ in {
               };
             }
           ];
+          refactoring = [
+            {
+              mode = "x";
+              key = "<leader>cm";
+              action.__raw = ''
+                function() require('refactoring').refactor('Extract Function') end
+              '';
+              options = {
+                desc = "Extract [m]ethod";
+              };
+            }
+            {
+              mode = "x";
+              key = "<leader>cM";
+              action.__raw = ''
+                function()
+                  require('refactoring').refactor('Extract Function To File')
+                end
+              '';
+              options = {
+                desc = "Extract [M]ethod";
+              };
+            }
+            {
+              mode = "x";
+              key = "<leader>cv";
+              action.__raw = ''
+                function()
+                  require('refactoring').refactor('Extract Variable')
+                end
+              '';
+              options = {
+                desc = "Extract [v]ariable";
+              };
+            }
+            {
+              mode = "n";
+              key = "<leader>cI";
+              action.__raw = ''
+                function() require('refactoring').refactor('Extract Function') end
+              '';
+              options = {
+                desc = "[I]nline method";
+              };
+            }
+            {
+              mode = ["n" "x"];
+              key = "<leader>ci";
+              action.__raw = ''
+                function()
+                  require('refactoring').refactor('Inline Variable')
+                end
+              '';
+              options = {
+                desc = "[i]nline variable";
+              };
+            }
+            {
+              mode = "n";
+              key = "<leader>cb";
+              action.__raw = ''
+                function() require('refactoring').refactor('Extract Block') end
+              '';
+              options = {
+                desc = "Extract [b]lock";
+              };
+            }
+            {
+              mode = "n";
+              key = "<leader>cB";
+              action.__raw = ''
+                function()
+                  require('refactoring').refactor('Extract Block To File')
+                end
+              '';
+              options = {
+                desc = "Extract [B]lock to file";
+              };
+            }
+          ];
         }
         [
           builtins.attrValues
