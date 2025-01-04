@@ -273,10 +273,10 @@ in {
               };
             }
             {
-              key = "<leader>Q";
+              key = "<leader>tq";
               action.__raw = "require('dap.ui.widgets').preview";
               options = {
-                desc = "bla";
+                desc = "Show DAP UI widgets";
               };
             }
           ];
