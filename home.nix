@@ -46,6 +46,8 @@ in {
       # anki
       anki-bin
       appimage-run
+      arduino-cli
+      arduino-core
       arduino-ide
       audacious
       audacity
