@@ -11,6 +11,9 @@ in {
   imports = [nixvim.homeManagerModules.nixvim];
 
   home.packages = with pkgs; [
+    arduino-cli
+    arduino-core
+    arduino-language-server
     cppcheck
     clang-tools
     haskellPackages.haskell-debug-adapter
@@ -892,6 +895,24 @@ in {
       lsp = {
         enable = true;
         servers = {
+          arduino_language_server = {
+            enable = true;
+            cmd = [
+              "arduino-language-server"
+              "-clangd"
+              "${pkgs.clang-tools}/bin/clangd"
+              "-cli"
+              "${pkgs.arduino-cli}/bin/arduino-cli"
+              "-cli-config"
+              "/home/mira/Documents/arduino/starter-kit/test/sketch.yaml"
+              "-fqbn"
+              "arduino:avr:uno"
+            ];
+            extraOptions = {
+              capabilities.__raw = "{}";
+            };
+            filetypes = ["arduino"];
+          };
           bashls = {
             enable = true;
             settings = {
