@@ -38,7 +38,6 @@ in {
 
     packages = with pkgs; let
       ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix {};
-      codecrafters-cli = pkgs.callPackage ./derivations/codecrafters-cli.nix {};
       sasm = pkgs.callPackage ./derivations/sasm.nix {};
     in [
       _1password-gui
@@ -64,7 +63,7 @@ in {
       calibre
       cc65
       chromium
-      codecrafters-cli
+      pkgs-unstable.codecrafters-cli
       dasm
       dbeaver-bin
       discord
