@@ -68,6 +68,7 @@
       vi = "nvim";
       copy = "xclip -selection clipboard";
       cat = "bat";
+      mktmp = "export MYTEMPDIR=$(mktemp -d -t mytmp-$(date +%Y-%m-%d)-XXXXXXXXXX) && cd $MYTEMPDIR";
     };
     zplug = {
       enable = true;
