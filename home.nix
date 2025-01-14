@@ -121,7 +121,7 @@ in {
       nixd
       nixpkgs-fmt
       node2nix
-      nodejs_20
+      nodejs_22
       nodePackages.npm-check-updates
       nodePackages.yarn
       nomacs
