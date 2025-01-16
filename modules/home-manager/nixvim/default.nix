@@ -1262,15 +1262,23 @@ in {
           "<C-A-b>" = "lsp_references";
         };
 
-        settings.defaults = {
-          file_ignore_patterns = [
-            "^.git/"
-            "^.mypy_cache/"
-            "^__pycache__/"
-            "^output/"
-            "^data/"
-            "%.ipynb"
-          ];
+        settings = {
+          defaults = {
+            file_ignore_patterns = [
+              "^.git/"
+              "^.mypy_cache/"
+              "^__pycache__/"
+              "^output/"
+              "^data/"
+              "%.ipynb"
+            ];
+          };
+          pickers = {
+            find_files = {
+              # hidden = true;
+              # no_ignore = true;
+            };
+          };
           set_env.COLORTERM = "truecolor";
         };
 
