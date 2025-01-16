@@ -1107,8 +1107,9 @@ in {
       neotest = {
         enable = true;
         adapters = {
-          vitest.enable = true;
           haskell.enable = true;
+          jest.enable = true;
+          vitest.enable = true;
         };
       };
 
