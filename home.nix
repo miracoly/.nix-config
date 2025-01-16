@@ -152,7 +152,7 @@ in {
       sops
       steam-run
       stella
-      telepresence2
+      pkgs-unstable.telepresence2
       terraform
       texlive.combined.scheme-full
       unzip
