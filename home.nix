@@ -135,7 +135,7 @@ in {
       pinentry-curses
       pinta
       pipenv
-      pnpm
+      pnpm_10
       pulseaudio
       purescript-overlay.packages.${pkgs.system}.purs
       purescript-overlay.packages.${pkgs.system}.spago
