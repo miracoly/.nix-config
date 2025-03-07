@@ -126,6 +126,7 @@ in {
       nodePackages.yarn
       nomacs
       obs-studio
+      obsidian
       openssl
       p7zip
       pa_applet
