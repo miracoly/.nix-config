@@ -280,6 +280,9 @@ in {
       enable = true;
       userName = "miracoly";
       userEmail = "68049792+miracoly@users.noreply.github.com";
+      aliases = {
+        br = "!b=$(git branch --show-current) && git checkout --detach && git commit --amend --no-verify -m \"require $b\" && git checkout -b";
+      };
       ignores = [
         "*~"
         "*.swp"
