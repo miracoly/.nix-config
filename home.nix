@@ -50,7 +50,7 @@ in {
       arduino-ide
       audacious
       audacity
-      asciidoctor
+      asciidoctor-with-extensions
       azure-cli
       bat
       bitwarden
@@ -110,6 +110,7 @@ in {
       (wrapHelm kubernetes-helm {plugins = [kubernetes-helmPlugins.helm-secrets];})
       libnotify
       maven
+      mermaid-cli
       minikube
       mob
       mysql80
