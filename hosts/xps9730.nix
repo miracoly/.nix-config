@@ -10,7 +10,7 @@
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_11;
+    kernelPackages = pkgs.linuxPackages_6_13;
 
     #  set a custom kernel parameter to 'thunderbolt.host_reset=false
     kernelParams = ["thunderbolt.host_reset=false"];
