@@ -5,7 +5,8 @@ _: {
     ./i3
     ./i3status
     ./kitty
-    ./nixvim
+    ./lazyvim
+    # ./nixvim
     # ./nvim
     ./picom
     ./redshift
