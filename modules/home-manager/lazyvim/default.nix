@@ -10,14 +10,22 @@
     vimAlias = true;
     vimdiffAlias = true;
 
-    extraPackages = with pkgs; [
-      curl
-      fd
-      fzf
-      lazygit
-      nerdfonts
-      ripgrep
-      xclip
-    ];
+    extraPackages = with pkgs; let
+      lsp = [
+        lua-language-server
+        nil
+      ];
+    in
+      [
+        curl
+        fd
+        fzf
+        lazygit
+        nerdfonts
+        ripgrep
+        stylua
+        xclip
+      ]
+      ++ lsp;
   };
 }
