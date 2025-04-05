@@ -12,6 +12,8 @@
 
     extraPackages = with pkgs; let
       lsp = [
+        clang-tools
+        haskell-language-server
         lua-language-server
         nil
       ];
