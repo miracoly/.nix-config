@@ -83,6 +83,7 @@ in {
       gnome-disk-utility
       gnumake
       google-chrome
+      google-java-format
       gradle
       graphviz
       haskellPackages.cabal-fmt
@@ -109,6 +110,7 @@ in {
       kubectl
       (wrapHelm kubernetes-helm {plugins = [kubernetes-helmPlugins.helm-secrets];})
       libnotify
+      liquibase
       maven
       mermaid-cli
       minikube
