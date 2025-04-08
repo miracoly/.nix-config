@@ -23,6 +23,8 @@
         haskell-language-server
         lua-language-server
         nil
+        vscode-langservers-extracted
+        vtsls
       ];
     in
       [
