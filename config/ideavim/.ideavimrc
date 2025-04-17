@@ -45,7 +45,7 @@ set shortmess=filnxtToOF
 
 " CUSTOM
 " ------------------------------------------------------------------------------
-nmap <Enter> :w<CR><Esc>
+nmap <Enter> <Action>(SaveAll)
 
 " Selection / Smart Select
 sethandler <C-a> a:ide
@@ -53,6 +53,15 @@ sethandler <C-Space> n:vim v:vim i:ide
 nmap <C-Space> <Action>(EditorSelectWord)
 vmap <C-Space> <Action>(EditorSelectWord)
 vmap <BS> <Action>(EditorUnSelectWord)
+
+" Git
+" Reset Hunk
+nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
+
+" Search"
+" Buffer lines
+sethandler <C-f> a:ide
+nmap <leader>sb <Action>(F)
 " ------------------------------------------------------------------------------
 
 " Enable plugin behavior
@@ -142,8 +151,8 @@ nmap [q <Action>(GotoPreviousError)
 " Next Quickfix
 nmap ]q <Action>(GotoNextError)
 " Format
-nmap <leader>cf <Action>(Format)
-vmap <leader>cf <Action>(Format)
+nmap <leader>cf <Action>(ReformatCode)
+vmap <leader>cf <Action>(ReformatCode)
 " Line Diagnostics
 nmap <leader>cd <Action>(ShowErrorDescription)
 " Next Diagnostic
@@ -731,6 +740,8 @@ let g:WhichKeyDesc_LazyVim_254 = "<leader>ql Restore Last Session"
 let g:WhichKeyDesc_LazyVim_255 = "<leader>qd Don't Save Current Session"
 
 let g:WhichKeyDesc_LazyVim_256 = "<leader>sr Replace"
+let g:WhichKeyDesc_LazyVim_257 = "<leader>gh Hunks"
+let g:WhichKeyDesc_LazyVim_258 = "<leader>ghr Reset Hunk"
 
 " yank to clipboard
 set clipboard+=unnamedplus
