@@ -46,6 +46,9 @@ set shortmess=filnxtToOF
 " CUSTOM
 " ------------------------------------------------------------------------------
 nmap <Enter> <Action>(SaveAll)
+sethandler <C-c> v:ide
+sethandler <C-x> v:ide
+sethandler <C-v> i:ide
 
 " Selection / Smart Select
 sethandler <C-a> a:ide
@@ -58,7 +61,7 @@ vmap <BS> <Action>(EditorUnSelectWord)
 " Reset Hunk
 nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
 
-" Search"
+" Search
 " Buffer lines
 sethandler <C-f> a:ide
 nmap <leader>sb <Action>(F)
@@ -376,9 +379,11 @@ nmap <leader>so <Action>(ShowSettings)
 " Quickfix List
 nmap <leader>sq <Action>(ActivateProblemsViewToolWindow)
 " Replace
-nmap <leader>sr <Action>(Replace)<cr>
-" Resume
-nmap <leader>sR :echo 'Not yet implmented.'<cr>
+nmap <leader>sr <Action>(ReplaceInPath)<cr>
+" Replace in File (IntelliJ Replace)
+nmap <leader>sR <Action>(Replace)<cr>
+" " Resume
+" nmap <leader>sR :echo 'Not yet implmented.'<cr>
 " Goto Symbol
 nmap <leader>ss <Action>(GotoSymbol)
 " Goto Symbol (Workspace)
