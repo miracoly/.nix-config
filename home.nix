@@ -1,6 +1,7 @@
 {
   pkgs,
   pkgs-unstable,
+  pkgs-telepresence,
   dnd-latex-template,
   purescript-overlay,
   wallpaper,
@@ -156,7 +157,7 @@ in {
       sops
       steam-run
       stella
-      pkgs-unstable.telepresence2
+      pkgs-telepresence.telepresence2
       terraform
       texlive.combined.scheme-full
       unzip
