@@ -1,16 +1,16 @@
-local function find_vitest_root()
-  local root = vim.fn.expand("%:p:h")
-  while root ~= "/" do
-    if
-      vim.fn.filereadable(root .. "/vitest.config.ts") == 1
-      or vim.fn.filereadable(root .. "/vitest.config.js") == 1
-      or vim.fn.filereadable(root .. "/package.json") == 1
-    then
-      return root
+local function find_root(files)
+  return function()
+    local root = vim.fn.expand("%:p:h")
+    while root ~= "/" do
+      for _, file in ipairs(files) do
+        if vim.fn.filereadable(root .. "/" .. file) == 1 then
+          return root
+        end
+      end
+      root = vim.fn.fnamemodify(root, ":h")
     end
-    root = vim.fn.fnamemodify(root, ":h")
+    return vim.fn.getcwd()
   end
-  return vim.fn.getcwd() -- fallback
 end
 
 return {
@@ -28,31 +28,26 @@ return {
     "nvim-neotest/neotest",
     dependencies = {
       "marilari88/neotest-vitest",
+      "nvim-neotest/neotest-jest",
     },
-    opts = {
-      adapters = {
-        ["neotest-vitest"] = {
-          cwd = find_vitest_root,
-        },
-      },
-    },
-  },
-  { "nvim-neotest/neotest-jest" },
-  {
-    "nvim-neotest/neotest",
     opts = function(_, opts)
-      opts.adapters = opts.adapters or {}
-      table.insert(
-        opts.adapters,
+      opts.adapters = {
+        require("neotest-vitest")({
+          cwd = find_root({
+            "vitest.config.ts",
+            "vitest.config.js",
+            "package.json",
+          }),
+        }),
         require("neotest-jest")({
-          jestCommand = "pnpm test --",
-          jestConfigFile = "custom.jest.config.ts",
+          cwd = find_root({
+            "jest.config.ts",
+            "jest.config.js",
+            "package.json",
+          }),
           env = { CI = true },
-          cwd = function()
-            return vim.fn.getcwd()
-          end,
-        })
-      )
+        }),
+      }
     end,
   },
 }
