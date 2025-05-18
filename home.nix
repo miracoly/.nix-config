@@ -141,6 +141,7 @@ in {
       pinta
       pipenv
       pnpm_10
+      prusa-slicer
       pulseaudio
       purescript-overlay.packages.${pkgs.system}.purs
       purescript-overlay.packages.${pkgs.system}.spago
