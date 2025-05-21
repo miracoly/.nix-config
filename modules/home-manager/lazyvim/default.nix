@@ -24,6 +24,8 @@
         helm-ls
         lua-language-server
         nil
+        pyright
+        ruff
         tailwindcss-language-server
         vscode-langservers-extracted
         vtsls
