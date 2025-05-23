@@ -23,6 +23,7 @@
         haskell-language-server
         helm-ls
         lua-language-server
+        marksman
         nil
         pyright
         ruff
@@ -40,6 +41,7 @@
         lazygit
         lldb
         nerdfonts
+        markdownlint-cli2
         ripgrep
         stylua
         xclip
