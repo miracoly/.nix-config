@@ -202,18 +202,6 @@ in {
     };
 
     file = {
-      # Applications
-      yubikey-rofi.source = ./config/applications/yubikey-rofi.desktop;
-      yubikey-rofi.target = ".local/share/applications/yubikey-rofi.desktop";
-
-      # Other .dotfiles
-      ideavim.source = ./config/ideavim/.ideavimrc;
-      ideavim.target = ".ideavimrc";
-
-      # Latex Dnd Templage
-      dnd-latex-template.source = dnd-latex-template;
-      dnd-latex-template.target = "texmf/tex/latex/dnd";
-
       # Azure CLI Autocomplete
       azure-cli-completion.source = pkgs.fetchurl {
         url = "https://raw.githubusercontent.com/Azure/azure-cli/dev/az.completion";
@@ -221,9 +209,31 @@ in {
       };
       azure-cli-completion.target = ".azure-cli/az.completion";
 
+      # Latex Dnd Templage
+      dnd-latex-template.source = dnd-latex-template;
+      dnd-latex-template.target = "texmf/tex/latex/dnd";
+
+      # .gdbinit
+      ".gdbinit".text = ''
+        python
+        import sys
+        sys.path.insert(0, "${pkgs.gcc-unwrapped.lib}/share/gcc-${pkgs.gcc-unwrapped.version}/python")
+        from libstdcxx.v6.printers import register_libstdcxx_printers
+        register_libstdcxx_printers(gdb.current_objfile())
+        end
+      '';
+
+      # Other .dotfiles
+      ideavim.source = ./config/ideavim/.ideavimrc;
+      ideavim.target = ".ideavimrc";
+
       # Wallpaper
       wallpaper.source = wallpaper;
       wallpaper.target = "Pictures/wallpaper";
+
+      # Applications
+      yubikey-rofi.source = ./config/applications/yubikey-rofi.desktop;
+      yubikey-rofi.target = ".local/share/applications/yubikey-rofi.desktop";
     };
   };
 
