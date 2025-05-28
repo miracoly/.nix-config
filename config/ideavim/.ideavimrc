@@ -60,6 +60,10 @@ vmap <BS> <Action>(EditorUnSelectWord)
 " Git
 " Reset Hunk
 nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
+" Next Hunk
+nmap ]h <Action>(VcsShowNextChangeMarker)
+" Previous Hunk
+nmap [h <Action>(VcsShowPrevChangeMarker)
 
 " Search
 " Buffer lines
@@ -747,6 +751,8 @@ let g:WhichKeyDesc_LazyVim_255 = "<leader>qd Don't Save Current Session"
 let g:WhichKeyDesc_LazyVim_256 = "<leader>sr Replace"
 let g:WhichKeyDesc_LazyVim_257 = "<leader>gh Hunks"
 let g:WhichKeyDesc_LazyVim_258 = "<leader>ghr Reset Hunk"
+let g:WhichKeyDesc_LazyVim_258 = "]h Next Hunk"
+let g:WhichKeyDesc_LazyVim_258 = "[h Prev Hunk"
 
 " yank to clipboard
 set clipboard+=unnamedplus
