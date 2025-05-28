@@ -11,13 +11,6 @@
     vimdiffAlias = true;
 
     extraPackages = with pkgs; let
-      codelldb = pkgs.stdenv.mkDerivation {
-        name = "codelldb";
-        buildCommand = ''
-          mkdir -p $out/bin
-          ln -s "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb" $out/bin/codelldb
-        '';
-      };
       lsp = [
         clang-tools
         haskell-language-server
@@ -34,8 +27,8 @@
       ];
     in
       [
-        codelldb
         curl
+        gdb
         fd
         fzf
         lazygit
@@ -44,6 +37,7 @@
         markdownlint-cli2
         ripgrep
         stylua
+        vscode-js-debug
         xclip
       ]
       ++ lsp;

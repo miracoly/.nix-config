@@ -15,6 +15,14 @@ end
 
 return {
   { "williamboman/mason.nvim", enabled = false },
+  { "mason-org/mason.nvim", enabled = false },
+  { "mason-org/mason-lspconfig.nvim", enabled = false },
+  { "jay-babu/mason-nvim-dap.nvim", enabled = false },
+  { "mfussenegger/nvim-dap-python", enabled = false },
+  {
+    "mfussenegger/nvim-dap",
+    opts = false, -- ← wipes the chain built so far
+  },
   {
     "stevearc/conform.nvim",
     optional = true,
@@ -48,6 +56,53 @@ return {
           env = { CI = true },
         }),
       }
+    end,
+  },
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = nil,
+    opts = function()
+      local dap = require("dap")
+
+      dap.adapters["pwa-node"] = nil
+      dap.adapters["node"] = nil
+      dap.adapters["codelldb"] = nil
+      dap.adapters["debugpy"] = nil
+
+      dap.adapters.gdb = {
+        type = "executable",
+        command = "gdb",
+        args = {
+          "--interpreter=dap",
+          "--eval-command",
+          "set print pretty on",
+        },
+      }
+
+      dap.configurations.c = {
+        {
+          name = "Launch",
+          type = "gdb",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+          end,
+          cwd = "${workspaceFolder}",
+          stopAtBeginningOfMainSubprogram = false,
+        },
+        {
+          name = "Attach to gdbserver :1234",
+          type = "gdb",
+          request = "attach",
+          target = "localhost:1234",
+          program = function()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+          end,
+          cwd = "${workspaceFolder}",
+        },
+      }
+
+      dap.configurations.cpp = dap.configurations.c
     end,
   },
 }
