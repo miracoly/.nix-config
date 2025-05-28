@@ -266,8 +266,8 @@ nmap gK <Action>(ParameterInfo)
 " Signature Help in Insert Mode
 imap <C-k> <C-o><Action>(ParameterInfo)
 " Code Action
-nmap <leader>ca <Action>(RefactoringMenu)
-vmap <leader>ca <Action>(RefactoringMenu)
+nmap <leader>cA <Action>(RefactoringMenu)
+vmap <leader>cA <Action>(RefactoringMenu)
 " Run Codelens
 nmap <leader>cc :echo 'There is no equivalent mapping for Run Codelens.'<cr>
 " Refresh & Display Codelens
@@ -277,7 +277,7 @@ nmap <leader>cR <Action>(RenameFile)
 " Rename
 nmap <leader>cr <Action>(RenameElement)
 " Source Action
-nmap <leader>cA <Action>(ShowIntentionActions)
+nmap <leader>ca <Action>(ShowIntentionActions)
 " Next Reference
 nmap ]] <Action>(GotoNextError)
 " Prev Reference
@@ -522,12 +522,12 @@ let g:WhichKeyDesc_LazyVim_31 = "<leader><tab>] Next Tab"
 let g:WhichKeyDesc_LazyVim_32 = "<leader><tab>d Close Tab"
 let g:WhichKeyDesc_LazyVim_33 = "<leader><tab>[ Previous Tab"
 let g:WhichKeyDesc_LazyVim_34 = "<leader>cl Lsp Info"
-let g:WhichKeyDesc_LazyVim_35 = "<leader>ca Code Action"
+let g:WhichKeyDesc_LazyVim_35 = "<leader>ca Source Action"
 let g:WhichKeyDesc_LazyVim_36 = "<leader>cc Run Codelens"
 let g:WhichKeyDesc_LazyVim_37 = "<leader>cC Refresh & Display Codelens"
 let g:WhichKeyDesc_LazyVim_38 = "<leader>cR Rename File"
 let g:WhichKeyDesc_LazyVim_39 = "<leader>cr Rename"
-let g:WhichKeyDesc_LazyVim_40 = "<leader>cA Source Action"
+let g:WhichKeyDesc_LazyVim_40 = "<leader>cA Code Action"
 let g:WhichKeyDesc_LazyVim_41 = "<leader>cm Mason"
 let g:WhichKeyDesc_LazyVim_42 = "<leader>ow Task list"
 let g:WhichKeyDesc_LazyVim_43 = "<leader>oo Run task"
