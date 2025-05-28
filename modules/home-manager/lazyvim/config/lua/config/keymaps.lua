@@ -5,3 +5,13 @@
 local map = LazyVim.safe_keymap_set
 
 map({ "n" }, "<Enter>", "<cmd>w<cr><esc>", { desc = "Save File" })
+map({ "n" }, "<leader>uP", function()
+  local copilot = require("copilot.client")
+  if copilot.is_disabled() then
+    vim.cmd("Copilot enable")
+    vim.notify("Copilot enabled", vim.log.levels.INFO)
+  else
+    vim.cmd("Copilot disable")
+    vim.notify("Copilot disabled", vim.log.levels.INFO)
+  end
+end, { desc = "Enable/Disable Copilot" })
