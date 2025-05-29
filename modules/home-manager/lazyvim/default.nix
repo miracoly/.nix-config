@@ -10,36 +10,33 @@
     vimAlias = true;
     vimdiffAlias = true;
 
-    extraPackages = with pkgs; let
-      lsp = [
-        clang-tools
-        haskell-language-server
-        helm-ls
-        lua-language-server
-        marksman
-        nil
-        pyright
-        ruff
-        tailwindcss-language-server
-        vscode-langservers-extracted
-        vtsls
-        yaml-language-server
-      ];
-    in
-      [
-        curl
-        gdb
-        fd
-        fzf
-        lazygit
-        lldb
-        nerdfonts
-        markdownlint-cli2
-        ripgrep
-        stylua
-        vscode-js-debug
-        xclip
-      ]
-      ++ lsp;
+    extraPackages = with pkgs; [
+      clang-tools
+      curl
+      gdb
+      fd
+      fzf
+      haskell-language-server
+      helm-ls
+      lazygit
+      lldb
+      lua-language-server
+      marksman
+      nerdfonts
+      nil
+      markdownlint-cli2
+      pyright
+      ripgrep
+      rubocop
+      (ruby.withPackages (ps: [ps.solargraph]))
+      ruff
+      stylua
+      tailwindcss-language-server
+      vscode-js-debug
+      vscode-langservers-extracted
+      xclip
+      vtsls
+      yaml-language-server
+    ];
   };
 }
