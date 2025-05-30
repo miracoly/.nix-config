@@ -64,6 +64,7 @@ in {
       calibre
       cc65
       chromium
+      cmake
       pkgs-unstable.codecrafters-cli
       dasm
       dbeaver-bin
