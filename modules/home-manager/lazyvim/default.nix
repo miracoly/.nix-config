@@ -12,6 +12,8 @@
 
     extraPackages = with pkgs; [
       clang-tools
+      cmake
+      cmake-lint
       curl
       gdb
       fd
@@ -22,6 +24,7 @@
       lldb
       lua-language-server
       marksman
+      neocmakelsp
       nerdfonts
       nil
       markdownlint-cli2
