@@ -304,10 +304,10 @@ nmap <leader>br <Action>(CloseAllToTheRight)
 
 " Buffer Explorer
 nmap <leader>be <Action>(ActivateProjectToolWindow)
-" Explorer NeoTree (Root Dir)
-nmap <leader>e <Action>(FileStructurePopup)
 " Explorer NeoTree (cwd)
-nmap <leader>E <Action>(SelectInProjectView)
+nmap <leader>E <Action>(FileStructurePopup)
+" Explorer NeoTree (Root Dir)
+nmap <leader>e <Action>(SelectInProjectView)
 " Explorer NeoTree (Root Dir) (alternative)
 nmap <leader>fe <Action>(ActivateProjectToolWindow)
 " Explorer NeoTree (cwd) (alternative)
