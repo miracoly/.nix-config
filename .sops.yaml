@@ -1,0 +1,10 @@
+keys:
+  - &mira 3685C417BD428EBF
+  - &xps17 age1fwyh0d8g5a46m8g0pstqjqdyrxv89ue57vjdgs4k2djj6d33la9qt88rcw
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - pgp:
+          - *mira
+      - age:
+          - *xps17

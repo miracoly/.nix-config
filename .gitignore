@@ -2,7 +2,6 @@
 .swp
 nohup.out
 .idea
-*secret*
 host-specific.nix
 .pre-commit-config.yaml
 .direnv/

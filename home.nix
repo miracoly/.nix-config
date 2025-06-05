@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   pkgs-unstable,
   pkgs-telepresence,
@@ -238,6 +239,47 @@ in {
     };
   };
 
+  accounts.email.accounts = {
+    miracoly = {
+      address = config.sops.placeholder.mira;
+      userName = config.sops.placeholder.mira;
+      realName = config.sops.placeholder.realName;
+      primary = true;
+      imap = {
+        host = "posteo.de";
+        port = 993;
+        tls.enable = true;
+      };
+      smtp = {
+        host = "posteo.de";
+        port = 465;
+        tls.enable = true;
+      };
+
+      thunderbird.enable = true;
+    };
+    # kb = {
+    #   address = config.sops.placeholder.kb;
+    #   userName = config.sops.placeholder.kb;
+    #   realName = config.sops.placeholder.realName;
+    #   imap = {
+    #     host = "imap.gmail.com";
+    #     port = 993;
+    #     tls.enable = true;
+    #   };
+    #   signature = {};
+    #   smtp = {
+    #     host = "smtp.gmail.com";
+    #     port = 587;
+    #     tls = {
+    #       enable = true;
+    #       useStartTls = true;
+    #     };
+    #   };
+    #   thunderbird.enable = true;
+    # };
+  };
+
   services = {
     autorandr.enable = false;
 
@@ -260,6 +302,17 @@ in {
       enable = true;
       lockCmd = "${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 5 3";
       xautolock.enable = false;
+    };
+  };
+
+  sops = {
+    defaultSopsFile = ./secrets/secrets.yaml;
+    age.keyFile = "/var/lib/sops-nix/key.txt";
+    age.generateKey = false;
+    secrets = {
+      realName = {};
+      mira = {};
+      kb = {};
     };
   };
 
