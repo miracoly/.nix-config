@@ -27,7 +27,10 @@
 
       PROMPT_EOL_MARK=${"''"}
     '';
-    history.extended = true;
+    history = {
+      extended = true;
+      save = 1000000;
+    };
     oh-my-zsh = {
       enable = true;
       plugins = [
