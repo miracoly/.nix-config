@@ -97,7 +97,6 @@ in {
       haskellPackages.stylish-haskell
       haskellPackages.yesod-bin
       haskell-language-server
-      i3lock-fancy-rapid
       ihp-new
       inkscape
       inotify-tools

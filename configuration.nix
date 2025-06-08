@@ -173,7 +173,13 @@
     etc.hosts.mode = "0644";
   };
 
-  programs.zsh.enable = true;
+  programs = {
+    i3lock = {
+      enable = true;
+      package = pkgs.i3lock-fancy-rapid;
+    };
+    zsh.enable = true;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mira = {
