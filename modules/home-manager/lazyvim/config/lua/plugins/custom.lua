@@ -24,6 +24,14 @@ return {
     opts = false, -- ← wipes the chain built so far
   },
   {
+    "3rd/image.nvim",
+    build = false, -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
+    commit = "4206c48",
+    opts = {
+      processor = "magick_cli",
+    },
+  },
+  {
     "stevearc/conform.nvim",
     optional = true,
     opts = {

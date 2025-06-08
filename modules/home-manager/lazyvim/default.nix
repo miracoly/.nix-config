@@ -10,6 +10,8 @@
     vimAlias = true;
     vimdiffAlias = true;
 
+    extraLuaPackages = ps: [ps.magick];
+
     extraPackages = with pkgs; [
       clang-tools
       cmake
@@ -20,6 +22,7 @@
       fzf
       haskell-language-server
       helm-ls
+      imagemagick
       lazygit
       lldb
       lua-language-server
