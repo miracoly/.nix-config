@@ -421,6 +421,22 @@
         "type": "github"
       }
     },
+    "private": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1749107199,
+        "narHash": "sha256-iYbF39Cn7G0UUHkhnV578OHCmN72JPiJWPsm0zBCkRU=",
+        "ref": "refs/heads/main",
+        "rev": "f94431b3bc3a760a30d8e8273d4828a05c21de45",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://miracoly@github.com/miracoly/.nix-config-private"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://miracoly@github.com/miracoly/.nix-config-private"
+      }
+    },
     "purescript-overlay": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -452,6 +468,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
         "pre-commit-hooks": "pre-commit-hooks",
+        "private": "private",
         "purescript-overlay": "purescript-overlay",
         "wallpaper": "wallpaper"
       }

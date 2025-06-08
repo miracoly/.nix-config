@@ -43,6 +43,11 @@
       url = "github:miracoly/wallpaper/main";
       flake = false;
     };
+
+    private = {
+      url = "git+https://miracoly@github.com/miracoly/.nix-config-private";
+      flake = false;
+    };
   };
 
   outputs = {
