@@ -25,7 +25,7 @@
       lua-language-server
       marksman
       neocmakelsp
-      nerdfonts
+      nerd-fonts.jetbrains-mono
       nil
       markdownlint-cli2
       pyright

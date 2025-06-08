@@ -3,7 +3,7 @@
     enable = true;
     autosuggestion.enable = true;
     enableCompletion = true;
-    initExtra = ''
+    initContent = ''
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
       export PATH=$HOME/.local/bin:$PATH

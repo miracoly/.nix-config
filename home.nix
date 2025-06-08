@@ -106,7 +106,7 @@ in {
       pkgs-unstable.jetbrains.idea-ultimate
       jq
       k9s
-      kate
+      kdePackages.kate
       keepassxc
       kind
       kubectl
@@ -120,7 +120,9 @@ in {
       mysql80
       nasm
       ncdu
-      nerdfonts
+      nerd-fonts.jetbrains-mono
+      nerd-fonts."m+"
+      nerd-fonts.noto
       nil
       nix-index
       nixd
@@ -166,7 +168,6 @@ in {
       wget
       xclip
       yubikey-manager
-      yubikey-manager-qt
       yubikey-personalization
       yubikey-personalization-gui
       yubico-piv-tool
@@ -251,7 +252,7 @@ in {
       extraConfig = ''
         allow-loopback-pinentry
       '';
-      pinentryPackage = pkgs.pinentry-curses;
+      pinentry.package = pkgs.pinentry-curses;
     };
 
     network-manager-applet.enable = true;
