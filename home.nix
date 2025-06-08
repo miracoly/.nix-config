@@ -103,7 +103,7 @@ in {
       inotify-tools
       insomnia
       jetbrains.clion
-      pkgs-unstable.jetbrains.idea-ultimate
+      jetbrains.idea-ultimate
       jq
       k9s
       kdePackages.kate
