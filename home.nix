@@ -77,6 +77,7 @@ in {
       gauge
       gcc
       gdb
+      gdbgui
       gh
       ghc
       gimp
