@@ -85,6 +85,7 @@ in {
       ghex
       gnome-disk-utility
       gnumake
+      go
       google-chrome
       google-java-format
       gradle
@@ -103,6 +104,7 @@ in {
       inotify-tools
       insomnia
       jetbrains.clion
+      jetbrains.goland
       jetbrains.idea-ultimate
       jq
       k9s

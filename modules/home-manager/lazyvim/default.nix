@@ -18,6 +18,7 @@
       cmake-lint
       curl
       gdb
+      gopls
       fd
       fzf
       haskell-language-server

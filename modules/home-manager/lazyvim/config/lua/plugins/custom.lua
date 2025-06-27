@@ -45,6 +45,7 @@ return {
     dependencies = {
       "marilari88/neotest-vitest",
       "nvim-neotest/neotest-jest",
+      "fredrikaverpil/neotest-golang",
     },
     opts = function(_, opts)
       opts.adapters = {
@@ -63,6 +64,9 @@ return {
           }),
           env = { CI = true },
         }),
+        ["neotest-golang"] = {
+          dap_go_enabled = true,
+        },
       }
     end,
   },
