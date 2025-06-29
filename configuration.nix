@@ -168,9 +168,29 @@
   };
 
   environment = {
-    shells = with pkgs; [zsh];
+    etc = {
+      "bin/bash".source = "${pkgs.bash}/bin/bash";
+      hosts.mode = "0644";
+    };
     pathsToLink = ["/share/zsh"];
-    etc.hosts.mode = "0644";
+    shells = with pkgs; [zsh];
+    # List packages installed in system profile. To search, run:
+    # $ nix search wget
+    systemPackages = with pkgs; [
+      alsa-utils
+      arandr
+      firefox
+      gitFull
+      man-pages
+      man-pages-posix
+      nixos-option
+      pavucontrol
+      qemu
+      quickemu
+      quickgui
+      vim
+      xorg.xrandr
+    ];
   };
 
   programs = {
@@ -178,6 +198,7 @@
       enable = true;
       package = pkgs.i3lock-fancy-rapid;
     };
+    virt-manager.enable = true;
     zsh.enable = true;
   };
 
@@ -185,7 +206,7 @@
   users.users.mira = {
     isNormalUser = true;
     description = "miracoly";
-    extraGroups = ["networkmanager" "wheel" "docker" "input" "dialout"];
+    extraGroups = ["networkmanager" "wheel" "docker" "input" "dialout" "libvirtd"];
     shell = pkgs.zsh;
   };
 
@@ -193,24 +214,11 @@
   nixpkgs.config.allowUnfree = true;
 
   # Docker
-  virtualisation.docker.enable = true;
-
-  environment.etc."bin/bash".source = "${pkgs.bash}/bin/bash";
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    alsa-utils
-    arandr
-    firefox
-    gitFull
-    man-pages
-    man-pages-posix
-    nixos-option
-    pavucontrol
-    vim
-    xorg.xrandr
-  ];
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+    spiceUSBRedirection.enable = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
