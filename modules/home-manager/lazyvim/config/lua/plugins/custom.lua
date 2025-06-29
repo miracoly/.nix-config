@@ -20,6 +20,16 @@ return {
   { "jay-babu/mason-nvim-dap.nvim", enabled = false },
   { "mfussenegger/nvim-dap-python", enabled = false },
   {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        bashls = {
+          filetypes = { "sh", "bash", "zsh", "bats" },
+        },
+      },
+    },
+  },
+  {
     "mfussenegger/nvim-dap",
     opts = false, -- ← wipes the chain built so far
   },
@@ -37,6 +47,17 @@ return {
     opts = {
       formatters_by_ft = {
         nix = { "alejandra" },
+      },
+    },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters_by_ft = {
+        sh = { "shellcheck" },
+        bash = { "shellcheck" },
+        zsh = { "shellcheck" },
+        bats = { "shellcheck" },
       },
     },
   },

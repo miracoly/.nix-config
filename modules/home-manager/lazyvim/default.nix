@@ -13,6 +13,7 @@
     extraLuaPackages = ps: [ps.magick];
 
     extraPackages = with pkgs; [
+      bash-language-server
       clang-tools
       cmake
       cmake-lint
@@ -37,6 +38,8 @@
       rubocop
       (ruby.withPackages (ps: [ps.solargraph]))
       ruff
+      shfmt
+      shellcheck
       stylua
       tailwindcss-language-server
       vscode-js-debug
