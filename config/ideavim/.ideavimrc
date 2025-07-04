@@ -64,6 +64,8 @@ nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
 nmap ]h <Action>(VcsShowNextChangeMarker)
 " Previous Hunk
 nmap [h <Action>(VcsShowPrevChangeMarker)
+" Show Hunk
+nmap <leader>ghp <Action>(VcsShowCurrentChangeMarker)
 
 " Search
 " Buffer lines
@@ -753,6 +755,7 @@ let g:WhichKeyDesc_LazyVim_257 = "<leader>gh Hunks"
 let g:WhichKeyDesc_LazyVim_258 = "<leader>ghr Reset Hunk"
 let g:WhichKeyDesc_LazyVim_258 = "]h Next Hunk"
 let g:WhichKeyDesc_LazyVim_258 = "[h Prev Hunk"
+let g:WhichKeyDesc_LazyVim_259 = "<leader>ghp Hunk Preview"
 
 " yank to clipboard
 set clipboard+=unnamedplus
