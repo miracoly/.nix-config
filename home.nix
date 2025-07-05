@@ -164,6 +164,7 @@ in {
       steam-run
       stella
       pkgs-telepresence.telepresence2
+      go-task
       terraform
       texlive.combined.scheme-full
       unzip
