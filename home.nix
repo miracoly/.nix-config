@@ -66,6 +66,7 @@ in {
       chromium
       cmake
       pkgs-unstable.codecrafters-cli
+      ctop
       dasm
       dbeaver-bin
       discord
