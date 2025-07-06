@@ -56,6 +56,7 @@ in {
       bat
       bitwarden
       bitwarden-cli
+      bootdev-cli
       brightnessctl
       bruno
       ca65-symbls-to-nl
