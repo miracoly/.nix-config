@@ -6,15 +6,13 @@
   purescript-overlay,
   wallpaper,
   ...
-}: let
-  homedir = "/home/mira";
-in {
+}: {
   imports = [./modules];
   home = {
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
     username = "mira";
-    homeDirectory = "${homedir}";
+    homeDirectory = "/home/mira";
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
@@ -27,8 +25,8 @@ in {
     stateVersion = "23.05";
 
     sessionPath = [
-      "${homedir}/.local/bin"
-      "${homedir}/.local/share/coursier/bin"
+      "$HOME/.local/bin"
+      "$HOME/.local/share/coursier/bin"
     ];
 
     pointerCursor = {
@@ -204,7 +202,7 @@ in {
       DOTNET_CLI_TELEMETRY_OPTOUT = 1;
       QT_AUTO_SCREEN_SCALE_FACTOR = 2;
       ROFI_SYSTEMD_TERM = "kitty";
-      KUBECONFIG = "${homedir}/.kube/config:${homedir}/.kube/udp-staging.config";
+      KUBECONFIG = "$HOME/.kube/config:$HOME/.kube/udp-staging.config";
       GPG_TTY = "$(tty)";
     };
 
