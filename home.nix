@@ -27,6 +27,7 @@
     sessionPath = [
       "$HOME/.local/bin"
       "$HOME/.local/share/coursier/bin"
+      "$HOME/go/bin"
     ];
 
     pointerCursor = {
