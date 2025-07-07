@@ -71,6 +71,13 @@ nmap <leader>ghp <Action>(VcsShowCurrentChangeMarker)
 " Buffer lines
 sethandler <C-f> a:ide
 nmap <leader>sb <Action>(F)
+
+" CopilotChat
+" Toggle
+nmap <leader>aa <Action>(copilot.chat.show)
+" Prompt Actions
+nmap <leader>ap <Action>(copilot.chat.inline)
+vmap <leader>ap <Action>(copilot.chat.inline)
 " ------------------------------------------------------------------------------
 
 " Enable plugin behavior
@@ -756,6 +763,8 @@ let g:WhichKeyDesc_LazyVim_258 = "<leader>ghr Reset Hunk"
 let g:WhichKeyDesc_LazyVim_258 = "]h Next Hunk"
 let g:WhichKeyDesc_LazyVim_258 = "[h Prev Hunk"
 let g:WhichKeyDesc_LazyVim_259 = "<leader>ghp Hunk Preview"
+let g:WhichKeyDesc_LazyVim_260 = "<leader>aa Toggle (CopilotChat)"
+let g:WhichKeyDesc_LazyVim_261 = "<leader>ap Prompt Actions (CopilotChat)"
 
 " yank to clipboard
 set clipboard+=unnamedplus
