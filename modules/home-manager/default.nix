@@ -2,6 +2,7 @@ _: {
   imports = [
     ./autorandr
     ./copyq
+    ./espanso
     ./i3
     ./i3status
     ./kitty
