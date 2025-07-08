@@ -221,12 +221,7 @@
 
       # .gdbinit
       ".gdbinit".text = ''
-        python
-        import sys
-        sys.path.insert(0, "${pkgs.gcc-unwrapped.lib}/share/gcc-${pkgs.gcc-unwrapped.version}/python")
-        from libstdcxx.v6.printers import register_libstdcxx_printers
-        register_libstdcxx_printers(gdb.current_objfile())
-        end
+        set auto-load safe-path ${pkgs.gcc-unwrapped.lib}/lib
       '';
 
       # Other .dotfiles
