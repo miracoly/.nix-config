@@ -18,6 +18,7 @@
       cmake
       cmake-lint
       curl
+      delve
       gdb
       gopls
       fd

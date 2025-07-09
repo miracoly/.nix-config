@@ -69,6 +69,7 @@
       ctop
       dasm
       dbeaver-bin
+      delve
       discord
       dotty
       entr
@@ -79,6 +80,7 @@
       gcc
       gdb
       gdbgui
+      gdlv
       gh
       ghc
       gimp
