@@ -47,6 +47,17 @@ return {
     opts = {
       formatters_by_ft = {
         nix = { "alejandra" },
+        sql = { "sqlfluff" },
+      },
+      formatters = {
+        sqlfluff = {
+          command = "sqlfluff",
+          args = { "format", "--dialect=ansi", "-" },
+          stdin = true,
+          cwd = function()
+            return vim.fn.getcwd()
+          end,
+        },
       },
     },
   },

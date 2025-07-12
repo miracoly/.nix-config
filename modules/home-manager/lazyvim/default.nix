@@ -41,6 +41,7 @@
       ruff
       shfmt
       shellcheck
+      sqlfluff
       stylua
       tailwindcss-language-server
       vscode-js-debug
