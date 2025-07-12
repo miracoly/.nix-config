@@ -89,8 +89,10 @@
       gnome-disk-utility
       gnumake
       go
+      golangci-lint
       google-chrome
       google-java-format
+      goose
       gradle
       graphviz
       haskellPackages.cabal-fmt
