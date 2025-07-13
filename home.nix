@@ -166,6 +166,7 @@
       sbt
       slack
       sops
+      sqlc
       steam-run
       stella
       pkgs-telepresence.telepresence2
