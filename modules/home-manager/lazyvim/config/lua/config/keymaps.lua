@@ -15,3 +15,5 @@ map({ "n" }, "<leader>uP", function()
     vim.notify("Copilot disabled", vim.log.levels.INFO)
   end
 end, { desc = "Enable/Disable Copilot" })
+
+map({ "i" }, "<S-CR>", "<Esc>o", { desc = "Insert new line below" })
