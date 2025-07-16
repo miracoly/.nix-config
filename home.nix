@@ -44,6 +44,7 @@
       alejandra
       # anki
       anki-bin
+      ansible
       appimage-run
       arduino-cli
       arduino-core
