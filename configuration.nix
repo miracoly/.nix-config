@@ -189,6 +189,7 @@
       quickemu
       quickgui
       vim
+      virt-viewer
       xorg.xrandr
     ];
   };
@@ -206,7 +207,15 @@
   users.users.mira = {
     isNormalUser = true;
     description = "miracoly";
-    extraGroups = ["networkmanager" "wheel" "docker" "input" "dialout" "libvirtd"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "input"
+      "dialout"
+      "libvirtd"
+      "kvm"
+    ];
     shell = pkgs.zsh;
   };
 
