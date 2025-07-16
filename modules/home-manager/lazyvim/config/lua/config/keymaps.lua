@@ -17,3 +17,11 @@ map({ "n" }, "<leader>uP", function()
 end, { desc = "Enable/Disable Copilot" })
 
 map({ "i" }, "<S-CR>", "<Esc>o", { desc = "Insert new line below" })
+
+map({ "n" }, "<leader>fa", function()
+  require("telescope.builtin").find_files({
+    hidden = true,
+    no_ignore = true,
+    no_ignore_parent = true,
+  })
+end, { desc = "Find Files (All)" })
