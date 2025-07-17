@@ -28,7 +28,6 @@
 
     nixvim = {
       url = "github:nix-community/nixvim/nixos-24.11";
-      # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -48,17 +47,17 @@
       url = "git+https://miracoly@github.com/miracoly/.nix-config-private";
       flake = false;
     };
+
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    flake-utils,
     ...
   } @ inputs: let
-    system = "x86_64-linux";
-    supportedSystems = [system];
-    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     miras-home-manager = {
       home-manager = {
         useGlobalPkgs = true;
@@ -74,53 +73,59 @@
             wallpaper
             ;
           pkgs-unstable = import inputs.nixpkgs-unstable {
-            inherit system;
+            system = "x86_64-linux";
             config.allowUnfree = true;
           };
           pkgs-telepresence = import inputs.nixpkgs-telepresence {
-            inherit system;
+            system = "x86_64-linux";
             config.allowUnfree = true;
           };
         };
       };
     };
-  in {
-    checks = forAllSystems (system: {
+  in
+    flake-utils.lib.eachSystem ["x86_64-linux" "aarch64-linux"] (system: let
+      pkgs = import nixpkgs {inherit system;};
+
       pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
         src = ./.;
         hooks = {
           alejandra.enable = true;
         };
       };
-    });
-
-    devShells = forAllSystems (system: {
-      default = nixpkgs.legacyPackages.${system}.mkShell {
-        inherit (self.checks.${system}.pre-commit-check) shellHook;
-        buildInputs = self.checks.${system}.pre-commit-check.enabledPackages;
-      };
-    });
-
-    nixosConfigurations = {
-      miras-xps-9730 = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./configuration.nix
-          ./hosts/xps9730.nix
-          home-manager.nixosModules.home-manager
-          miras-home-manager
-        ];
+    in {
+      checks = {
+        pre-commit-check = pre-commit-check;
       };
 
-      miras-xps-93xx = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./configuration.nix
-          ./hosts/xps93xx.nix
-          home-manager.nixosModules.home-manager
-          miras-home-manager
-        ];
+      devShells = {
+        default = pkgs.mkShell {
+          inherit (pre-commit-check) shellHook;
+          buildInputs = pre-commit-check.enabledPackages;
+        };
+      };
+    })
+    // {
+      nixosConfigurations = {
+        miras-xps-9730 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./configuration.nix
+            ./hosts/xps9730.nix
+            home-manager.nixosModules.home-manager
+            miras-home-manager
+          ];
+        };
+
+        miras-xps-93xx = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./configuration.nix
+            ./hosts/xps93xx.nix
+            home-manager.nixosModules.home-manager
+            miras-home-manager
+          ];
+        };
       };
     };
-  };
 }
