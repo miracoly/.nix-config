@@ -67,6 +67,7 @@
       chromium
       cmake
       pkgs-unstable.codecrafters-cli
+      pkgs-unstable.codex
       ctop
       dasm
       dbeaver-bin
