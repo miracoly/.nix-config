@@ -119,6 +119,7 @@
       kind
       kubectl
       (wrapHelm kubernetes-helm {plugins = [kubernetes-helmPlugins.helm-secrets];})
+      lazysql
       libnotify
       liquibase
       maven
