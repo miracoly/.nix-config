@@ -53,6 +53,7 @@
       }
     ];
     shellAliases = {
+      cdg = "cd $(git rev-parse --show-toplevel)";
       grep = "grep --color=auto";
       egrep = "egrep --color=auto";
       fgrep = "fgrep --color=auto";
@@ -78,7 +79,7 @@
       plugins = [
         {
           name = "romkatv/powerlevel10k";
-          tags = [as:theme depth:1];
+          tags = ["as:theme" "depth:1"];
         }
       ];
     };
