@@ -21,6 +21,22 @@
         decode_base64_url "$(echo -n "$2" | cut -d "." -f "$1")" | jq .
       }
 
+      loop() {
+        n=$1; shift
+        ok=0; fail=0
+        i=1
+        while [ "$i" -le "$n" ]; do
+          "$@"
+          if [ $? -eq 0 ]; then
+            ok=$((ok+1))
+          else
+            fail=$((fail+1))
+          fi
+          i=$((i+1))
+        done
+        printf "Success: %d  Failures: %d\n" "$ok" "$fail"
+      }
+
       autoload -U +X bashcompinit && bashcompinit
       complete -o nospace -C ${pkgs.terraform}/bin/terraform terraform
       source ~/.azure-cli/az.completion
