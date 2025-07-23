@@ -52,6 +52,7 @@
       audacious
       audacity
       asciidoctor-with-extensions
+      awscli2
       azure-cli
       bat
       bitwarden

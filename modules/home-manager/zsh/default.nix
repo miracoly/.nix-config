@@ -34,6 +34,7 @@
     oh-my-zsh = {
       enable = true;
       plugins = [
+        "aws"
         "azure"
         "direnv"
         "fzf"
