@@ -29,6 +29,12 @@ _: {
               > #files:
             '';
           }
+          {
+            trigger = ":nvim.yamlls.inlineschema";
+            label = "Neovim > YAML > Inline Schema";
+            force_mode = "clipboard";
+            replace = "# yaml-language-server: $schema=$|$";
+          }
         ];
       };
     };
