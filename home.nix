@@ -38,6 +38,7 @@
 
     packages = with pkgs; let
       ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix {};
+      codex = pkgs.callPackage ./derivations/codex {};
       sasm = pkgs.callPackage ./derivations/sasm.nix {};
     in [
       _1password-gui
@@ -68,7 +69,7 @@
       chromium
       cmake
       pkgs-unstable.codecrafters-cli
-      pkgs-unstable.codex
+      codex
       ctop
       dasm
       dbeaver-bin
