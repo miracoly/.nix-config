@@ -162,6 +162,7 @@
       purescript-overlay.packages.${pkgs.system}.spago
       python311
       racket
+      redis
       rofi-bluetooth
       rofi-file-browser
       rofi-power-menu
