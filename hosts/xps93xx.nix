@@ -10,7 +10,7 @@
   ];
   # Kernel
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_13;
+    kernelPackages = pkgs.linuxPackages_6_16;
     kernelModules = ["kvm-intel"];
 
     extraModulePackages = [];
