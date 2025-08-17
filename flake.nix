@@ -12,6 +12,14 @@
   };
 
   inputs = {
+    backlog-md = {
+      url = "github:MrLesk/Backlog.md";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-unstable";
+        flake-utils.follows = "flake-utils";
+      };
+    };
+
     dnd-latex-template = {
       url = "github:rpgtex/DND-5e-LaTeX-Template/stable";
       flake = false;
@@ -67,6 +75,7 @@
         extraSpecialArgs = {
           inherit
             (inputs)
+            backlog-md
             dnd-latex-template
             nixvim
             purescript-overlay

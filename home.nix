@@ -2,6 +2,7 @@
   pkgs,
   pkgs-unstable,
   pkgs-telepresence,
+  backlog-md,
   dnd-latex-template,
   purescript-overlay,
   wallpaper,
@@ -37,6 +38,13 @@
     };
 
     packages = with pkgs; let
+      backlogmd = backlog-md.packages.${pkgs.system}.default.overrideAttrs (old: {
+        preBuild =
+          (old.preBuild or "")
+          + ''
+            export LD_LIBRARY_PATH=${pkgs.stdenv.cc.cc.lib}/lib''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+          '';
+      });
       ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix {};
       sasm = pkgs.callPackage ./derivations/sasm.nix {};
     in [
@@ -54,6 +62,7 @@
       asciidoctor-with-extensions
       awscli2
       azure-cli
+      backlogmd
       bat
       bitwarden
       bitwarden-cli
