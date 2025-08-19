@@ -35,6 +35,13 @@ _: {
             force_mode = "clipboard";
             replace = "# yaml-language-server: $schema=$|$";
           }
+          {
+            trigger = ":backlog-md.cli.new-story";
+            label = "Backlog.md > CLI > New Story";
+            form = ''
+              backlog task create "[[name]]" -p [[feature]] -s "Backlog" -d "[[description]]" --ac "[[AC]]"
+            '';
+          }
         ];
       };
     };
