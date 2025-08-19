@@ -126,6 +126,7 @@
       (wrapHelm kubernetes-helm {plugins = [kubernetes-helmPlugins.helm-secrets];})
       lazysql
       libnotify
+      librewolf
       liquibase
       maven
       mermaid-cli
