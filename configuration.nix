@@ -249,7 +249,7 @@
   # Or disable the firewall altogether.
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [8080];
+    allowedTCPPorts = [8096];
   };
 
   nix = {
