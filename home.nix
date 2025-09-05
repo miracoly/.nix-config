@@ -76,11 +76,13 @@
       dasm
       dbeaver-bin
       delve
+      dig
       discord
       dotty
       entr
       exercism
       fceux
+      fd
       fluxcd
       gauge
       gcc
@@ -124,6 +126,7 @@
       kind
       kubectl
       (wrapHelm kubernetes-helm {plugins = [kubernetes-helmPlugins.helm-secrets];})
+      lazygit
       lazysql
       libnotify
       librewolf
