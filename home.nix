@@ -142,6 +142,7 @@
       nerd-fonts."m+"
       nerd-fonts.noto
       nil
+      nitrokey-app
       nix-index
       nixd
       nixpkgs-fmt

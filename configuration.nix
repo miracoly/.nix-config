@@ -81,6 +81,8 @@
     # Thumbnails
     tumbler.enable = true;
 
+    udev.packages = with pkgs; [nitrokey-udev-rules];
+
     # X11
     xserver = {
       enable = true;
