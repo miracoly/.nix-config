@@ -10,13 +10,15 @@
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_16;
+    # kernelPackages = pkgs.linuxPackages_6_16;
 
     #  set a custom kernel parameter to 'thunderbolt.host_reset=false
     kernelParams = ["thunderbolt.host_reset=false"];
     kernelModules = ["kvm-intel"];
 
     extraModulePackages = [];
+
+    blacklistedKernelModules = ["nouveau"];
 
     # Bootloader.
     loader = {
@@ -79,6 +81,28 @@
 
   hardware = {
     bluetooth.enable = true;
-    graphics.extraPackages = with pkgs; [intel-media-driver];
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [intel-media-driver];
+    };
+    nvidia = {
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = true;
+      open = true;
+      prime = {
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+        # sync.enable = true;
+      };
+      package = config.boot.kernelPackages.nvidiaPackages.production;
+    };
   };
+
+  services.xserver.videoDrivers = ["nvidia" "modesetting"];
 }
