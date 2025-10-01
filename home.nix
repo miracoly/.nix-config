@@ -119,6 +119,7 @@
       jetbrains.clion
       jetbrains.goland
       jetbrains.idea-ultimate
+      jetbrains.pycharm-professional
       jq
       k9s
       kdePackages.kate
