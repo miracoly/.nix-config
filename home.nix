@@ -168,7 +168,7 @@
       pulseaudio
       purescript-overlay.packages.${pkgs.system}.purs
       purescript-overlay.packages.${pkgs.system}.spago
-      python311
+      python313
       racket
       redis
       rofi-bluetooth
