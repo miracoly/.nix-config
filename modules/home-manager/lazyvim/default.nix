@@ -44,6 +44,7 @@
       sqlfluff
       stylua
       tailwindcss-language-server
+      tree-sitter
       vscode-js-debug
       vscode-langservers-extracted
       xclip
