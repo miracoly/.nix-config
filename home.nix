@@ -143,6 +143,7 @@
       nerd-fonts."m+"
       nerd-fonts.noto
       nil
+      ninja
       nitrokey-app
       nix-index
       nixd
