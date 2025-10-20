@@ -151,7 +151,6 @@
       node2nix
       nodejs_22
       nodePackages.npm-check-updates
-      nodePackages.yarn
       nomacs
       obs-studio
       obsidian
@@ -191,6 +190,7 @@
       unzip
       wget
       xclip
+      yarn-berry_4
       yubikey-manager
       yubikey-personalization
       yubikey-personalization-gui
