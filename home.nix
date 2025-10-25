@@ -223,7 +223,6 @@
       DOTNET_CLI_TELEMETRY_OPTOUT = 1;
       QT_AUTO_SCREEN_SCALE_FACTOR = 2;
       ROFI_SYSTEMD_TERM = "kitty";
-      KUBECONFIG = "$HOME/.kube/config:$HOME/.kube/udp-staging.config:$HOME/.kube/jdm-staging.config:$HOME/.kube/pluralsight.config:$HOME/.kube/vm.config";
       GPG_TTY = "$(tty)";
     };
 

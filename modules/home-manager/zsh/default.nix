@@ -37,6 +37,20 @@
         printf "Success: %d  Failures: %d\n" "$ok" "$fail"
       }
 
+      # kubernetes
+      k8s-jdo-staging() {
+        export KUBECONFIG="$HOME/.kube/jdo-staging.config"
+        echo "✅ KUBECONFIG set to $KUBECONFIG"
+      }
+      k8s-udp-staging() {
+        export KUBECONFIG="$HOME/.kube/udp-staging.config"
+        echo "✅ KUBECONFIG set to $KUBECONFIG"
+      }
+      k8s-minikube() {
+        export KUBECONFIG="$HOME/.kube/config"
+        echo "✅ KUBECONFIG set to $KUBECONFIG"
+      }
+
       autoload -U +X bashcompinit && bashcompinit
       complete -o nospace -C ${pkgs.terraform}/bin/terraform terraform
       source ~/.azure-cli/az.completion
