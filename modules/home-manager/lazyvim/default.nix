@@ -28,6 +28,8 @@
       imagemagick
       lazygit
       lldb
+      lua5_1
+      luarocks
       lua-language-server
       marksman
       neocmakelsp
@@ -42,6 +44,7 @@
       shfmt
       shellcheck
       sqlfluff
+      statix
       stylua
       tailwindcss-language-server
       tree-sitter
