@@ -148,4 +148,27 @@ return {
       dap.configurations.cpp = dap.configurations.c
     end,
   },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        config = function()
+          -- Load the extension only after telescope is available
+          LazyVim.on_load("telescope.nvim", function()
+            require("telescope").load_extension("live_grep_args")
+          end)
+        end,
+      },
+    },
+    keys = {
+      {
+        "<leader>sG",
+        function()
+          require("telescope").extensions.live_grep_args.live_grep_args({ cwd = vim.uv.cwd() })
+        end,
+        desc = "Grep with Args (cwd)",
+      },
+    },
+  },
 }
