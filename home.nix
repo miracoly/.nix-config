@@ -215,6 +215,7 @@
       xorg.libXcursor
       xorg.libXrender
       xorg.libXrandr
+      yq
       pkgs-unstable.zed-editor
     ];
 
