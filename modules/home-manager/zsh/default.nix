@@ -42,6 +42,10 @@
         export KUBECONFIG="$HOME/.kube/jdo-staging.config"
         echo "✅ KUBECONFIG set to $KUBECONFIG"
       }
+      k8s-jdo-prod() {
+        export KUBECONFIG="$HOME/.kube/jdo-prod.config"
+        echo "✅ KUBECONFIG set to $KUBECONFIG"
+      }
       k8s-udp-staging() {
         export KUBECONFIG="$HOME/.kube/udp-staging.config"
         echo "✅ KUBECONFIG set to $KUBECONFIG"
