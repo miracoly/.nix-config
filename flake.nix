@@ -13,7 +13,7 @@
 
   inputs = {
     backlog-md = {
-      url = "github:MrLesk/Backlog.md";
+      url = "github:MrLesk/Backlog.md/9b2b4aa4ce7c9dc454215419413109f3efb04708";
       inputs = {
         nixpkgs.follows = "nixpkgs-unstable";
         flake-utils.follows = "flake-utils";
@@ -39,7 +39,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
+    pre-commit-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     purescript-overlay = {
       url = "github:thomashoneyman/purescript-overlay";
