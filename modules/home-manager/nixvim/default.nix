@@ -6,7 +6,7 @@
   purescript-overlay,
   ...
 }: let
-  purescriptls = purescript-overlay.packages.${pkgs.system}.purescript-language-server;
+  purescriptls = purescript-overlay.packages.${pkgs.stdenv.hostPlatform.system}.purescript-language-server;
 in {
   imports = [nixvim.homeManagerModules.nixvim];
 

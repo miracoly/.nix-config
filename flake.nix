@@ -26,11 +26,11 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-telepresence.url = "github:NixOS/nixpkgs/15d54e7a7dd5b8f43a1e49ae7795285da1283224";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -107,7 +107,7 @@
       };
     in {
       checks = {
-        pre-commit-check = pre-commit-check;
+        inherit pre-commit-check;
       };
 
       devShells = {

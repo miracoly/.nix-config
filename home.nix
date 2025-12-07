@@ -38,7 +38,7 @@
     };
 
     packages = with pkgs; let
-      backlogmd = backlog-md.packages.${pkgs.system}.default;
+      backlogmd = backlog-md.packages.${pkgs.stdenv.hostPlatform.system}.default;
       ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix {};
       sasm = pkgs.callPackage ./derivations/sasm.nix {};
     in [
@@ -58,7 +58,7 @@
       azure-cli
       backlogmd
       bat
-      bitwarden
+      bitwarden-desktop
       bitwarden-cli
       bootdev-cli
       brightnessctl
@@ -78,7 +78,7 @@
       delve
       dig
       discord
-      dotty
+      scala
       entr
       exercism
       fceux
@@ -166,8 +166,8 @@
       pnpm_10
       prusa-slicer
       pulseaudio
-      purescript-overlay.packages.${pkgs.system}.purs
-      purescript-overlay.packages.${pkgs.system}.spago
+      purescript-overlay.packages.${pkgs.stdenv.hostPlatform.system}.purs
+      purescript-overlay.packages.${pkgs.stdenv.hostPlatform.system}.spago
       python313
       racket
       redis
@@ -193,7 +193,6 @@
       yarn-berry_4
       yubikey-manager
       yubikey-personalization
-      yubikey-personalization-gui
       yubico-piv-tool
       yubioath-flutter
       # zed-editor
@@ -315,17 +314,19 @@
     # git
     git = {
       enable = true;
-      userName = "miracoly";
-      userEmail = "68049792+miracoly@users.noreply.github.com";
-      aliases = {
-        br = "!b=$(git branch --show-current) && git checkout --detach && git commit --amend --no-verify -m \"require $b\" && git checkout -b";
-      };
       ignores = [
         "*~"
         "*.swp"
         "*.out"
       ];
-      extraConfig = {
+      settings = {
+        user = {
+          name = "miracoly";
+          email = "68049792+miracoly@users.noreply.github.com";
+        };
+        aliases = {
+          br = "!b=$(git branch --show-current) && git checkout --detach && git commit --amend --no-verify -m \"require $b\" && git checkout -b";
+        };
         init.defaultBranch = "main";
         credential.helper = "store";
         pull.rebase = "true";
