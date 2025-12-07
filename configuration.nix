@@ -58,6 +58,10 @@
 
     geoclue2.enable = false;
 
+    # Automounting
+    gvfs.enable = true;
+    udisks2.enable = true;
+
     # Smartcard
     pcscd.enable = true;
 
@@ -188,6 +192,7 @@
       arandr
       firefox
       gitFull
+      jmtpfs
       man-pages
       man-pages-posix
       nixos-option
@@ -195,6 +200,7 @@
       qemu
       quickemu
       quickgui
+      simple-mtpfs
       vim
       virt-viewer
       xorg.xrandr
@@ -210,6 +216,10 @@
     zsh.enable = true;
   };
 
+  users.groups = {
+    fuse = {};
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mira = {
     isNormalUser = true;
@@ -222,6 +232,7 @@
       "dialout"
       "libvirtd"
       "kvm"
+      "fuse"
     ];
     shell = pkgs.zsh;
   };
