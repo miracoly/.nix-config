@@ -118,8 +118,8 @@
       insomnia
       jetbrains.clion
       jetbrains.goland
-      jetbrains.idea-ultimate
-      jetbrains.pycharm-professional
+      jetbrains.idea
+      jetbrains.pycharm
       jq
       k9s
       kdePackages.kate
