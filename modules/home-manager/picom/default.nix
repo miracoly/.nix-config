@@ -18,6 +18,7 @@
       "100:name *= 'Pikuma'"
       "100:name *= 'Schneider Akademie'"
       "100:name *= 'A Cloud Guru'"
+      "100:name *= 'skool'"
     ];
 
     fade = true;
