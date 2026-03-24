@@ -8,6 +8,8 @@
 
       export PATH=$HOME/.local/bin:$PATH
 
+      export NEXT_TELEMETRY_DISABLED=1
+
       decode_base64_url() {
         local len=$((''${#1} % 4))
         local result="$1"
