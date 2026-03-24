@@ -4,6 +4,7 @@
   pkgs-telepresence,
   backlog-md,
   dnd-latex-template,
+  openspec,
   purescript-overlay,
   wallpaper,
   ...
@@ -39,6 +40,7 @@
 
     packages = with pkgs; let
       backlogmd = backlog-md.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      open-spec = openspec.packages.${pkgs.stdenv.hostPlatform.system}.default;
       ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix {};
       sasm = pkgs.callPackage ./derivations/sasm.nix {};
     in [
@@ -154,6 +156,7 @@
       nomacs
       obs-studio
       obsidian
+      open-spec
       openssl
       p7zip
       pa_applet

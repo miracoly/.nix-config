@@ -39,6 +39,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    openspec = {
+      url = "github:Fission-AI/OpenSpec";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     pre-commit-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -81,6 +86,7 @@
             backlog-md
             dnd-latex-template
             nixvim
+            openspec
             purescript-overlay
             wallpaper
             ;
