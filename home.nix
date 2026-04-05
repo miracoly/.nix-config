@@ -83,7 +83,7 @@
       scala
       entr
       exercism
-      fceux
+      pkgs-unstable.fceux
       fd
       fluxcd
       gauge
