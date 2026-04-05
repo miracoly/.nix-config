@@ -93,6 +93,9 @@
           pkgs-unstable = import inputs.nixpkgs-unstable {
             system = "x86_64-linux";
             config.allowUnfree = true;
+            overlays = [
+              (import ./derivations/claude-code-overlay.nix)
+            ];
           };
           pkgs-telepresence = import inputs.nixpkgs-telepresence {
             system = "x86_64-linux";

@@ -71,6 +71,7 @@
       calibre
       cc65
       chromium
+      pkgs-unstable.claude-code-bin
       cmake
       pkgs-unstable.codecrafters-cli
       pkgs-unstable.codex
