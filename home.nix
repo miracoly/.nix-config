@@ -136,6 +136,7 @@
       librewolf
       liquibase
       maven
+      pkgs-unstable.mcp-nixos
       mermaid-cli
       minikube
       mob
