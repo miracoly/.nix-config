@@ -45,6 +45,7 @@
       sasm = pkgs.callPackage ./derivations/sasm.nix {};
     in [
       _1password-gui
+      age
       alejandra
       # anki
       anki-bin
