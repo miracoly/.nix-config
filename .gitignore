@@ -7,3 +7,4 @@ host-specific.nix
 .pre-commit-config.yaml
 .direnv/
 tags
+.claude/settings.local.json
