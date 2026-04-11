@@ -70,9 +70,11 @@
       cabal2nix
       cachix
       calibre
+      cargo
       cc65
       chromium
       pkgs-unstable.claude-code-bin
+      clippy # Rust cargo-clippy
       cmake
       pkgs-unstable.codecrafters-cli
       pkgs-unstable.codex
@@ -182,6 +184,8 @@
       rofi-power-menu
       rofi-systemd
       rofimoji
+      rustc
+      rustfmt
       sasm
       sbt
       slack

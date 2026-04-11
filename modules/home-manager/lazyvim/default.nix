@@ -15,6 +15,7 @@
     extraPackages = with pkgs; [
       bash-language-server
       clang-tools
+      clippy # Rust cargo-clippy
       cmake
       cmake-lint
       curl
@@ -41,6 +42,8 @@
       rubocop
       (ruby.withPackages (ps: [ps.solargraph]))
       ruff
+      rust-analyzer
+      rustfmt
       shfmt
       shellcheck
       sqlfluff
