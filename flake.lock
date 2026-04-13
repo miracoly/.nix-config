@@ -76,6 +76,23 @@
         "type": "github"
       }
     },
+    "cpp-core-guidelines": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773331757,
+        "narHash": "sha256-smuGSur65TWj8zumFrrdDGzCnyHyz1Mu23o7+4frJHc=",
+        "owner": "isocpp",
+        "repo": "CppCoreGuidelines",
+        "rev": "431d25dc77101b240b98bb52a27ed5c974639e9a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "isocpp",
+        "ref": "master",
+        "repo": "CppCoreGuidelines",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -561,6 +578,7 @@
     "root": {
       "inputs": {
         "backlog-md": "backlog-md",
+        "cpp-core-guidelines": "cpp-core-guidelines",
         "dnd-latex-template": "dnd-latex-template",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",

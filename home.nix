@@ -3,6 +3,7 @@
   pkgs-unstable,
   pkgs-telepresence,
   backlog-md,
+  cpp-core-guidelines,
   dnd-latex-template,
   openspec,
   purescript-overlay,
@@ -260,6 +261,13 @@
       # Wallpaper
       wallpaper.source = wallpaper;
       wallpaper.target = "Pictures/wallpaper";
+
+      # Claude Skills
+      claude-skill-review-cpp.source = ./config/claude/skills/review-cpp/SKILL.md;
+      claude-skill-review-cpp.target = ".claude/skills/review-cpp/SKILL.md";
+
+      claude-skill-review-cpp-guidelines.source = "${cpp-core-guidelines}/CppCoreGuidelines.md";
+      claude-skill-review-cpp-guidelines.target = ".claude/skills/review-cpp/references/CppCoreGuidelines.md";
 
       # Applications
       yubikey-rofi.source = ./config/applications/yubikey-rofi.desktop;

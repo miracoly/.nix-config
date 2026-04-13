@@ -20,6 +20,11 @@
       };
     };
 
+    cpp-core-guidelines = {
+      url = "github:isocpp/CppCoreGuidelines/master";
+      flake = false;
+    };
+
     dnd-latex-template = {
       url = "github:rpgtex/DND-5e-LaTeX-Template/stable";
       flake = false;
@@ -84,6 +89,7 @@
           inherit
             (inputs)
             backlog-md
+            cpp-core-guidelines
             dnd-latex-template
             nixvim
             openspec
