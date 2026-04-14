@@ -137,6 +137,7 @@
       lazygit
       lazysql
       libnotify
+      libreoffice
       librewolf
       liquibase
       maven
