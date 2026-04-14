@@ -181,6 +181,7 @@
       python313
       racket
       redis
+      ripgrep
       rofi-bluetooth
       rofi-file-browser
       rofi-power-menu
