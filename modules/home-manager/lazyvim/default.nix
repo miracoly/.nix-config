@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   home.file.".config/nvim" = {
     source = ./config;
   };
@@ -15,6 +19,7 @@
     extraPackages = with pkgs; [
       bash-language-server
       clang-tools
+      pkgs-unstable.claude-code-bin
       clippy # Rust cargo-clippy
       cmake
       cmake-lint
