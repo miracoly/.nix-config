@@ -58,11 +58,11 @@
 
   # Right prompt segments.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+    kubeconfig                # active kubeconfig (set via Ctrl+K)
     command_execution_time    # previous command duration
     virtualenv                # python virtual environment
     context                   # user@host
     nix_shell
-    time                      # current time
   )
 
   # Basic style options that define the overall prompt look.

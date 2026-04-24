@@ -5,6 +5,7 @@
     enableCompletion = true;
     initContent = ''
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+      [[ ! -f ~/.kubeconfig-picker.zsh ]] || source ~/.kubeconfig-picker.zsh
 
       export PATH=$HOME/.local/bin:$PATH
 
@@ -37,24 +38,6 @@
           i=$((i+1))
         done
         printf "Success: %d  Failures: %d\n" "$ok" "$fail"
-      }
-
-      # kubernetes
-      k8s-jdo-staging() {
-        export KUBECONFIG="$HOME/.kube/jdo-staging.config"
-        echo "✅ KUBECONFIG set to $KUBECONFIG"
-      }
-      k8s-jdo-prod() {
-        export KUBECONFIG="$HOME/.kube/jdo-prod.config"
-        echo "✅ KUBECONFIG set to $KUBECONFIG"
-      }
-      k8s-udp-staging() {
-        export KUBECONFIG="$HOME/.kube/udp-staging.config"
-        echo "✅ KUBECONFIG set to $KUBECONFIG"
-      }
-      k8s-minikube() {
-        export KUBECONFIG="$HOME/.kube/config"
-        echo "✅ KUBECONFIG set to $KUBECONFIG"
       }
 
       autoload -U +X bashcompinit && bashcompinit
@@ -123,4 +106,6 @@
   };
   home.file.p10k.source = ./p10k.zsh;
   home.file.p10k.target = ".p10k.zsh";
+  home.file.kubeconfig-picker.source = ./kubeconfig-picker.zsh;
+  home.file.kubeconfig-picker.target = ".kubeconfig-picker.zsh";
 }
