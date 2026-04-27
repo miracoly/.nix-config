@@ -181,6 +181,7 @@
   environment = {
     etc = {
       "bin/bash".source = "${pkgs.bash}/bin/bash";
+      "ovmf/OVMF.fd".source = "${pkgs.OVMF.fd}/FV/OVMF.fd";
       hosts.mode = "0644";
     };
     pathsToLink = ["/share/zsh"];
@@ -202,6 +203,7 @@
       quickgui
       simple-mtpfs
       vim
+      virtiofsd
       virt-viewer
       xorg.xrandr
     ];
@@ -243,7 +245,10 @@
   # Docker
   virtualisation = {
     docker.enable = true;
-    libvirtd.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu.vhostUserPackages = with pkgs; [virtiofsd];
+    };
     spiceUSBRedirection.enable = true;
   };
 
