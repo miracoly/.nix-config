@@ -167,6 +167,7 @@
       openssl
       p7zip
       pa_applet
+      packer
       pandoc
       pciutils
       peek
@@ -216,6 +217,7 @@
       # gtk2
       gtk3
       nss
+      vagrant
       xorg.libXScrnSaver
       xorg.libXdamage
       xorg.libX11
