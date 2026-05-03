@@ -123,10 +123,11 @@
       inkscape
       inotify-tools
       insomnia
-      jetbrains.clion
-      jetbrains.goland
-      jetbrains.idea
-      jetbrains.pycharm
+      pkgs-unstable.jetbrains.clion
+      pkgs-unstable.jetbrains.gateway
+      pkgs-unstable.jetbrains.goland
+      pkgs-unstable.jetbrains.idea
+      pkgs-unstable.jetbrains.pycharm
       jq
       k9s
       kdePackages.kate
