@@ -22,6 +22,7 @@
       pkgs-unstable.claude-code-bin
       clippy # Rust cargo-clippy
       cmake
+      cmake-format
       cmake-lint
       curl
       delve

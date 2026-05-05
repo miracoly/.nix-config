@@ -250,6 +250,8 @@
       };
       azure-cli-completion.target = ".azure-cli/az.completion";
 
+      ".cmake-format.yaml".source = ./config/cmake/.cmake-format.yaml;
+
       # Latex Dnd Templage
       dnd-latex-template.source = dnd-latex-template;
       dnd-latex-template.target = "texmf/tex/latex/dnd";

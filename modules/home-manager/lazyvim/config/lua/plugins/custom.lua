@@ -39,6 +39,7 @@ return {
       formatters_by_ft = {
         nix = { "alejandra" },
         sql = { "sqlfluff" },
+        cmake = { "cmake_format" },
       },
       formatters = {
         sqlfluff = {
@@ -60,6 +61,7 @@ return {
         bash = { "shellcheck" },
         zsh = { "shellcheck" },
         bats = { "shellcheck" },
+        cmake = { "cmakelint" },
       },
     },
   },
