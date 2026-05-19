@@ -30,6 +30,7 @@
       gopls
       fd
       fzf
+      hadolint
       haskell-language-server
       helm-ls
       imagemagick
