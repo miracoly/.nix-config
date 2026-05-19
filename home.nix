@@ -90,6 +90,7 @@
       exercism
       pkgs-unstable.fceux
       fd
+      pkgs-unstable.flux9s
       fluxcd
       gauge
       gcc
