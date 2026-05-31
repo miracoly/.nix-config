@@ -92,6 +92,7 @@
       fd
       pkgs-unstable.flux9s
       fluxcd
+      pkgs-unstable.fluxcd-operator-mcp
       gauge
       gcc
       gdb
