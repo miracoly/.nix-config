@@ -25,6 +25,7 @@ return {
         bashls = {
           filetypes = { "sh", "bash", "zsh", "bats" },
         },
+        buf_ls = {},
       },
     },
   },
