@@ -18,6 +18,7 @@
 
     extraPackages = with pkgs; [
       bash-language-server
+      buf
       clang-tools
       pkgs-unstable.claude-code-bin
       clippy # Rust cargo-clippy

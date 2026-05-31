@@ -40,6 +40,7 @@ return {
         nix = { "alejandra" },
         sql = { "sqlfluff" },
         cmake = { "cmake_format" },
+        proto = { "buf" },
       },
       formatters = {
         sqlfluff = {
