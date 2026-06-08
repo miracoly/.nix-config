@@ -31,11 +31,6 @@
     nixpkgs-telepresence.url = "github:NixOS/nixpkgs/15d54e7a7dd5b8f43a1e49ae7795285da1283224";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    nixvim = {
-      url = "github:nix-community/nixvim/nixos-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     openspec = {
       url = "github:Fission-AI/OpenSpec";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -82,7 +77,6 @@
             (inputs)
             cpp-core-guidelines
             dnd-latex-template
-            nixvim
             openspec
             purescript-overlay
             wallpaper
