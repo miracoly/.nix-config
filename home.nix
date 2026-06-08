@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   pkgs-unstable,
   pkgs-telepresence,
@@ -59,7 +60,6 @@
       awscli2
       azure-cli
       bat
-      bitwarden-desktop
       bitwarden-cli
       bootdev-cli
       brightnessctl
@@ -71,7 +71,7 @@
       cargo
       cc65
       chromium
-      pkgs-unstable.claude-code-bin
+      pkgs-unstable.claude-code
       clippy # Rust cargo-clippy
       cmake
       pkgs-unstable.codecrafters-cli
@@ -145,7 +145,7 @@
       mermaid-cli
       minikube
       mob
-      mysql80
+      mysql84
       nasm
       ncdu
       nerd-fonts.jetbrains-mono
@@ -157,9 +157,8 @@
       nix-index
       nixd
       nixpkgs-fmt
-      node2nix
       nodejs_22
-      nodePackages.npm-check-updates
+      npm-check-updates
       nomacs
       obs-studio
       obsidian
@@ -209,7 +208,6 @@
       yubikey-personalization
       yubico-piv-tool
       yubioath-flutter
-      # zed-editor
       zip
       zlib
       zoom-us
@@ -218,17 +216,17 @@
       gtk3
       nss
       vagrant
-      xorg.libXScrnSaver
-      xorg.libXdamage
-      xorg.libX11
-      xorg.libxcb
-      xorg.libXcomposite
-      xorg.libXi
-      xorg.libXext
-      xorg.libXfixes
-      xorg.libXcursor
-      xorg.libXrender
-      xorg.libXrandr
+      libxscrnsaver
+      libxdamage
+      libx11
+      libxcb
+      libxcomposite
+      libxi
+      libxext
+      libxfixes
+      libxcursor
+      libxrender
+      libxrandr
       yq
       pkgs-unstable.zed-editor
     ];
@@ -315,7 +313,10 @@
     };
 
     feh.enable = true;
-    firefox.enable = true;
+    firefox = {
+      enable = true;
+      configPath = "${config.xdg.configHome}.mozilla/firefox";
+    };
     fzf = {
       enable = true;
       enableZshIntegration = true;

@@ -24,7 +24,7 @@
           postswitch = ''
             #!/usr/bin/env bash
             ${pkgs.i3}/bin/i3-msg restart
-            echo "Xft.dpi: 250" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
+            echo "Xft.dpi: 250" | ${pkgs.xrdb}/bin/xrdb -merge
             ${pkgs.feh}/bin/feh --bg-center ~/Pictures/wallpaper/8k/surreal-6645614.jpg &
             ${pkgs.libnotify}/bin/notify-send "autorandr" "profile mobile loaded"
           '';
@@ -59,7 +59,7 @@
           postswitch = ''
             #!/usr/bin/env bash
             ${pkgs.i3}/bin/i3-msg restart
-            echo "Xft.dpi: 152" | ${pkgs.xorg.xrdb}/bin/xrdb -merge
+            echo "Xft.dpi: 152" | ${pkgs.xrdb}/bin/xrdb -merge
             ${pkgs.feh}/bin/feh --bg-tile ~/Pictures/wallpaper/8k/surreal-6645614.jpg &
             ${pkgs.libnotify}/bin/notify-send "autorandr" "profile homeoffice loaded"
           '';

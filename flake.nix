@@ -23,16 +23,16 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-telepresence.url = "github:NixOS/nixpkgs/15d54e7a7dd5b8f43a1e49ae7795285da1283224";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     openspec = {
-      url = "github:Fission-AI/OpenSpec";
+      url = "github:Fission-AI/OpenSpec?ref=refs/pull/1177/merge";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -84,9 +84,6 @@
           pkgs-unstable = import inputs.nixpkgs-unstable {
             system = "x86_64-linux";
             config.allowUnfree = true;
-            overlays = [
-              (import ./derivations/claude-code-overlay.nix)
-            ];
           };
           pkgs-telepresence = import inputs.nixpkgs-telepresence {
             system = "x86_64-linux";

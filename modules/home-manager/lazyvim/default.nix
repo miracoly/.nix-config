@@ -14,13 +14,16 @@
     vimAlias = true;
     vimdiffAlias = true;
 
+    withPython3 = false;
+    withRuby = false;
+
     extraLuaPackages = ps: [ps.magick];
 
     extraPackages = with pkgs; [
       bash-language-server
       buf
       clang-tools
-      pkgs-unstable.claude-code-bin
+      pkgs-unstable.claude-code
       clippy # Rust cargo-clippy
       cmake
       cmake-format

@@ -74,8 +74,8 @@
           "${mod}+Shift+s" = "exec --no-startup-id rofi-systemd";
           "${mod}+Shift+mod1+p" = "exec rofi -show p -modi p:'rofi-power-menu'";
           "${mod}+Shift+mod1+l" = "exec --no-startup-id ${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 5 3";
-          "${mod}+Shift+mod1+h" = "exec echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge";
-          "${mod}+Shift+mod1+m" = "exec echo 'Xft.dpi: 200' | ${pkgs.xorg.xrdb}/bin/xrdb -merge";
+          "${mod}+Shift+mod1+h" = "exec echo 'Xft.dpi: 152' | ${pkgs.xrdb}/bin/xrdb -merge";
+          "${mod}+Shift+mod1+m" = "exec echo 'Xft.dpi: 200' | ${pkgs.xrdb}/bin/xrdb -merge";
           "Print" = "exec flameshot gui";
 
           # Volume
@@ -137,7 +137,7 @@
           command = "setxkbmap -layout 'de,de' -variant 'us,qwerty' -option 'grp:win_space_toggle'";
           notification = false;
         }
-        # { command = "echo 'Xft.dpi: 152' | ${pkgs.xorg.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
+        # { command = "echo 'Xft.dpi: 152' | ${pkgs.xrdb}/bin/xrdb -merge"; always = true; notification = false; }
       ];
       terminal = "kitty";
       window = {

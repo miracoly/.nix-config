@@ -48,7 +48,7 @@
 
     thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [
+      plugins = with pkgs; [
         thunar-archive-plugin
         thunar-volman
       ];
@@ -207,7 +207,7 @@
       vim
       virtiofsd
       virt-viewer
-      xorg.xrandr
+      xrandr
     ];
   };
 
