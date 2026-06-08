@@ -2,7 +2,6 @@
   pkgs,
   pkgs-unstable,
   pkgs-telepresence,
-  backlog-md,
   cpp-core-guidelines,
   dnd-latex-template,
   openspec,
@@ -40,7 +39,6 @@
     };
 
     packages = with pkgs; let
-      backlogmd = backlog-md.packages.${pkgs.stdenv.hostPlatform.system}.default;
       open-spec = openspec.packages.${pkgs.stdenv.hostPlatform.system}.default;
       ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix {};
       sasm = pkgs.callPackage ./derivations/sasm.nix {};
@@ -60,7 +58,6 @@
       asciidoctor-with-extensions
       awscli2
       azure-cli
-      backlogmd
       bat
       bitwarden-desktop
       bitwarden-cli

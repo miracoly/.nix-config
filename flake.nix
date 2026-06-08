@@ -12,14 +12,6 @@
   };
 
   inputs = {
-    backlog-md = {
-      url = "github:MrLesk/Backlog.md/9b2b4aa4ce7c9dc454215419413109f3efb04708";
-      inputs = {
-        nixpkgs.follows = "nixpkgs-unstable";
-        flake-utils.follows = "flake-utils";
-      };
-    };
-
     cpp-core-guidelines = {
       url = "github:isocpp/CppCoreGuidelines/master";
       flake = false;
@@ -88,7 +80,6 @@
         extraSpecialArgs = {
           inherit
             (inputs)
-            backlog-md
             cpp-core-guidelines
             dnd-latex-template
             nixvim
