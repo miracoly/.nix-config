@@ -174,6 +174,7 @@
       pinta
       pipenv
       pnpm_10
+      poppler-utils
       prusa-slicer
       pulseaudio
       purescript-overlay.packages.${pkgs.stdenv.hostPlatform.system}.purs
@@ -200,6 +201,7 @@
       go-task
       terraform
       texlive.combined.scheme-full
+      tokei
       unzip
       wget
       xclip
