@@ -326,6 +326,9 @@
 
     gpg = {
       enable = true;
+      scdaemonSettings = {
+        disable-ccid = true;
+      };
       publicKeys = [
         {source = ./config/gpg/public-key.asc;}
       ];
