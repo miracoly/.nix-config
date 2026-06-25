@@ -157,7 +157,7 @@
       nix-index
       nixd
       nixpkgs-fmt
-      nodejs_22
+      nodejs
       npm-check-updates
       nomacs
       obs-studio
@@ -173,7 +173,7 @@
       pinentry-curses
       pinta
       pipenv
-      pnpm_10
+      pnpm
       poppler-utils
       prusa-slicer
       pulseaudio
