@@ -6,6 +6,13 @@
   home.file.".config/nvim" = {
     source = ./config;
   };
+
+  # Global markdownlint defaults, used as the base config for every markdown
+  # file. Any project-local .markdownlint.* file still overrides these.
+  home.file.".config/markdownlint/config.yaml".text = ''
+    # Disable MD013 (line-length) everywhere by default.
+    MD013: false
+  '';
   programs.neovim = {
     enable = true;
     defaultEditor = true;

@@ -65,6 +65,17 @@ return {
         bats = { "shellcheck" },
         cmake = { "cmakelint" },
       },
+      linters = {
+        -- Use a global markdownlint config as the base for all markdown files.
+        -- A project-local .markdownlint.* file still overrides these rules.
+        ["markdownlint-cli2"] = {
+          args = {
+            "--config",
+            vim.fn.expand("~/.config/markdownlint/config.yaml"),
+            "-",
+          },
+        },
+      },
     },
   },
   {
