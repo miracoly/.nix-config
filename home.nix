@@ -194,6 +194,8 @@
       sbt
       slack
       sops
+      source-sans
+      source-serif
       sqlc
       steam-run
       stella
