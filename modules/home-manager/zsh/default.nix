@@ -7,10 +7,6 @@
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
       [[ ! -f ~/.kubeconfig-picker.zsh ]] || source ~/.kubeconfig-picker.zsh
 
-      export PATH=$HOME/.local/bin:$PATH
-
-      export NEXT_TELEMETRY_DISABLED=1
-
       decode_base64_url() {
         local len=$((''${#1} % 4))
         local result="$1"
@@ -72,6 +68,9 @@
         src = zsh-autocomplete;
       }
     ];
+    sessionVariables = {
+      NEXT_TELEMETRY_DISABLED = "1";
+    };
     shellAliases = {
       cdg = "cd $(git rev-parse --show-toplevel)";
       grep = "grep --color=auto";
@@ -80,6 +79,7 @@
       handover = "git add -A && git commit -m 'handover' && git push";
       jwth = "decode_jwt 1";
       jwtp = "decode_jwt 2";
+      k = "kubectl";
       kw = "echo $(date | cut -d' ' -f1,2,3,6) && echo 'Aktuelle Kalenderwoche: $(date +'%W' | sed 's/^0*//')'";
       ls = "ls --color=auto";
       la = "ls -a";
@@ -93,6 +93,9 @@
       copy = "xclip -selection clipboard";
       cat = "bat";
       mktmp = "export MYTEMPDIR=$(mktemp -d -t mytmp-$(date +%Y-%m-%d)-XXXXXXXXXX) && cd $MYTEMPDIR";
+    };
+    shellGlobalAliases = {
+      DO = "--dry-run=client -o yaml";
     };
     zplug = {
       enable = true;
