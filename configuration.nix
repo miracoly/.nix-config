@@ -273,6 +273,7 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [8096];
+    checkReversePath = false;
   };
 
   nix = {
