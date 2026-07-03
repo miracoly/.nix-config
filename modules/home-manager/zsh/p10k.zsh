@@ -103,6 +103,12 @@
   # Blue current directory.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=$blue
 
+  # Shorten directory: abbreviate each parent to its shortest unique prefix
+  # while keeping the current folder's name in full.
+  typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+  # Don't insert a delimiter between the shortened parents.
+  typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
+
   # Context format when root: user@host. The first part white, the rest grey.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE="%F{$white}%n%f%F{$grey}@%m%f"
   # Context format when not root: user@host. The whole thing grey.
