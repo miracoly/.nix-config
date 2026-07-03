@@ -30,6 +30,7 @@
             size = 10.0;
           };
           statusCommand = "i3status";
+          trayOutput = "primary";
         }
       ];
       colors.background = "#282420";
