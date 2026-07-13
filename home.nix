@@ -258,8 +258,12 @@
       dnd-latex-template.target = "texmf/tex/latex/dnd";
 
       # .gdbinit
+      # Trust the whole (immutable, content-addressed) Nix store so libstdc++
+      # pretty printers auto-load regardless of which gcc build a binary was
+      # linked against. Pinning a single gcc-lib path breaks across flake bumps
+      # and when debugging binaries from other projects/devshells.
       ".gdbinit".text = ''
-        set auto-load safe-path ${pkgs.gcc-unwrapped.lib}/lib
+        set auto-load safe-path /nix/store
       '';
 
       # Other .dotfiles
