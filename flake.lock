@@ -181,16 +181,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1780889611,
-        "narHash": "sha256-vL0dPSU84v+zDFzWUN9NR7ftVi2dUvPMcBpPoF2nhTc=",
+        "lastModified": 1783698404,
+        "narHash": "sha256-BfYeIFjxk/WpbmkyLP8wSNkTb+jpFhBim2I/himVtms=",
         "owner": "Fission-AI",
         "repo": "OpenSpec",
-        "rev": "64c86c08ee65dea69004ec0cd753999331c5fb0c",
+        "rev": "0a99f410457271aa773d8b106f03f637f7c6b3c0",
         "type": "github"
       },
       "original": {
         "owner": "Fission-AI",
-        "ref": "refs/pull/1177/merge",
         "repo": "OpenSpec",
         "type": "github"
       }

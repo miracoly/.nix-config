@@ -32,7 +32,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     openspec = {
-      url = "github:Fission-AI/OpenSpec?ref=refs/pull/1177/merge";
+      url = "github:Fission-AI/OpenSpec";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

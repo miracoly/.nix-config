@@ -40,7 +40,14 @@
     };
 
     packages = with pkgs; let
-      open-spec = openspec.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      open-spec = openspec.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (_: {
+        nativeBuildInputs = with pkgs; [
+          nodejs
+          npmHooks.npmInstallHook
+          pnpmConfigHook
+          pnpm_9
+        ];
+      });
       ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix {};
       sasm = pkgs.callPackage ./derivations/sasm.nix {};
     in [
