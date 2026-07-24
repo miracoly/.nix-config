@@ -80,6 +80,7 @@
       bootdev-cli
       brightnessctl
       bruno
+      buildah
       ca65-symbls-to-nl
       cabal2nix
       cachix
@@ -208,6 +209,7 @@
       rustfmt
       sasm
       sbt
+      skopeo
       slack
       sops
       source-sans

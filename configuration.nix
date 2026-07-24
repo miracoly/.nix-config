@@ -254,6 +254,7 @@
       enable = true;
       qemu.vhostUserPackages = with pkgs; [virtiofsd];
     };
+    podman.enable = true;
     spiceUSBRedirection.enable = true;
   };
 
