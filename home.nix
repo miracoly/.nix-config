@@ -40,13 +40,22 @@
     };
 
     packages = with pkgs; let
-      open-spec = openspec.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (_: {
+      k8s-helm = wrapHelm pkgs-unstable.kubernetes-helm {plugins = [kubernetes-helmPlugins.helm-secrets];};
+      open-spec = openspec.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
         nativeBuildInputs = with pkgs; [
           nodejs
           npmHooks.npmInstallHook
           pnpmConfigHook
-          pnpm_9
+          pnpm_10
         ];
+        # OpenSpec pins pnpm_9 (9.15.9), now marked insecure. Refetch deps with a
+        # clean pnpm so the whole build avoids the vulnerable package.
+        pnpmDeps = pkgs.fetchPnpmDeps {
+          inherit (old) pname version src;
+          pnpm = pkgs.pnpm_10;
+          fetcherVersion = 3;
+          hash = "sha256-OUY6G8e6Xqi+0YCcDbpVF06V9pJc68jSSA9rtNg/Vrg=";
+        };
       });
       ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix {};
       sasm = pkgs.callPackage ./derivations/sasm.nix {};
@@ -135,12 +144,12 @@
       pkgs-unstable.jetbrains.idea
       pkgs-unstable.jetbrains.pycharm
       jq
+      k8s-helm
       k9s
       kdePackages.kate
       keepassxc
       kind
       kubectl
-      (wrapHelm kubernetes-helm {plugins = [kubernetes-helmPlugins.helm-secrets];})
       lazygit
       lazysql
       libnotify
