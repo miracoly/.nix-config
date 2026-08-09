@@ -54,7 +54,7 @@
           inherit (old) pname version src;
           pnpm = pkgs.pnpm_10;
           fetcherVersion = 3;
-          hash = "sha256-OUY6G8e6Xqi+0YCcDbpVF06V9pJc68jSSA9rtNg/Vrg=";
+          hash = "sha256-l/0tc/9pzjwHcjGT9/exBZTiHhRJpUFuiam2+fQYcbw=";
         };
       });
       ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix {};
