@@ -325,6 +325,7 @@
 
     screen-locker = {
       enable = true;
+      inactiveInterval = 60;
       lockCmd = "${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 5 3";
       xautolock.enable = false;
     };
