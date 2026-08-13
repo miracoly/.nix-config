@@ -2,7 +2,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  set-dpi = pkgs.callPackage ../../../derivations/set-dpi.nix {};
+in {
   xsession.windowManager.i3 = {
     enable = true;
     config = let
@@ -75,8 +77,8 @@
           "${mod}+Shift+s" = "exec --no-startup-id rofi-systemd";
           "${mod}+Shift+mod1+p" = "exec rofi -show p -modi p:'rofi-power-menu'";
           "${mod}+Shift+mod1+l" = "exec --no-startup-id ${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 5 3";
-          "${mod}+Shift+mod1+h" = "exec echo 'Xft.dpi: 152' | ${pkgs.xrdb}/bin/xrdb -merge";
-          "${mod}+Shift+mod1+m" = "exec echo 'Xft.dpi: 200' | ${pkgs.xrdb}/bin/xrdb -merge";
+          "${mod}+Shift+mod1+h" = "exec --no-startup-id ${set-dpi}/bin/set-dpi 152";
+          "${mod}+Shift+mod1+m" = "exec --no-startup-id ${set-dpi}/bin/set-dpi 200";
           "Print" = "exec flameshot gui";
 
           # Volume

@@ -11,6 +11,7 @@ _: {
     ./redshift
     ./rofi
     ./vscode
+    ./xsettingsd
     ./zsh
   ];
 }
