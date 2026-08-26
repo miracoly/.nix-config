@@ -20,6 +20,11 @@
         decode_base64_url "$(echo -n "$2" | cut -d "." -f "$1")" | jq .
       }
 
+      unalias md 2>/dev/null
+      md() {
+        mkdir -p "$1" && cd "$1"
+      }
+
       loop() {
         n=$1; shift
         ok=0; fail=0
