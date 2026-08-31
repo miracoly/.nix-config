@@ -33,13 +33,36 @@
 -- hits the network. Bare words are passed through as-is - cppman offers a
 -- numbered menu when a name like `formatter` matches several pages.
 vim.api.nvim_create_user_command("Cppman", function(opts)
-  vim.cmd("botright 20new")
-  local buf = vim.api.nvim_get_current_buf()
+  -- Sized for legibility, not for the screen: groff reflows cppman's output to
+  -- the window width at launch, so a cramped window mangles the synopsis tables.
+  -- 100 columns is comfortable for man output; the proportions clamp down on a
+  -- small terminal rather than overflowing it.
+  local width = math.min(100, math.floor(vim.o.columns * 0.9))
+  local height = math.floor(vim.o.lines * 0.85)
+
+  -- A plain unlisted buffer, not a scratch one - the terminal needs to set its
+  -- own buftype, and it must start empty and unmodified.
+  local buf = vim.api.nvim_create_buf(false, false)
+  local win = vim.api.nvim_open_win(buf, true, {
+    relative = "editor",
+    width = width,
+    height = height,
+    row = math.floor((vim.o.lines - height) / 2),
+    col = math.floor((vim.o.columns - width) / 2),
+    style = "minimal",
+    border = vim.o.winborder ~= "" and vim.o.winborder or "rounded",
+    title = " cppman: " .. opts.args .. " ",
+    title_pos = "center",
+  })
+
   vim.fn.jobstart({ "cppman", opts.args }, {
     term = true,
-    -- Quitting the pager closes the split rather than leaving a dead
-    -- "[Process exited]" buffer behind.
+    -- Quitting the pager tears down the float rather than leaving a dead
+    -- "[Process exited]" window behind.
     on_exit = function()
+      if vim.api.nvim_win_is_valid(win) then
+        vim.api.nvim_win_close(win, true)
+      end
       if vim.api.nvim_buf_is_valid(buf) then
         vim.api.nvim_buf_delete(buf, { force = true })
       end
