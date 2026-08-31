@@ -93,6 +93,7 @@
       cmake
       pkgs-unstable.codecrafters-cli
       pkgs-unstable.codex
+      cppman
       ctop
       dasm
       dbeaver-bin

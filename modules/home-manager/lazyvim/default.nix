@@ -35,6 +35,7 @@
       cmake
       cmake-format
       cmake-lint
+      cppman
       curl
       delve
       gdb
