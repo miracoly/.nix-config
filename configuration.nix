@@ -59,6 +59,15 @@
   };
 
   services = {
+    # Virus scanning on demand only: keep the signature DB fresh via the
+    # freshclam timer, but run no clamd daemon, no scheduled scan and no
+    # on-access hook. Scan manually with `clamscan -r -i <path>`.
+    clamav.updater = {
+      enable = true;
+      interval = "daily";
+      frequency = 1;
+    };
+
     dbus.packages = [pkgs.gcr];
 
     geoclue2.enable = false;
