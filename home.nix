@@ -5,7 +5,6 @@
   pkgs-telepresence,
   cpp-core-guidelines,
   dnd-latex-template,
-  openspec,
   purescript-overlay,
   wallpaper,
   ...
@@ -41,22 +40,6 @@
 
     packages = with pkgs; let
       k8s-helm = wrapHelm pkgs-unstable.kubernetes-helm {plugins = [kubernetes-helmPlugins.helm-secrets];};
-      open-spec = openspec.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
-        nativeBuildInputs = with pkgs; [
-          nodejs
-          npmHooks.npmInstallHook
-          pnpmConfigHook
-          pnpm_10
-        ];
-        # OpenSpec pins pnpm_9 (9.15.9), now marked insecure. Refetch deps with a
-        # clean pnpm so the whole build avoids the vulnerable package.
-        pnpmDeps = pkgs.fetchPnpmDeps {
-          inherit (old) pname version src;
-          pnpm = pkgs.pnpm_10;
-          fetcherVersion = 3;
-          hash = "sha256-l/0tc/9pzjwHcjGT9/exBZTiHhRJpUFuiam2+fQYcbw=";
-        };
-      });
       ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix {};
       sasm = pkgs.callPackage ./derivations/sasm.nix {};
     in [
@@ -180,7 +163,7 @@
       nomacs
       obs-studio
       obsidian
-      open-spec
+      pkgs-unstable.openspec
       openssl
       p7zip
       pa_applet
