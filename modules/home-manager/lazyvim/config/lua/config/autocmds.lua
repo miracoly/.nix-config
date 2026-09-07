@@ -88,21 +88,65 @@ local function cppman_float(query, selection, title)
   vim.cmd("startinsert")
 end
 
-vim.api.nvim_create_user_command("Cppman", function(opts)
-  local query = opts.args
-
-  -- `cppman -f X` and the menu of `cppman X` are rendered from the same query
-  -- in the same order, so a line's position here is exactly the number the
-  -- menu wants. The ordering is a total order - the sort key ends in the
-  -- keyword, and keywords are unique - so it is stable across processes.
-  -- vim.system rather than systemlist: cppman reports a miss on stderr and
-  -- still exits 0, and systemlist folds stderr into its result, which would
-  -- turn "nothing appropriate" into a plausible-looking single match.
+-- `cppman -f X` and the menu of `cppman X` are rendered from the same query in
+-- the same order, so a line's position here is exactly the number the menu
+-- wants. The ordering is a total order - the sort key ends in the keyword, and
+-- keywords are unique - so it is stable across processes.
+--
+-- vim.system rather than systemlist: cppman reports a miss on stderr and still
+-- exits 0, and systemlist folds stderr into its result, which would turn
+-- "nothing appropriate" into a plausible-looking single match.
+local function cppman_find(query)
   local res = vim.system({ "cppman", "-f", query }, { text = true }):wait()
-
   local matches = {}
   for line in (res.stdout or ""):gmatch("[^\n]+") do
     matches[#matches + 1] = line
+  end
+  return matches
+end
+
+-- <leader>K reaches this through 'keywordprg', which passes the word under the
+-- cursor - and 'iskeyword' for C++ stops at ':'. So invoking it on std::string
+-- actually asks for "string", which matches 3343 pages instead of 309, and
+-- std::string::size (a single page) arrives as "size", which matches 4341.
+--
+-- Widen the word back to its qualified form, but only when it really is the
+-- word under the cursor, so a hand-typed `:Cppman foo` is left alone. Nothing
+-- here depends on 'iskeyword', which is deliberately not touched: adding ':' to
+-- it would drag every w/b/e motion and * search along with it.
+local function qualify(word)
+  if vim.fn.expand("<cword>") ~= word then
+    return word
+  end
+
+  local line = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+  local first, last = col, col
+  while first > 1 and line:sub(first - 1, first - 1):match("[%w_:]") do
+    first = first - 1
+  end
+  while last < #line and line:sub(last + 1, last + 1):match("[%w_:]") do
+    last = last + 1
+  end
+
+  -- Trailing/leading colons come from things like a `case foo:` label or a
+  -- ternary, and are not part of the name.
+  local symbol = line:sub(first, last):gsub("^:+", ""):gsub(":+$", "")
+
+  -- Only a qualification is interesting; anything else is the word we started
+  -- with, or punctuation that stopped the scan (`str.size()` stays "size").
+  return symbol:find("::", 1, true) and symbol or word
+end
+
+vim.api.nvim_create_user_command("Cppman", function(opts)
+  local query = qualify(opts.args)
+  local matches = cppman_find(query)
+
+  -- The qualified name is a guess built from surrounding text, so an empty
+  -- result is a reason to retry the plain word rather than to give up.
+  if #matches == 0 and query ~= opts.args then
+    query = opts.args
+    matches = cppman_find(query)
   end
 
   if #matches == 0 then
@@ -152,8 +196,7 @@ vim.api.nvim_create_user_command("Cppman", function(opts)
     -- lookup (~0.2s), because otherwise cppman has to print every candidate
     -- into the terminal before it will read the answer, and for a word like
     -- `size` that is 4341 lines and several seconds of rendering.
-    local exact = vim.system({ "cppman", "-f", keyword }, { text = true }):wait()
-    local _, n = (exact.stdout or ""):gsub("[^\n]+", "")
+    local n = #cppman_find(keyword)
 
     if n == 0 then
       -- Nothing came back for the keyword itself; answer the original menu.
