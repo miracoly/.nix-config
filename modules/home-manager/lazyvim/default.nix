@@ -2,7 +2,11 @@
   pkgs,
   pkgs-unstable,
   ...
-}: {
+}: let
+  # sonarlint-ls from nixpkgs is built without the proprietary CFamily
+  # analyzer, which means no C/C++ diagnostics at all. This wrapper adds it.
+  sonarlint-ls-cfamily = pkgs.callPackage ../../../derivations/sonarlint-ls-cfamily.nix {};
+in {
   home.file.".config/nvim" = {
     source = ./config;
   };
@@ -65,6 +69,7 @@
       rustfmt
       shfmt
       shellcheck
+      sonarlint-ls-cfamily
       sqlfluff
       statix
       stylua
