@@ -30,9 +30,19 @@
 -- shell, which would blank the editor until the pager exits.
 --
 -- Run `cppman -c` once to populate the offline cache; without it every lookup
--- hits the network. Bare words are passed through as-is - cppman offers a
--- numbered menu when a name like `formatter` matches several pages.
-vim.api.nvim_create_user_command("Cppman", function(opts)
+-- hits the network.
+--
+-- When a name matches several pages, cppman prints a numbered menu and blocks
+-- on a bare Python input() prompt. That prompt is not a pager, so a long list
+-- just scrolls off the top with no way to page back other than the terminal's
+-- own scrollback (<C-\><C-n>). It is routinely unusable: `size` matches 4341
+-- entries. So the menu is skipped entirely - the candidates are pulled from
+-- cppman up front with `-f` and handed to vim.ui.select, which LazyVim routes
+-- through its picker, giving fuzzy filtering instead of scrolling.
+
+-- Opens `cppman <query>` in a centered floating terminal. `selection`, when
+-- given, is the number to answer cppman's menu with.
+local function cppman_float(query, selection, title)
   -- Sized for legibility, not for the screen: groff reflows cppman's output to
   -- the window width at launch, so a cramped window mangles the synopsis tables.
   -- 100 columns is comfortable for man output; the proportions clamp down on a
@@ -51,11 +61,11 @@ vim.api.nvim_create_user_command("Cppman", function(opts)
     col = math.floor((vim.o.columns - width) / 2),
     style = "minimal",
     border = vim.o.winborder ~= "" and vim.o.winborder or "rounded",
-    title = " cppman: " .. opts.args .. " ",
+    title = " cppman: " .. (title or query) .. " ",
     title_pos = "center",
   })
 
-  vim.fn.jobstart({ "cppman", opts.args }, {
+  local chan = vim.fn.jobstart({ "cppman", query }, {
     term = true,
     -- Quitting the pager tears down the float rather than leaving a dead
     -- "[Process exited]" window behind.
@@ -68,7 +78,92 @@ vim.api.nvim_create_user_command("Cppman", function(opts)
       end
     end,
   })
+
+  -- The pty buffers this until cppman's input() gets around to reading it, so
+  -- there is no race against process startup.
+  if selection then
+    vim.fn.chansend(chan, selection .. "\n")
+  end
+
   vim.cmd("startinsert")
+end
+
+vim.api.nvim_create_user_command("Cppman", function(opts)
+  local query = opts.args
+
+  -- `cppman -f X` and the menu of `cppman X` are rendered from the same query
+  -- in the same order, so a line's position here is exactly the number the
+  -- menu wants. The ordering is a total order - the sort key ends in the
+  -- keyword, and keywords are unique - so it is stable across processes.
+  -- vim.system rather than systemlist: cppman reports a miss on stderr and
+  -- still exits 0, and systemlist folds stderr into its result, which would
+  -- turn "nothing appropriate" into a plausible-looking single match.
+  local res = vim.system({ "cppman", "-f", query }, { text = true }):wait()
+
+  local matches = {}
+  for line in (res.stdout or ""):gmatch("[^\n]+") do
+    matches[#matches + 1] = line
+  end
+
+  if #matches == 0 then
+    vim.notify("cppman: nothing appropriate for " .. query, vim.log.levels.WARN)
+    return
+  end
+
+  -- A lone match means cppman skips the menu and opens the page directly, so
+  -- there is nothing to answer and nothing worth asking about.
+  if #matches == 1 then
+    cppman_float(query)
+    return
+  end
+
+  -- Snacks' picker, which is what LazyVim routes vim.ui.select through, reads a
+  -- leading `word:` as a field filter (see `^([%w_][%w_]+):(.*)$` in its
+  -- matcher). Typing `std::` therefore searches a field named "std", finds no
+  -- such field, and silently shows nothing - which is exactly the query anyone
+  -- reaches for here. Its regex mode skips that parsing altogether.
+  --
+  -- The trade is that patterns become Lua patterns instead of fuzzy
+  -- subsequences: `basicstring` no longer finds `basic_string`, and a bracket
+  -- query like `operator[]` is an invalid character class that quietly matches
+  -- nothing - search `operator` instead. Literal matching suits a list of C++
+  -- symbol names better than fuzzy does, and no other query form silently
+  -- lies. Providers other than Snacks ignore the unknown key.
+  local select_opts = {
+    prompt = "cppman: " .. query,
+    snacks = { matcher = { regex = true } },
+  }
+
+  vim.ui.select(matches, select_opts, function(choice, idx)
+    if not idx then
+      return
+    end
+
+    -- Each line is "keyword - page title".
+    local keyword = choice:match("^(.-) %- ")
+    if not keyword then
+      cppman_float(query, idx)
+      return
+    end
+
+    -- Re-run the lookup against the exact keyword rather than answering the
+    -- original menu by number. A keyword is usually specific enough to match a
+    -- single page, and then cppman skips the menu outright - worth the second
+    -- lookup (~0.2s), because otherwise cppman has to print every candidate
+    -- into the terminal before it will read the answer, and for a word like
+    -- `size` that is 4341 lines and several seconds of rendering.
+    local exact = vim.system({ "cppman", "-f", keyword }, { text = true }):wait()
+    local _, n = (exact.stdout or ""):gsub("[^\n]+", "")
+
+    if n == 0 then
+      -- Nothing came back for the keyword itself; answer the original menu.
+      cppman_float(query, idx, keyword)
+    else
+      -- cppman ranks an exact keyword match first, so when the keyword is
+      -- still ambiguous the answer to its menu is always 1.
+      cppman_float(keyword, n > 1 and 1 or nil, keyword)
+    end
+  end)
 end, { nargs = 1, desc = "cppreference.com page for a C++ symbol" })
 
 vim.api.nvim_create_autocmd("FileType", {
