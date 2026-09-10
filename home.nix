@@ -146,6 +146,7 @@
       mermaid-cli
       minikube
       mob
+      mqttx
       mysql84
       nasm
       ncdu
