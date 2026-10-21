@@ -182,6 +182,7 @@
       purescript-overlay.packages.${pkgs.stdenv.hostPlatform.system}.purs
       purescript-overlay.packages.${pkgs.stdenv.hostPlatform.system}.spago
       python313
+      pkgs-unstable.qtcreator
       racket
       redis
       ripgrep
