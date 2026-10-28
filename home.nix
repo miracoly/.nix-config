@@ -89,7 +89,8 @@
       pkgs-unstable.fceux
       fd
       pkgs-unstable.flux9s
-      fluxcd
+      pkgs-unstable.fluxcd
+      pkgs-unstable.fluxcd-operator
       pkgs-unstable.fluxcd-operator-mcp
       gauge
       gcc
