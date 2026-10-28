@@ -41,6 +41,10 @@
     packages = with pkgs; let
       k8s-helm = wrapHelm pkgs-unstable.kubernetes-helm {plugins = [kubernetes-helmPlugins.helm-secrets];};
       ca65-symbls-to-nl = pkgs.callPackage ./derivations/ca65-symbls-to-nl.nix {};
+      ovhcloud-cli-completions = pkgs.runCommand "ovhcloud-cli-completions" {} ''
+        mkdir -p $out/share/zsh/site-functions
+        ${lib.getExe pkgs-unstable.ovhcloud-cli} completion zsh > $out/share/zsh/site-functions/_ovhcloud
+      '';
       sasm = pkgs.callPackage ./derivations/sasm.nix {};
     in [
       _1password-gui
@@ -167,6 +171,8 @@
       obsidian
       pkgs-unstable.openspec
       openssl
+      pkgs-unstable.ovhcloud-cli
+      ovhcloud-cli-completions
       p7zip
       pa_applet
       packer
